@@ -3,6 +3,7 @@ import { siteConfig, footerLinks } from "@/data/site";
 import Logo from "@/components/layout/Logo";
 import SocialIcon from "@/components/layout/SocialIcon";
 import NewsletterForm from "@/components/layout/NewsletterForm";
+import CurrentYear from "@/components/ui/CurrentYear";
 
 const socials = [
   ["instagram", siteConfig.socials.instagram],
@@ -48,10 +49,11 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-12 flex flex-wrap gap-3 border-y border-white/15 py-5">
-          {[1, 2, 3].map((badge) => <span key={badge} className="rounded-lg border border-gold/50 px-4 py-2 text-xs text-cream/70">Licence / membership badge (add logo) <span className="sr-only">TODO(REPLACE)</span></span>)}
+          {/* TODO(REPLACE): replace this licence/membership badge placeholder with verified logos. */}
+          <span className="rounded-lg border border-gold/50 px-4 py-2 text-xs text-cream/70">Licence / membership badge (add logo)</span>
         </div>
         <div className="flex flex-col gap-4 pt-6 text-xs text-cream/65 md:flex-row md:items-center md:justify-between">
-          <p>© {new Date().getFullYear()} SheRoarsAfricaSafari. All rights reserved.</p>
+          <p>© <CurrentYear /> SheRoarsAfricaSafari. All rights reserved.</p>
           <div className="flex flex-wrap gap-5">
             <Link href="/privacy-policy" className="hover:text-gold">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-gold">Terms</Link>

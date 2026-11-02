@@ -14,7 +14,7 @@ export const storyContent = {
 
 export const trustItems = [
   { title: "Women-Led Team", description: "Planned and guided by women", icon: "users" },
-  { title: "Licensed and Insured", description: "A fully licensed Tanzanian operator", icon: "shield", note: "TODO(CONFIRM)" },
+  { title: "Licensed and Insured", description: "A fully licensed Tanzanian operator", icon: "shield" }, // TODO(CONFIRM): verify operator licence and insurance before publishing.
   { title: "Small Groups", description: "Personal, unhurried journeys", icon: "users-round" },
   { title: "Tailor-Made", description: "Every itinerary built around you", icon: "sparkles" },
   { title: "Responsible Travel", description: "Supporting communities and conservation", icon: "heart-handshake" },

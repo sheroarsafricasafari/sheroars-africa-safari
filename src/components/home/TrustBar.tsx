@@ -16,7 +16,6 @@ export default function TrustBar() {
               <div>
                 <h2 className="text-sm font-bold">{item.title}</h2>
                 <p className="mt-1 text-xs leading-5 text-muted">{item.description}</p>
-                {item.note ? <span className="sr-only">{item.note}</span> : null}
               </div>
             </div>
           );

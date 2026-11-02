@@ -27,7 +27,7 @@ export default function Hero() {
           Discover <ArrowDown className="size-4 motion-safe:animate-bounce" />
         </Link>
       </div>
-      <Container className="relative z-20 w-full">
+      <Container className="relative z-20 w-full translate-y-12">
         <QuickInquiry />
       </Container>
     </div>
