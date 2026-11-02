@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "SheRoarsAfricaSafari | Women-Led Safaris, Kilimanjaro Climbs and Zanzibar Escapes in Tanzania",
     description: "Women-led safaris in the Serengeti, Ngorongoro and Tarangire, Kilimanjaro climbs and Zanzibar beach escapes. Tailor-made, safe and unforgettable journeys across Tanzania.",
-    images: [{ url: "/images/home/hero.jpg", width: 1200, height: 630, alt: "Wild Tanzania, led by women who roar" }],
+    images: [{ url: "/images/destinations/serengeti.jpeg", width: 1200, height: 630, alt: "Wild Tanzania, led by women who roar" }],
   },
 };
 

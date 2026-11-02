@@ -2,14 +2,23 @@ import Link from "next/link";
 import { ArrowDown } from "lucide-react";
 import { homeCopy } from "@/data/home";
 import Button from "@/components/ui/Button";
-import SmartImage from "@/components/ui/SmartImage";
 import Container from "@/components/ui/Container";
 import QuickInquiry from "@/components/home/QuickInquiry";
 
 export default function Hero() {
   return (
     <div className="relative flex min-h-[100svh] flex-col justify-end overflow-hidden bg-forest px-5 pb-8 pt-28 text-white sm:px-8 md:pb-10">
-      <SmartImage src="/images/home/hero.jpg" alt="Golden light over Tanzania's open savanna" sizes="100vw" fill priority className="object-cover" />
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        aria-hidden="true"
+        className="absolute inset-0 size-full object-cover motion-reduce:hidden"
+      >
+        <source src="/video/Hero.webm" type="video/webm" />
+      </video>
       <div className="absolute inset-0 bg-gradient-to-t from-earth/90 via-forest/45 to-forest/20" aria-hidden="true" />
       <Container className="relative z-10 mb-9 w-full">
         <div className="max-w-3xl md:mb-14">

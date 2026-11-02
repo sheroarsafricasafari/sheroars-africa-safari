@@ -12,7 +12,7 @@ export default function OurStory() {
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
         <Reveal className="relative mx-auto w-full max-w-xl pb-10 pr-8">
           <div className="relative aspect-[4/5] overflow-hidden rounded-3xl shadow-xl">
-            <SmartImage src="/images/home/about-main.jpg" alt="A woman guide exploring Tanzania's wild landscape" sizes="(max-width: 1024px) 90vw, 45vw" fill className="object-cover transition-transform duration-700 hover:scale-105" />
+            <SmartImage src="/images/home/about-main.avif" alt="A woman guide exploring Tanzania's wild landscape" sizes="(max-width: 1024px) 90vw, 45vw" fill className="object-cover transition-transform duration-700 hover:scale-105" />
           </div>
           <div className="absolute bottom-0 right-0 aspect-[4/3] w-1/2 overflow-hidden rounded-2xl border-8 border-sand shadow-lg">
             <SmartImage src="/images/home/about-secondary.jpg" alt="A warm welcome on a Tanzanian journey" sizes="(max-width: 1024px) 45vw, 22vw" fill className="object-cover" />

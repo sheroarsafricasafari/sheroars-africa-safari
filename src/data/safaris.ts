@@ -17,7 +17,7 @@ export const safaris: SafariPackage[] = [
     parks: "Tarangire, Lake Manyara, Ngorongoro",
     highlight: "Elephants among baobabs, flamingo shores and a descent into the crater.",
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
-    image: "/images/safaris/3-day-tarangire-manyara-ngorongoro.jpg",
+    image: "/images/safaris/3-day-tarangire-manyara-ngorongoro.webp",
   },
   {
     slug: "4-day-tarangire-serengeti-ngorongoro",
@@ -36,7 +36,7 @@ export const safaris: SafariPackage[] = [
     highlight: "Tanzania's iconic safari route, perfectly paced.",
     badge: "Most Popular",
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
-    image: "/images/safaris/5-day-northern-circuit-classic.jpg",
+    image: "/images/safaris/5-day-northern-circuit-classic.webp",
   },
   {
     slug: "6-day-serengeti-great-migration",
@@ -45,7 +45,7 @@ export const safaris: SafariPackage[] = [
     parks: "Serengeti, Ngorongoro",
     highlight: "Follow the herds to where the action is, season by season.",
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
-    image: "/images/safaris/6-day-serengeti-great-migration.jpg",
+    image: "/images/safaris/6-day-serengeti-great-migration.jpeg",
   },
   {
     slug: "8-day-safari-and-zanzibar",
@@ -54,6 +54,6 @@ export const safaris: SafariPackage[] = [
     parks: "Northern Circuit + Zanzibar",
     highlight: "Savanna sundowners, then barefoot on white sand.",
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
-    image: "/images/safaris/8-day-safari-and-zanzibar.jpg",
+    image: "/images/safaris/8-day-safari-and-zanzibar.jpeg",
   },
 ];

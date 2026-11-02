@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display } from "next/font/google";
-import TopBar from "@/components/layout/TopBar";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
@@ -33,7 +32,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <a href="#main-content" className="sr-only z-[100] rounded bg-cream px-4 py-3 text-earth focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>
-        <TopBar />
         <Navbar />
         <div id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</div>
         <Footer />
