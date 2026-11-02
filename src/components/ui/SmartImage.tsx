@@ -1,5 +1,6 @@
-import { existsSync } from "node:fs";
-import path from "node:path";
+"use client";
+
+import { useState } from "react";
 import Image from "next/image";
 import { Camera } from "lucide-react";
 
@@ -24,12 +25,13 @@ export default function SmartImage({
   className = "",
   priority = false,
 }: SmartImageProps) {
-  const imagePath = path.join(process.cwd(), "public", src.replace(/^[/\\]+/, ""));
-  if (existsSync(imagePath)) {
+  const [unavailable, setUnavailable] = useState(false);
+
+  if (!unavailable) {
     return fill ? (
-      <Image src={src} alt={alt} fill sizes={sizes} className={className} priority={priority} />
+      <Image src={src} alt={alt} fill sizes={sizes} className={className} priority={priority} onError={() => setUnavailable(true)} />
     ) : (
-      <Image src={src} alt={alt} width={width} height={height} sizes={sizes} className={className} priority={priority} />
+      <Image src={src} alt={alt} width={width} height={height} sizes={sizes} className={className} priority={priority} onError={() => setUnavailable(true)} />
     );
   }
 
