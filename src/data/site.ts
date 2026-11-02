@@ -29,7 +29,6 @@ export const navigation: NavItem[] = [
   { label: "Kilimanjaro", href: "/kilimanjaro", children: [
     { label: "Routes", href: "/kilimanjaro/routes" },
     { label: "Climb Packages", href: "/kilimanjaro/packages" },
-    { label: "Women-Only Climbs", href: "/kilimanjaro/women-only-climbs" },
     { label: "Climbing Guide", href: "/kilimanjaro/guide" },
   ] },
   { label: "Zanzibar", href: "/zanzibar", children: [
@@ -40,8 +39,6 @@ export const navigation: NavItem[] = [
   ] },
   { label: "Day Trips", href: "/day-trips" },
   { label: "Experiences", href: "/experiences", children: [
-    { label: "Women-Only Group Safaris", href: "/experiences/women-only-group-safaris" },
-    { label: "Solo Women Travelers", href: "/experiences/solo-women-travelers" },
     { label: "Honeymoon and Romance", href: "/experiences/honeymoon-and-romance" },
     { label: "Family Safaris", href: "/experiences/family-safaris" },
     { label: "Photography Safaris", href: "/experiences/photography-safaris" },
@@ -67,7 +64,6 @@ export const footerLinks = {
   more: [
     { label: "Kilimanjaro Routes", href: "/kilimanjaro/routes" },
     { label: "Climb Packages", href: "/kilimanjaro/packages" },
-    { label: "Women-Only Climbs", href: "/kilimanjaro/women-only-climbs" },
     { label: "Zanzibar", href: "/zanzibar" },
     { label: "Day Trips", href: "/day-trips" },
     { label: "Experiences", href: "/experiences" },

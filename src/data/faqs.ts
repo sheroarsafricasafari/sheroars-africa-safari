@@ -1,9 +1,5 @@
 export const faqs = [
   {
-    question: "Is Tanzania safe for solo women travelers?",
-    answer: "Yes. Tanzania welcomes many solo women travelers every year. On our journeys you are accompanied by experienced guides, stay in carefully chosen lodges and camps, and are supported by our team throughout. Our Safety for Women Travelers guide covers everything in detail.",
-  },
-  {
     question: "When is the best time to visit Tanzania?",
     answer: "Tanzania is a year-round destination. The dry season from June to October offers the best wildlife viewing and Kilimanjaro conditions, while January to March is ideal for calving season in the southern Serengeti. Zanzibar's beaches are at their best from June to October and from December to February.",
   },

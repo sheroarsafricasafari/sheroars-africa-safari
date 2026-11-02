@@ -24,7 +24,6 @@ export default function KilimanjaroFeature() {
           </ul>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button href="/kilimanjaro" variant="light">Explore Kilimanjaro Climbs</Button>
-            <Button href="/kilimanjaro/women-only-climbs" variant="outline-light">Women-Only Climbs</Button>
           </div>
         </Reveal>
         <Reveal className="rounded-3xl border border-white/25 bg-white/10 p-7 text-white shadow-2xl backdrop-blur-md md:p-9">

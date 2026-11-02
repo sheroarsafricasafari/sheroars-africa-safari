@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
 import { safaris } from "@/data/safaris";
 
@@ -19,6 +20,10 @@ export async function generateMetadata({
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
+  if (slug === "7-day-women-only-group-safari") {
+    notFound();
+  }
+
   return (
     <PagePlaceholder
       title={`Safari Package: ${slug}`}

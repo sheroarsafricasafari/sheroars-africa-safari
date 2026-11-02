@@ -86,7 +86,6 @@ export const kilimanjaro = {
   ],
   facts: ["5,895 m|Uhuru Peak", "5|climate zones, from rainforest to arctic summit", "No technical climbing|required"],
   highlights: [
-    "Women-only climbs led by women guides", // TODO(CONFIRM)
     "Daily health checks with a pulse oximeter", // TODO(CONFIRM)
     "Routes chosen for the best acclimatisation and summit success",
     "Fair pay and care for every member of our mountain crew", // TODO(CONFIRM)

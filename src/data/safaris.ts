@@ -48,16 +48,6 @@ export const safaris: SafariPackage[] = [
     image: "/images/safaris/6-day-serengeti-great-migration.jpg",
   },
   {
-    slug: "7-day-women-only-group-safari",
-    title: "7-Day Women-Only Group Safari",
-    duration: "7 days",
-    parks: "Tarangire, Serengeti, Ngorongoro",
-    highlight: "Share the adventure with like-minded women.",
-    badge: "Women-Only Departure",
-    priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
-    image: "/images/safaris/7-day-women-only-group-safari.jpg",
-  },
-  {
     slug: "8-day-safari-and-zanzibar",
     title: "8-Day Safari and Zanzibar Escape",
     duration: "8 days",
