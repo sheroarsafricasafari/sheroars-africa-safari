@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import { safaris } from "@/data/safaris";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
-// Sample slugs for now. These will come from the data files later.
 export function generateStaticParams() {
-  return ["sample-one", "sample-two", "sample-three"].map((slug) => ({ slug }));
+  return safaris.map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({

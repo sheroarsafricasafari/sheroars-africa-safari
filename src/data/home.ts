@@ -20,6 +20,51 @@ export const trustItems = [
   { title: "Responsible Travel", description: "Supporting communities and conservation", icon: "heart-handshake" },
 ];
 
+export const homeCopy = {
+  hero: {
+    eyebrow: "WOMEN-LED SAFARIS  ·  KILIMANJARO  ·  ZANZIBAR",
+    title: "Wild Tanzania, Led by Women Who Roar",
+    description: "Safaris, Kilimanjaro climbs and Zanzibar beach escapes, crafted by a women-led team who know every park, trail and sunrise. Travel fearless. Travel with us.",
+  },
+  safariHeading: {
+    eyebrow: "SIGNATURE JOURNEYS",
+    title: "Safaris Designed to Make You Roar",
+    subtitle: "From the endless plains of the Serengeti to the rim of Ngorongoro Crater, choose a journey or let us tailor one just for you.",
+  },
+  destinationHeading: {
+    eyebrow: "WHERE WE TAKE YOU",
+    title: "Tanzania's Great Wild Places",
+    subtitle: "Six unforgettable destinations, one team that knows them all.",
+  },
+  kilimanjaroHeading: { eyebrow: "KILIMANJARO", title: "Stand on the Roof of Africa" },
+  whyHeading: {
+    eyebrow: "WHY SHE ROARS",
+    title: "Travel With People Who Truly Care",
+    subtitle: "Every detail is designed so you can relax, explore and feel completely at home.",
+  },
+  experiencesHeading: { eyebrow: "TRAVEL YOUR WAY", title: "A Journey for Every Kind of Roar" },
+  seasonsHeading: {
+    eyebrow: "PLAN YOUR TIMING",
+    title: "When to Go",
+    subtitle: "Tanzania is a year-round destination. Here is what each season does best.",
+  },
+  zanzibarHeading: { eyebrow: "ZANZIBAR BEACH ESCAPES", title: "Trade Your Boots for Barefoot" },
+  dayTripsHeading: {
+    eyebrow: "SHORT ON TIME?",
+    title: "Unforgettable Day Trips",
+    subtitle: "Big experiences that fit into a single day.",
+  },
+  howHeading: { eyebrow: "HOW IT WORKS", title: "From Dream to Departure in Four Simple Steps" },
+  testimonialHeading: { eyebrow: "TRAVELER STORIES", title: "Words From Women Who Roared" },
+  galleryHeading: { eyebrow: "MOMENTS", title: "Glimpses of the Wild" },
+  blogHeading: { eyebrow: "TRAVEL GUIDES AND TIPS", title: "Plan Smarter, Travel Better" },
+  faqHeading: { eyebrow: "GOOD TO KNOW", title: "Your Questions, Answered" },
+  finalCta: {
+    title: "Your Roar Starts Here",
+    description: "Tell us where you dream of going, and we will shape it into a journey that is entirely yours.",
+  },
+};
+
 export const whyChooseUs = [
   { title: "Women-Led, Women-Guided", description: "A team of women planning, guiding and hosting, so you feel understood from the first message to the last sunset.", icon: "users-round" },
   { title: "Safety First", description: "Experienced guides, trusted vehicles, vetted lodges and support from our team whenever you need it.", icon: "shield-check" },
