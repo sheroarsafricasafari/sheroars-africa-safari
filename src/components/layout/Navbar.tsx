@@ -7,10 +7,12 @@ import { ChevronDown, Menu, X } from "lucide-react";
 import { navigation, siteConfig } from "@/data/site";
 import Button from "@/components/ui/Button";
 import Logo from "@/components/layout/Logo";
+import { useNavbarTheme } from "@/components/layout/NavbarTheme";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(pathname !== "/");
+  const { hasHero } = useNavbarTheme();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpenAt, setMobileOpenAt] = useState<string | null>(null);
   const mobileOpen = mobileOpenAt === pathname;
@@ -18,11 +20,11 @@ export default function Navbar() {
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(pathname !== "/" || window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [pathname]);
+  }, [pathname, hasHero]);
 
   useEffect(() => {
     const closeOnHistoryNavigation = () => setMobileOpenAt(null);
@@ -61,7 +63,8 @@ export default function Navbar() {
   }, [mobileOpen]);
 
   const isActive = (href: string) => pathname === href || (href !== "/" && pathname.startsWith(`${href}/`));
-  const solid = scrolled || pathname !== "/";
+  const hasTransparentHero = pathname === "/" || hasHero;
+  const solid = !hasTransparentHero || scrolled;
 
   return (
     <nav aria-label="Main navigation" className={`sticky top-0 z-50 -mb-[78px] transition-colors duration-300 ${solid ? "bg-cream/95 text-earth shadow-sm backdrop-blur-md" : "bg-transparent text-white"}`}>
