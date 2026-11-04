@@ -1,12 +1,8 @@
-export type SafariPackage = {
-  slug: string;
-  title: string;
+import type { Package } from "../types/package";
+
+export type SafariPackage = Package & {
   duration: string;
-  parks: string;
   highlight: string;
-  badge?: string;
-  priceFrom: number | null;
-  image: string;
 };
 
 export const safaris: SafariPackage[] = [
@@ -14,46 +10,101 @@ export const safaris: SafariPackage[] = [
     slug: "3-day-tarangire-manyara-ngorongoro",
     title: "3-Day Classic Safari",
     duration: "3 days",
-    parks: "Tarangire, Lake Manyara, Ngorongoro",
+    days: 3,
+    parks: ["Tarangire", "Lake Manyara", "Ngorongoro"],
+    summary: "Elephants among baobabs, flamingo shores and a descent into the crater.",
     highlight: "Elephants among baobabs, flamingo shores and a descent into the crater.",
+    highlights: ["Elephants among baobabs", "Flamingo shores", "Ngorongoro Crater"],
+    bestFor: ["Wildlife viewing", "Northern Circuit"],
+    difficulty: "Easy",
+    groupSize: "Private or small group",
+    itinerary: [],
+    inclusions: [],
+    exclusions: [],
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
+    tags: ["Classic", "Northern Circuit"],
     image: "/images/safaris/3-day-tarangire-manyara-ngorongoro.webp",
+    related: [],
   },
   {
     slug: "4-day-tarangire-serengeti-ngorongoro",
     title: "4-Day Serengeti Escape",
     duration: "4 days",
-    parks: "Tarangire, Serengeti, Ngorongoro",
+    days: 4,
+    parks: ["Tarangire", "Serengeti", "Ngorongoro"],
+    summary: "A short, powerful taste of the great plains.",
     highlight: "A short, powerful taste of the great plains.",
+    highlights: ["Tarangire", "Serengeti", "Ngorongoro"],
+    bestFor: ["Short safaris", "Northern Circuit"],
+    difficulty: "Easy",
+    groupSize: "Private or small group",
+    itinerary: [],
+    inclusions: [],
+    exclusions: [],
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
+    tags: ["Serengeti", "Northern Circuit"],
     image: "/images/safaris/4-day-tarangire-serengeti-ngorongoro.jpg",
+    related: [],
   },
   {
     slug: "5-day-northern-circuit-classic",
     title: "5-Day Northern Circuit Classic",
     duration: "5 days",
-    parks: "Tarangire, Serengeti, Ngorongoro",
+    days: 5,
+    parks: ["Tarangire", "Serengeti", "Ngorongoro"],
+    summary: "Tanzania's iconic safari route, perfectly paced.",
     highlight: "Tanzania's iconic safari route, perfectly paced.",
+    highlights: ["Tarangire", "Serengeti", "Ngorongoro"],
+    bestFor: ["First-time safari", "Northern Circuit"],
+    difficulty: "Easy",
+    groupSize: "Private or small group",
+    itinerary: [],
+    inclusions: [],
+    exclusions: [],
     badge: "Most Popular",
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
+    tags: ["Classic", "Northern Circuit"],
     image: "/images/safaris/5-day-northern-circuit-classic.webp",
+    related: [],
   },
   {
     slug: "6-day-serengeti-great-migration",
     title: "6-Day Great Migration Safari",
     duration: "6 days",
-    parks: "Serengeti, Ngorongoro",
+    days: 6,
+    parks: ["Serengeti", "Ngorongoro"],
+    summary: "Follow the herds to where the action is, season by season.",
     highlight: "Follow the herds to where the action is, season by season.",
+    highlights: ["Serengeti wildlife", "Seasonal migration"],
+    bestFor: ["Wildlife viewing", "Great Migration"],
+    difficulty: "Easy",
+    groupSize: "Private or small group",
+    itinerary: [],
+    inclusions: [],
+    exclusions: [],
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
+    tags: ["Great Migration", "Serengeti"],
     image: "/images/safaris/6-day-serengeti-great-migration.jpeg",
+    related: [],
   },
   {
     slug: "8-day-safari-and-zanzibar",
     title: "8-Day Safari and Zanzibar Escape",
     duration: "8 days",
-    parks: "Northern Circuit + Zanzibar",
+    days: 8,
+    parks: ["Northern Circuit", "Zanzibar"],
+    summary: "Savanna sundowners, then barefoot on white sand.",
     highlight: "Savanna sundowners, then barefoot on white sand.",
+    highlights: ["Northern Circuit safari", "Zanzibar beach stay"],
+    bestFor: ["Safari and beach", "Relaxed itineraries"],
+    difficulty: "Easy",
+    groupSize: "Private or small group",
+    itinerary: [],
+    inclusions: [],
+    exclusions: [],
     priceFrom: null, // TODO(REPLACE): add a verified starting price, if published.
+    tags: ["Safari and Beach", "Zanzibar"],
     image: "/images/safaris/8-day-safari-and-zanzibar.jpeg",
+    related: [],
   },
 ];

@@ -21,7 +21,7 @@ export default function FeaturedSafaris() {
             >
               <SmartImage
                 src={safari.image}
-                alt={`${safari.title} safari in ${safari.parks}`}
+                alt={`${safari.title} safari in ${safari.parks.join(", ")}`}
                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 fill
                 className="object-contain"
@@ -31,7 +31,7 @@ export default function FeaturedSafaris() {
               <span className="absolute right-4 top-4 rounded-full border border-white/50 bg-earth/35 px-3 py-1.5 text-xs font-bold text-white backdrop-blur-sm">{safari.duration}</span>
               <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                 <h3 className="font-heading text-2xl text-white">{safari.title}</h3>
-                <p className="mt-2 text-xs font-bold uppercase tracking-wider text-gold">{safari.parks}</p>
+                <p className="mt-2 text-xs font-bold uppercase tracking-wider text-gold">{safari.parks.join(", ")}</p>
                 <p className="mt-3 text-sm leading-6 text-white/90">{safari.highlight}</p>
                 <div className="mt-5 flex items-center justify-between gap-3 border-t border-white/30 pt-4">
                   <span className="text-sm font-bold text-white">{safari.priceFrom === null ? "Price on request" : `From $${safari.priceFrom.toLocaleString()} per person`}</span>
