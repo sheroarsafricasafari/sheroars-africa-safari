@@ -1,3 +1,5 @@
+import { safaris } from "@/data/safaris";
+
 export type RouteDefinition = {
   path: string;
   title: string;
@@ -45,6 +47,7 @@ const staticPaths = [
   "/travel-guide/tipping-guide", "/travel-guide/visas-and-entry",
   "/travel-guide/what-to-expect-on-safari", "/blog", "/faq", "/contact", "/book",
   "/booking-terms", "/plan-your-safari", "/privacy-policy", "/terms", "/group-departures",
+  ...safaris.map(({ slug }) => `/safaris/packages/${slug}`),
 ];
 
 const sections: [string, string][] = [
@@ -55,6 +58,7 @@ const sections: [string, string][] = [
 
 const titleOverrides: Record<string, string> = {
   "/": "Home",
+  "/safaris": "Safaris",
   "/safaris/packages": "Safari Packages",
   "/kilimanjaro/packages": "Climb Packages",
   "/kilimanjaro/routes": "Kilimanjaro Routes",
@@ -64,6 +68,8 @@ const titleOverrides: Record<string, string> = {
 
 function humanize(path: string) {
   if (titleOverrides[path]) return titleOverrides[path];
+  const packageTitle = safaris.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
+  if (packageTitle) return packageTitle;
   if (path === "/") return "Home";
   return path.split("/").filter(Boolean).at(-1)!.split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");

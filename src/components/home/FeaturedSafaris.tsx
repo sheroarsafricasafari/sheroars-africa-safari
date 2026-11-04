@@ -9,11 +9,12 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 
 export default function FeaturedSafaris() {
+  const homepageSafaris = safaris.filter((safari) => safari.departureInfo.type !== "group");
   return (
     <Container>
       <SectionHeading {...homeCopy.safariHeading} />
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {safaris.map((safari) => (
+        {homepageSafaris.map((safari) => (
           <Reveal key={safari.slug} className="group">
             <Link
               href={`/safaris/packages/${safari.slug}`}
