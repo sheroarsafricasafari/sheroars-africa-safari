@@ -12,19 +12,18 @@ import {
   sampleZanzibarActivities,
   sampleZanzibarAreas,
 } from "@/data/sampleData";
-import type { Package } from "@/types/package";
 import type { KilimanjaroRoute } from "@/types/kilimanjaro-route";
 
 export const guideArticles = sampleGuideArticles;
 export const kilimanjaroPackages = sampleKilimanjaroPackages;
 export const kilimanjaroRoutes = sampleRoutes;
 
-export function getPackageBySlug(slug: string): (Package & { sample?: true }) | undefined {
-  return safaris.find((item) => item.slug === slug) ?? samplePackages.find((item) => item.slug === slug);
+export function getPackageBySlug(slug: string) {
+  return safaris.find((item) => item.slug === slug);
 }
 
 export function getAllPackageSlugs() {
-  return [...safaris, ...samplePackages].map(({ slug }) => ({ slug }));
+  return safaris.map(({ slug }) => ({ slug }));
 }
 
 export function getAllPackages() {

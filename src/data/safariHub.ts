@@ -1,0 +1,96 @@
+import { safariHubSchema } from "@/types/safari-hub";
+
+export const safariHub = {
+  // TODO(CONFIRM): verify all park figures, UNESCO references, seasonal guidance, and wildlife notes.
+  parks: [
+    {
+      name: "Serengeti",
+      tagline: "Endless plains, big cats and the Great Migration",
+      facts: ["Established as a national park in 1951", "UNESCO World Heritage Site", "About 14,750 square kilometres"],
+      bestTime: "Year-round, with the migration moving through different regions",
+      wildlife: ["Lion", "Leopard", "Cheetah", "Elephant", "Buffalo", "Hippo", "Giraffe", "Wildebeest", "Zebra"],
+      href: "/safaris/serengeti",
+      image: "/images/safaris/hub/serengeti.jpg",
+    },
+    {
+      name: "Ngorongoro",
+      tagline: "The world's largest intact volcanic caldera",
+      facts: ["UNESCO World Heritage Site", "Crater about 600 metres deep", "Crater floor about 260 square kilometres", "Home to an estimated 25,000 large mammals"],
+      bestTime: "Year-round game viewing",
+      wildlife: ["Lion", "Elephant", "Buffalo", "Hippo", "Hyena", "Black rhino (rare, not guaranteed)", "Flamingos (seasonal)"],
+      href: "/safaris/ngorongoro",
+      image: "/images/safaris/hub/ngorongoro.jpg",
+    },
+    {
+      name: "Tarangire",
+      tagline: "Elephant herds beneath ancient baobabs",
+      facts: ["About 2,850 square kilometres", "The Tarangire River draws wildlife in the dry season", "Famous for elephants and baobab trees"],
+      bestTime: "Dry season, June to October",
+      wildlife: ["Elephant", "Lion", "Giraffe", "Zebra", "Buffalo", "Wildebeest", "Fringe-eared oryx", "Lesser kudu", "Hundreds of bird species"],
+      href: "/safaris/tarangire",
+      image: "/images/safaris/hub/tarangire.jpg",
+    },
+    {
+      name: "Lake Manyara",
+      tagline: "Rift Valley scenery, tree-climbing lions and birdlife",
+      facts: ["Set beneath the Rift Valley escarpment", "Tree-climbing lion sightings vary", "Flamingos and other waterbirds depend on the season"],
+      bestTime: "Year-round, birdlife best in the wetter months",
+      wildlife: ["Elephant", "Lion", "Hippo", "Giraffe", "Flamingo", "Waterbirds"],
+      href: "/safaris/lake-manyara",
+      image: "/images/safaris/hub/lake-manyara.jpg",
+    },
+  ],
+  // TODO(CONFIRM): migration regions and timing are approximate and must be reviewed before publication.
+  migration: [
+    { month: "January", region: "Southern Serengeti and Ndutu", headline: "Calving season", text: "Herds gather on the short-grass plains and thousands of calves are born, drawing predators.", intensity: 5, activeRegion: "south" },
+    { month: "February", region: "Southern Serengeti and Ndutu", headline: "Calving season", text: "Herds gather on the short-grass plains and thousands of calves are born, drawing predators.", intensity: 5, activeRegion: "south" },
+    { month: "March", region: "Southern Serengeti and Ndutu", headline: "Calving season", text: "Herds gather on the short-grass plains and thousands of calves are born, drawing predators.", intensity: 4, activeRegion: "south" },
+    { month: "April", region: "Central Serengeti", headline: "Green season", text: "Herds begin moving north-west across lush plains, with fewer visitors.", intensity: 3, activeRegion: "central" },
+    { month: "May", region: "Central Serengeti", headline: "Green season", text: "Herds begin moving north-west across lush plains, with fewer visitors.", intensity: 3, activeRegion: "central" },
+    { month: "June", region: "Western Corridor and Grumeti", headline: "Grumeti crossings", text: "Herds move north through the western corridor.", intensity: 4, activeRegion: "west" },
+    { month: "July", region: "Western Corridor and Grumeti", headline: "Grumeti and northern movement", text: "Herds continue north; movement and river activity vary with the rains.", intensity: 4, activeRegion: "west" },
+    { month: "August", region: "Northern Serengeti", headline: "Mara River crossings", text: "Dramatic river crossings may take place in the north.", intensity: 5, activeRegion: "north" },
+    { month: "September", region: "Northern Serengeti", headline: "Mara River crossings", text: "Dramatic river crossings may take place in the north.", intensity: 5, activeRegion: "north" },
+    { month: "October", region: "Northern Serengeti", headline: "Mara River crossings", text: "Herds may remain in the north as they follow grazing and water.", intensity: 4, activeRegion: "north" },
+    { month: "November", region: "Eastern and Southern Serengeti", headline: "The return south", text: "Herds travel south as the short rains arrive.", intensity: 3, activeRegion: "east" },
+    { month: "December", region: "Eastern and Southern Serengeti", headline: "The return south", text: "Herds travel south as the short rains arrive.", intensity: 3, activeRegion: "east" },
+  ],
+  styles: [
+    { title: "Private Safaris", description: "Your own vehicle and guide, with space to set your pace.", href: "/safaris/packages", image: "/images/safaris/hub/private-safari.jpg" },
+    { title: "Women-Only Group Safaris", description: "A welcoming small-group departure for women travelers.", href: "/safaris/packages/7-day-women-only-group-safari", image: "/images/safaris/hub/women-only.jpg" },
+    { title: "Honeymoon and Romance", description: "Thoughtful moments and stays for a special journey.", href: "/experiences/honeymoon-and-romance", image: "/images/Experiences/honeymoon.jpg" },
+    { title: "Family Safaris", description: "A considered pace and memorable wildlife encounters for all ages.", href: "/experiences/family-safaris", image: "/images/Experiences/family.jpg" },
+    { title: "Photography Safaris", description: "Room to watch, wait and frame the wild.", href: "/experiences/photography-safaris", image: "/images/Experiences/photography.jpg" },
+    { title: "Safari and Zanzibar", description: "Pair wildlife days with time beside the Indian Ocean.", href: "/safaris/packages/8-day-safari-and-zanzibar", image: "/images/home/zanzibar.jpg" },
+  ],
+  daySchedule: [
+    { title: "Sunrise game drive", timeOfDay: "Early morning", text: "Set out while the plains are cool and wildlife is active." },
+    { title: "Breakfast at camp or in the bush", timeOfDay: "Mid-morning", text: "Pause for breakfast at camp or enjoy a picnic in the bush." },
+    { title: "Midday rest or lunch", timeOfDay: "Midday", text: "Take time to rest, enjoy lunch and watch the changing light." },
+    { title: "Afternoon game drive", timeOfDay: "Afternoon", text: "Continue exploring with your guide and look for wildlife along the way." },
+    { title: "Golden hour", timeOfDay: "Late afternoon", text: "The landscape warms as the day draws toward evening." },
+    { title: "Sundowner and dinner under the stars", timeOfDay: "Evening", text: "Return to camp or lodge for dinner and a restful night." },
+  ],
+  wildlifeSpotlight: [
+    { name: "Lion", slug: "lion", text: "Often seen resting between hunts or moving through the grass.", image: "/images/safaris/wildlife/lion.jpg" },
+    { name: "Elephant", slug: "elephant", text: "Family herds gather near water and shade.", image: "/images/safaris/wildlife/elephant.jpg" },
+    { name: "Leopard", slug: "leopard", text: "A quiet presence, often resting in a tree.", image: "/images/safaris/wildlife/leopard.jpg" },
+    { name: "Buffalo", slug: "buffalo", text: "Large herds graze across the plains and woodland.", image: "/images/safaris/wildlife/buffalo.jpg" },
+    { name: "Rhino", slug: "rhino", text: "Black rhino are rare and sightings are never guaranteed in Ngorongoro.", image: "/images/safaris/wildlife/rhino.jpg" },
+    { name: "Cheetah", slug: "cheetah", text: "Look for this fast cat scanning open ground from a rise.", image: "/images/safaris/wildlife/cheetah.jpg" },
+    { name: "Giraffe", slug: "giraffe", text: "Tall silhouettes move between acacia trees.", image: "/images/safaris/wildlife/giraffe.jpg" },
+    { name: "Wildebeest", slug: "wildebeest", text: "The herds move across the ecosystem with the seasons.", image: "/images/safaris/wildlife/wildebeest.jpg" },
+    { name: "Hippo", slug: "hippo", text: "Often found cooling in rivers and pools.", image: "/images/safaris/wildlife/hippo.jpg" },
+    { name: "Flamingo", slug: "flamingo", text: "Seasonal flocks may gather along alkaline lakes.", image: "/images/safaris/wildlife/flamingo.jpg" },
+  ],
+  hubFaqs: [
+    { question: "How many days do I need for a Tanzania safari?", answer: "Three days gives a taste of the Northern Circuit. Five to seven days lets you add the Serengeti at a relaxed pace, and longer trips allow more time with the Great Migration." },
+    { question: "When is the best time for a Tanzania safari?", answer: "Wildlife viewing is good year-round. The dry season from June to October is the most popular, while January to March is ideal for calving season in the southern Serengeti. The migration moves with the rains." },
+    { question: "Is a private or group safari better?", answer: "A private safari gives you flexibility and your own vehicle. Group departures are friendlier on budget and a lovely way to meet like-minded travelers." },
+    { question: "Is a safari suitable for solo travelers, couples and families?", answer: "Yes. We tailor pace, accommodation and activities to every kind of traveler." },
+    { question: "Can I add Zanzibar or Kilimanjaro?", answer: "Absolutely. Safari and beach and climb and safari combinations are our most popular add-ons." },
+    { question: "What should I pack?", answer: "Light, neutral layers, a warm jacket for early mornings, sun protection and comfortable shoes. See our packing guide.", href: "/travel-guide/packing-list" },
+  ],
+} satisfies import("@/types/safari-hub").SafariHubData;
+
+if (process.env.NODE_ENV === "development") safariHubSchema.parse(safariHub);
