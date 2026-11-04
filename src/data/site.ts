@@ -3,10 +3,20 @@ export const siteConfig = {
   shortName: "She Roars Africa Safari",
   tagline: "Wild Tanzania, Led by Women Who Roar",
   url: "https://sheroarsafricasafari.com", // TODO(REPLACE): replace with the production domain.
-  email: "hello@example.com", // TODO(REPLACE): use the verified business email.
-  phone: "+255 000 000 000", // TODO(REPLACE): use the verified business phone number.
-  whatsappNumber: "255000000000", // TODO(REPLACE): use the verified WhatsApp number without punctuation.
-  address: "Arusha, Tanzania", // TODO(REPLACE): confirm and publish the business address.
+  email: "sheroarsafricasafari@gmail.com",
+  phoneDisplay: "+255 748 157 630",
+  phoneLocal: "0748 157 630",
+  phoneTel: "+255748157630",
+  whatsappNumber: "255748157630",
+  whatsappUrl: "https://wa.me/255748157630",
+  whatsappUrlWithMessage(message: string) {
+    return `${this.whatsappUrl}?text=${encodeURIComponent(message)}`;
+  },
+  defaultWhatsappMessage: "Hello She Roars Africa Safari! I'd like to plan a trip to Tanzania. Could you please share more details about our safaris, Kilimanjaro climbs and Zanzibar packages? Thank you.",
+  address: "Office address coming soon", // TODO(REPLACE): publish the verified business address.
+  hours: "Monday to Saturday, 8:00 to 18:00 East Africa Time", // TODO(CONFIRM): verify business hours.
+  responseTime: "within 24 hours", // TODO(CONFIRM): verify the response-time commitment.
+  mapUrl: "", // TODO(REPLACE): set the Google Maps link for the office.
   socials: {
     instagram: "https://instagram.com/replace-this", // TODO(REPLACE)
     facebook: "https://facebook.com/replace-this", // TODO(REPLACE)

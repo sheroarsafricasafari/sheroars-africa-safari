@@ -55,12 +55,7 @@ export function buildOrganizationJsonLd() {
     description: "Women-led safaris, Kilimanjaro climbs and Zanzibar escapes across Tanzania.",
     areaServed: "Tanzania",
     email: siteConfig.email,
-    telephone: siteConfig.phone,
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: "Arusha",
-      addressCountry: "TZ",
-    },
+    telephone: siteConfig.phoneTel,
     sameAs: Object.values(siteConfig.socials).filter((url) => !url.includes("replace-this")),
   };
 }

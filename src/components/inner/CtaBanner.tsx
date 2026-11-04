@@ -21,7 +21,7 @@ export default function CtaBanner({
   description = "Tell us where you dream of going, and we will shape it into a journey that is entirely yours.",
   image = { src: "/images/home/cta-banner.webp", alt: "Warm evening light across Tanzania" },
   primaryCta = { label: "Plan My Safari", href: "/plan-your-safari" },
-  secondaryCta = { label: "Chat on WhatsApp", href: `https://wa.me/${siteConfig.whatsappNumber}` },
+  secondaryCta = { label: "Chat on WhatsApp", href: siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage) },
   className,
 }: CtaBannerProps) {
   return (

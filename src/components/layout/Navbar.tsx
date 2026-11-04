@@ -137,8 +137,8 @@ export default function Navbar() {
             <Button href="/plan-your-safari" className="mt-6 w-full" onClick={() => setMobileOpenAt(null)}>Plan Your Safari</Button>
             <div className="mt-auto grid gap-3 border-t border-sand pt-6 text-sm">
               <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
-              <a href={`tel:${siteConfig.phone.replaceAll(" ", "")}`}>{siteConfig.phone}</a>
-              <a href={`https://wa.me/${siteConfig.whatsappNumber}`}>WhatsApp</a>
+              <a href={`tel:${siteConfig.phoneTel}`}>{siteConfig.phoneDisplay}</a>
+              <a href={siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage)}>WhatsApp</a>
             </div>
           </div>
         </div>

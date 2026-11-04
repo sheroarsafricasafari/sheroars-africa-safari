@@ -27,6 +27,10 @@ export function getAllPackageSlugs() {
   return [...safaris, ...samplePackages].map(({ slug }) => ({ slug }));
 }
 
+export function getAllPackages() {
+  return safaris;
+}
+
 export function getRouteBySlug(slug: string): KilimanjaroRoute | undefined {
   return sampleRoutes.find((route) => route.slug === slug);
 }

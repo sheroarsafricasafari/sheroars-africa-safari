@@ -16,8 +16,7 @@ import QuickFacts from "@/components/inner/QuickFacts";
 import RouteCard from "@/components/inner/RouteCard";
 import StatTiles from "@/components/inner/StatTiles";
 import StepsStrip from "@/components/inner/StepsStrip";
-import InquiryForm from "@/components/forms/InquiryFormWithPrefill";
-import InquirySubmissionProvider from "@/components/forms/InquirySubmissionProvider";
+import InquiryForm from "@/components/forms/InquiryForm";
 import { sampleData } from "@/data";
 import { buildMetadata } from "@/lib/seo";
 
@@ -211,9 +210,7 @@ export default function DevPreviewPage() {
           <p className="text-eyebrow text-terracotta">Sample interaction</p>
           <h2 className="mt-3 font-heading text-h2 text-earth">Inquiry form</h2>
           <p className="mb-8 mt-3 text-muted">Submission is simulated in this preview and is not sent to a service.</p>
-          <InquirySubmissionProvider>
-            <InquiryForm />
-          </InquirySubmissionProvider>
+          <InquiryForm />
         </div>
       </section>
     </>

@@ -15,7 +15,7 @@ export default function FinalCta() {
         <p className="mx-auto mt-5 max-w-2xl leading-7 text-white/85">{homeCopy.finalCta.description}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button href="/plan-your-safari" variant="light" size="lg">Plan My Safari</Button>
-          <Button href={`https://wa.me/${siteConfig.whatsappNumber}?text=Hello%20She%20Roars%20Africa%20Safari`} variant="outline-light" size="lg">
+          <Button href={siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage)} variant="outline-light" size="lg">
             <MessageCircle aria-hidden="true" size={18} />Chat on WhatsApp
           </Button>
         </div>

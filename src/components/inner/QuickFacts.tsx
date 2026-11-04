@@ -43,7 +43,7 @@ export default function QuickFacts({ duration, difficulty, bestTime, groupSize, 
       </dl>
       <div className="mt-7 grid gap-3">
         <Button href={`/plan-your-safari?package=${encodeURIComponent(packageSlug)}`} className="w-full">Plan This Journey</Button>
-        <Button href={`https://wa.me/${siteConfig.whatsappNumber}`} variant="secondary" className="w-full">Ask on WhatsApp</Button>
+        <Button href={siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage)} variant="secondary" className="w-full">Ask on WhatsApp</Button>
       </div>
       <p className="mt-5 flex items-start gap-2 text-xs leading-5 text-muted"><ShieldCheck aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-forest" />No obligation. Reply within 24 hours. <span className="sr-only">TODO(CONFIRM): verify response-time promise.</span></p>
     </aside>

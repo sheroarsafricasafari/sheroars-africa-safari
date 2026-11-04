@@ -43,8 +43,8 @@ export default function Footer() {
             <div className="mt-6 grid gap-2 text-sm text-cream/75">
               <p>{siteConfig.address}</p>
               <a href={`mailto:${siteConfig.email}`} className="hover:text-gold">{siteConfig.email}</a>
-              <a href={`tel:${siteConfig.phone.replaceAll(" ", "")}`} className="hover:text-gold">{siteConfig.phone}</a>
-              <a href={`https://wa.me/${siteConfig.whatsappNumber}`} className="hover:text-gold">WhatsApp us</a>
+              <a href={`tel:${siteConfig.phoneTel}`} className="hover:text-gold">{siteConfig.phoneDisplay}</a>
+              <a href={siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage)} className="hover:text-gold">WhatsApp us</a>
             </div>
           </div>
         </div>
