@@ -4,6 +4,8 @@ import Navbar from "@/components/layout/Navbar";
 import { NavbarThemeProvider } from "@/components/layout/NavbarTheme";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/layout/WhatsAppButton";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildOrganizationJsonLd, buildWebsiteJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/data/site";
 import "./globals.css";
 
@@ -34,6 +36,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Skip to content
         </a>
         <NavbarThemeProvider>
+          <JsonLd data={buildOrganizationJsonLd()} />
+          <JsonLd data={buildWebsiteJsonLd()} />
           <Navbar />
           <div id="main-content" tabIndex={-1} className="flex-1 outline-none">{children}</div>
           <Footer />

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { siteConfig } from "@/data/site";
 import BlogPreview from "@/components/home/BlogPreview";
 import DayTrips from "@/components/home/DayTrips";
 import Destinations from "@/components/home/Destinations";
@@ -31,18 +30,6 @@ export const metadata: Metadata = {
   },
 };
 
-const travelAgencySchema = {
-  "@context": "https://schema.org",
-  "@type": "TravelAgency",
-  name: siteConfig.name,
-  url: siteConfig.url,
-  description: "Women-led safaris, Kilimanjaro climbs and Zanzibar escapes across Tanzania.",
-  areaServed: "Tanzania",
-  email: siteConfig.email,
-  telephone: siteConfig.phone,
-  sameAs: Object.values(siteConfig.socials),
-};
-
 export default function HomePage() {
   return (
     <main>
@@ -63,7 +50,6 @@ export default function HomePage() {
       <Section id="travel-guides" background="sand"><BlogPreview /></Section>
       <Section id="faq"><FaqPreview /></Section>
       <Section id="final-cta" className="!p-0"><FinalCta /></Section>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(travelAgencySchema).replace(/</g, "\\u003c") }} />
     </main>
   );
 }

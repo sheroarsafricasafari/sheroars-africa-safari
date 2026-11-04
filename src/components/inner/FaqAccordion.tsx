@@ -1,5 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/cn";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildFaqJsonLd } from "@/lib/seo";
 
 // Props: FAQ entries, optional JSON-LD toggle, and className.
 type FaqAccordionProps = {
@@ -9,15 +11,6 @@ type FaqAccordionProps = {
 };
 
 export default function FaqAccordion({ items, jsonLd = false, className }: FaqAccordionProps) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map(({ question, answer }) => ({
-      "@type": "Question",
-      name: question,
-      acceptedAnswer: { "@type": "Answer", text: answer },
-    })),
-  };
   return (
     <div className={cn("grid gap-3", className)}>
       {items.map(({ question, answer }) => (
@@ -28,7 +21,7 @@ export default function FaqAccordion({ items, jsonLd = false, className }: FaqAc
           <p className="max-w-3xl pb-2 pt-4 text-sm leading-7 text-muted">{answer}</p>
         </details>
       ))}
-      {jsonLd ? <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} /> : null}
+      {jsonLd ? <JsonLd data={buildFaqJsonLd(items)} /> : null}
     </div>
   );
 }

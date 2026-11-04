@@ -2,6 +2,8 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { createBreadcrumbs } from "@/lib/routes";
+import JsonLd from "@/components/seo/JsonLd";
+import { buildBreadcrumbJsonLd } from "@/lib/seo";
 
 // Props: path is the current route; items may override generated crumbs; tone controls foreground contrast.
 type BreadcrumbsProps = {
@@ -13,16 +15,6 @@ type BreadcrumbsProps = {
 
 export default function Breadcrumbs({ path, items, tone = "dark", className }: BreadcrumbsProps) {
   const crumbs = items ?? createBreadcrumbs(path ?? "/");
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: crumbs.map((crumb, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      name: crumb.title,
-      item: crumb.href,
-    })),
-  };
   return (
     <>
       <nav aria-label="Breadcrumb" className={cn("text-sm", tone === "light" ? "text-white/80" : "text-muted", className)}>
@@ -42,7 +34,7 @@ export default function Breadcrumbs({ path, items, tone = "dark", className }: B
           })}
         </ol>
       </nav>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, "\\u003c") }} />
+      <JsonLd data={buildBreadcrumbJsonLd(crumbs)} />
     </>
   );
 }

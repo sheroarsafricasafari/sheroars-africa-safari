@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "SheRoarsAfricaSafari",
   shortName: "She Roars Africa Safari",
   tagline: "Wild Tanzania, Led by Women Who Roar",
-  url: "https://example.com", // TODO(REPLACE): replace with the production domain.
+  url: "https://sheroarsafricasafari.com", // TODO(REPLACE): replace with the production domain.
   email: "hello@example.com", // TODO(REPLACE): use the verified business email.
   phone: "+255 000 000 000", // TODO(REPLACE): use the verified business phone number.
   whatsappNumber: "255000000000", // TODO(REPLACE): use the verified WhatsApp number without punctuation.
