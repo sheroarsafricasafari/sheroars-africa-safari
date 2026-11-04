@@ -3,6 +3,7 @@ import { siteConfig } from "@/data/site";
 import SmartImage from "@/components/ui/SmartImage";
 import Button from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import Parallax from "@/components/motion/Parallax";
 
 // Props: optional eyebrow/title/description/background and two CTA labels/links plus className.
 export type CtaBannerProps = {
@@ -12,6 +13,7 @@ export type CtaBannerProps = {
   image?: { src: string; alt: string };
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  parallax?: boolean;
   className?: string;
 };
 
@@ -22,11 +24,16 @@ export default function CtaBanner({
   image = { src: "/images/home/cta-banner.webp", alt: "Warm evening light across Tanzania" },
   primaryCta = { label: "Plan My Safari", href: "/plan-your-safari" },
   secondaryCta = { label: "Chat on WhatsApp", href: siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage) },
+  parallax = false,
   className,
 }: CtaBannerProps) {
   return (
     <section className={cn("relative isolate flex min-h-[420px] items-center justify-center overflow-hidden border-t border-gold py-20 text-center text-white", className)}>
-      <SmartImage src={image.src} alt={image.alt} sizes="100vw" fill className="object-cover" />
+      {parallax ? (
+        <Parallax className="absolute inset-0 overflow-hidden">
+          <div className="absolute -inset-y-[6%] inset-x-0"><SmartImage src={image.src} alt={image.alt} sizes="100vw" fill className="object-cover" /></div>
+        </Parallax>
+      ) : <SmartImage src={image.src} alt={image.alt} sizes="100vw" fill className="object-cover" />}
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-terracotta/85 via-earth/80 to-forest/85" />
       <div className="relative mx-auto max-w-3xl px-5">
         <p className="text-eyebrow text-gold">{eyebrow}</p>
