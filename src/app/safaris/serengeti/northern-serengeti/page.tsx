@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import SerengetiRegionPage, { getSerengetiRegionMetadata } from "@/components/destinations/SerengetiRegionPage";
+import { northernSerengeti } from "@/data/destinations/serengeti";
 
-export const metadata: Metadata = {
-  title: "Northern Serengeti (Mara River) | SheRoarsAfricaSafari",
-};
+const path = "/safaris/serengeti/northern-serengeti";
 
-export default function Page() {
-  return (
-    <PagePlaceholder title="Northern Serengeti (Mara River)" path="/safaris/serengeti/northern-serengeti" section="Safaris" />
-  );
+export const metadata: Metadata = getSerengetiRegionMetadata(northernSerengeti, path);
+
+export default function NorthernSerengetiPage() {
+  return <SerengetiRegionPage data={northernSerengeti} path={path} />;
 }

@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import SerengetiRegionPage, { getSerengetiRegionMetadata } from "@/components/destinations/SerengetiRegionPage";
+import { westernCorridor } from "@/data/destinations/serengeti";
 
-export const metadata: Metadata = {
-  title: "Western Corridor (Grumeti) | SheRoarsAfricaSafari",
-};
+const path = "/safaris/serengeti/western-corridor";
 
-export default function Page() {
-  return (
-    <PagePlaceholder title="Western Corridor (Grumeti)" path="/safaris/serengeti/western-corridor" section="Safaris" />
-  );
+export const metadata: Metadata = getSerengetiRegionMetadata(westernCorridor, path);
+
+export default function WesternCorridorPage() {
+  return <SerengetiRegionPage data={westernCorridor} path={path} />;
 }
