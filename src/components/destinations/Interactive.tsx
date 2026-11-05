@@ -165,7 +165,7 @@ export function HowManyDays({ options }: { options: DayOptionData[] }) {
   );
 }
 
-export function ZoneExplorer({ zones }: { zones: ZoneData[] }) {
+export function ZoneExplorer({ zones, label = "Seronera landscapes" }: { zones: ZoneData[]; label?: string }) {
   const [selected, setSelected] = useState(0);
   const reducedMotion = useReducedMotionPreference();
   const zone = zones[selected];
@@ -184,7 +184,7 @@ export function ZoneExplorer({ zones }: { zones: ZoneData[] }) {
   if (!zone) return null;
   return (
     <div>
-      <div role="tablist" aria-label="Seronera landscapes" className="flex gap-2 overflow-x-auto pb-3">
+      <div role="tablist" aria-label={label} className="flex gap-2 overflow-x-auto pb-3">
         {zones.map((item, index) => <button key={item.title} ref={(node) => { tabRefs.current[index] = node; }} role="tab" id={`zone-tab-${index}`} aria-selected={selected === index} aria-controls="zone-panel" tabIndex={selected === index ? 0 : -1} onClick={() => setSelected(index)} onKeyDown={(event) => onKeyDown(event, index)} className="relative min-h-12 shrink-0 px-4 text-sm font-semibold text-earth focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">{item.title}<span className={`absolute inset-x-3 bottom-0 h-0.5 ${selected === index ? "bg-terracotta" : "bg-transparent"}`} /></button>)}
       </div>
       <div id="zone-panel" role="tabpanel" aria-labelledby={`zone-tab-${selected}`} className="mt-5 grid overflow-hidden rounded-3xl bg-white shadow-card lg:grid-cols-2">

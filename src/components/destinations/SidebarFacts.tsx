@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Binoculars, Compass, MapPin, PawPrint, Plane, Sun, Trees } from "lucide-react";
+import { Binoculars, Clock, Compass, MapPin, PawPrint, Plane, Sun, Trees } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import Button from "@/components/ui/Button";
 import type { SubRegionData } from "@/types/destination";
 
 // Props: labeled quick facts with icon keys and the destination-specific enquiry message.
-const iconMap: Record<string, LucideIcon> = { binoculars: Binoculars, compass: Compass, map: MapPin, paw: PawPrint, plane: Plane, sun: Sun, trees: Trees, clock: Compass, people: Binoculars };
+const iconMap: Record<string, LucideIcon> = { binoculars: Binoculars, clock: Clock, compass: Compass, map: MapPin, paw: PawPrint, plane: Plane, sun: Sun, trees: Trees, people: Binoculars };
 
 export default function SidebarFacts({ items, message = "Hello, I would like to plan a Seronera safari." }: { items: SubRegionData["sidebarFacts"]; message?: string }) {
   const [showMobileBar, setShowMobileBar] = useState(false);

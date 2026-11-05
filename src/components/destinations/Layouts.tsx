@@ -28,7 +28,7 @@ export function DestinationHubLayout({ hero, breadcrumbs, nav, children, related
 }
 
 // Props: SubRegionLayout composes the sub-region hero, navigation, ordered sections, related links and final CTA.
-export function SubRegionLayout({ hero, breadcrumbs, nav, children, related, relatedTitle = "Continue Exploring", cta, ctaImage }: {
+export function SubRegionLayout({ hero, breadcrumbs, nav, children, related, relatedTitle = "Continue Exploring", cta, ctaImage, ctaImageAlt = "Seronera Valley in the Serengeti", ctaEyebrow = "LET'S PLAN YOUR SERONERA JOURNEY", whatsappMessage = siteConfig.defaultWhatsappMessage }: {
   hero: DestinationHeroData;
   breadcrumbs: { title: string; href: string }[];
   nav: DestinationNavItem[];
@@ -37,13 +37,16 @@ export function SubRegionLayout({ hero, breadcrumbs, nav, children, related, rel
   relatedTitle?: string;
   cta: { title: string; description: string; primary: string; secondary: string };
   ctaImage: string;
+  ctaImageAlt?: string;
+  ctaEyebrow?: string;
+  whatsappMessage?: string;
 }) {
   return <>
     <DestinationHero data={hero} breadcrumbs={breadcrumbs} />
     <StickySectionNav items={nav} cta={{ label: "Plan My Safari", href: "/plan-your-safari?type=Safari" }} />
     {children}
     <div className="bg-sand"><RelatedLinks title={relatedTitle} items={related.map((item) => ({ title: item.title, href: item.href, description: item.description ?? "Discover another part of the Serengeti." }))} /></div>
-    <CtaBanner eyebrow="LET'S PLAN YOUR SERONERA JOURNEY" title={cta.title} description={cta.description} image={{ src: ctaImage, alt: "Seronera Valley in the Serengeti" }} primaryCta={{ label: cta.primary, href: "/plan-your-safari?type=Safari" }} secondaryCta={{ label: cta.secondary, href: siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage) }} parallax />
+    <CtaBanner eyebrow={ctaEyebrow} title={cta.title} description={cta.description} image={{ src: ctaImage, alt: ctaImageAlt }} primaryCta={{ label: cta.primary, href: "/plan-your-safari?type=Safari" }} secondaryCta={{ label: cta.secondary, href: siteConfig.whatsappUrlWithMessage(whatsappMessage) }} parallax />
   </>;
 }
 

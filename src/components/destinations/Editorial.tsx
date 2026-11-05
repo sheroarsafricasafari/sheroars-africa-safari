@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {
-  Binoculars, Bird, Camera, CarFront, Compass, Crown, Heart, Leaf,
+  Binoculars, Bird, Camera, CarFront, Clock, Compass, Crown, Heart, Leaf,
   MapPin, Mountain, PawPrint, Plane, Route, Sun, Tent, Trees,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -20,7 +20,7 @@ import type {
 // Props: FactStrip takes facts and a footnote; PullQuote takes editorial text; SeasonGrid/SeasonCards take season data; WildlifeShowcase and SightingGuide take wildlife data; GettingThere takes two travel modes; TipsGrid and ExperienceCards take card data; StayTiers takes tiers, footnote and a destination link.
 const iconMap: Record<string, LucideIcon> = {
   binoculars: Binoculars, bird: Bird, camera: Camera, car: CarFront, compass: Compass,
-  crown: Crown, heart: Heart, leaf: Leaf, map: MapPin, mountain: Mountain,
+  clock: Clock, crown: Crown, heart: Heart, leaf: Leaf, map: MapPin, mountain: Mountain,
   paw: PawPrint, plane: Plane, route: Route, sun: Sun, tent: Tent, trees: Trees,
 };
 
@@ -56,7 +56,7 @@ export function SeasonGrid({ data, dark = false }: { data: SeasonData; dark?: bo
     <div className={`overflow-hidden rounded-3xl border p-4 sm:p-6 ${dark ? "border-white/10 bg-white/5 text-cream" : "border-sand bg-forest text-cream"}`}>
       <div className="overflow-x-auto">
         <table className="w-full min-w-[760px] border-separate border-spacing-x-1 border-spacing-y-2 text-xs">
-          <caption className="sr-only">Monthly wildlife, migration and weather guide</caption>
+          <caption className="sr-only">{data.caption ?? "Monthly wildlife, migration and weather guide"}</caption>
           <thead><tr><th scope="col" className="sticky left-0 z-10 min-w-48 bg-forest px-3 py-2 text-left">Season</th>{months.map((month) => <th key={month} scope="col" className="min-w-10 px-1 py-2 font-semibold">{month}</th>)}</tr></thead>
           <tbody>{data.rows.map((row) => <tr key={row.label}>
             <th scope="row" className={`sticky left-0 z-10 px-3 py-3 text-left font-semibold ${dark ? "bg-[#183c31]" : "bg-forest"}`}>{row.label}</th>
@@ -106,11 +106,11 @@ export function WildlifeShowcase({ items, note }: { items: WildlifeTileData[]; n
 export function SightingGuide({ items }: { items: SightingData[] }) {
   return <div className="overflow-hidden rounded-3xl border border-sand bg-white">
     <ul className="divide-y divide-sand">
-      {items.map((item) => <li key={item.name} className="grid gap-3 p-5 sm:grid-cols-[1fr_150px_1.2fr_1fr] sm:items-center sm:px-7">
-        <h3 className="font-heading text-xl text-earth">{item.name}</h3>
-        <LikelihoodDots name={item.name} value={item.likelihood} />
-        <p className="text-sm leading-6 text-muted"><strong className="text-earth">Where to look: </strong>{item.where}</p>
-        <p className="text-sm leading-6 text-muted"><strong className="text-earth">Best time: </strong>{item.bestTime}</p>
+      {items.map((item) => <li key={item.name} className="grid min-w-0 gap-3 p-5 sm:grid-cols-[minmax(0,1fr)_minmax(110px,150px)_minmax(0,1.2fr)_minmax(0,1fr)] sm:items-center sm:px-7">
+        <h3 className="min-w-0 break-words font-heading text-xl text-earth">{item.name}</h3>
+        {item.outlook ? <span className="inline-flex min-h-8 max-w-full items-center whitespace-normal break-words rounded-full bg-sand px-3 py-1 text-xs font-semibold text-earth">{item.outlook}</span> : item.likelihood !== undefined ? <LikelihoodDots name={item.name} value={item.likelihood} /> : null}
+        <p className="min-w-0 break-words text-sm leading-6 text-muted"><strong className="text-earth">Where to look: </strong>{item.where}</p>
+        <p className="min-w-0 break-words text-sm leading-6 text-muted"><strong className="text-earth">Best time: </strong>{item.bestTime}</p>
       </li>)}
     </ul>
     <p className="border-t border-sand bg-cream px-5 py-4 text-xs text-muted sm:px-7">Likelihood is a guide, not a guarantee.</p>

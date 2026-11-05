@@ -46,8 +46,8 @@ export type RegionData = {
 };
 export type DestinationPin = { label: string; x: number; y: number; kind: "gate" | "airstrip" };
 export type WildlifeTileData = { name: string; description: string; likelihood: string; image: string; featured?: boolean };
-export type SightingData = { name: string; likelihood: number; where: string; bestTime: string };
-export type SeasonData = { rows: SeasonRow[]; cards: SeasonCardData[] };
+export type SightingData = { name: string; likelihood?: number; outlook?: string; where: string; bestTime: string };
+export type SeasonData = { rows: SeasonRow[]; cards: SeasonCardData[]; caption?: string };
 export type TravelModeData = { title: string; description: string; times: string[]; steps: string[] };
 export type GettingThereData = { road: TravelModeData; air: TravelModeData; note: string };
 export type ExperienceData = { title: string; tags: string[]; text: string; image: string; href: string };
@@ -59,6 +59,140 @@ export type TipData = { title: string; text: string; icon: string };
 export type HighlightData = TipData;
 export type DestinationFaq = { question: string; answer: string; href?: string };
 export type RelatedDestination = { title: string; href: string; description?: string };
+export type MigrationFeatureData = {
+  image: string;
+  imageAlt: string;
+  points: { title: string; text: string }[];
+  moment: {
+    title: string;
+    text: string;
+    image?: string;
+    imageAlt?: string;
+    noteTitle?: string;
+    noteText?: string;
+    cards?: { title: string; text: string }[];
+  };
+  cta: { label: string; href: string };
+  comparison?: {
+    title: string;
+    text: string;
+    regions: { title: string; text: string; href: string }[];
+  };
+};
+export type EditorialSectionHeading = { eyebrow: string; title: string; subtitle: string };
+export type SerengetiRegionPageData = {
+  meta: DestinationMeta;
+  hero: DestinationHeroData;
+  breadcrumbs: { title: string; href: string }[];
+  nav: DestinationNavItem[];
+  overview: { eyebrow: string; title: string; subtitle: string; lead: string; body: string };
+  sections: {
+    highlights: EditorialSectionHeading;
+    landscape: EditorialSectionHeading;
+    seasons: EditorialSectionHeading;
+    schedule: EditorialSectionHeading;
+    tips: EditorialSectionHeading;
+    gettingThere: EditorialSectionHeading;
+    stay: EditorialSectionHeading;
+    journeys: EditorialSectionHeading;
+    faq: EditorialSectionHeading;
+  };
+  sidebarFacts: { label: string; value: string; icon: string }[];
+  highlights: HighlightData[];
+  zones: ZoneData[];
+  migration: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    feature: MigrationFeatureData;
+  };
+  wildlife: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    items: SightingData[];
+    callout: string;
+    image: string;
+    imageAlt: string;
+  };
+  seasons: SeasonData;
+  seasonNote: string;
+  schedule: DayScheduleData[];
+  tips: TipData[];
+  gettingThere: GettingThereData;
+  stay: {
+    tiers: StayTierData[];
+    footnote: string;
+    href: string;
+    linkLabel: string;
+    introduction: string;
+    image: string;
+    imageAlt: string;
+  };
+  journeys: {
+    title: string;
+    subtitle: string;
+    packageTag: string;
+    fallbackTitle: string;
+    fallbackDescription: string;
+    fallbackCta: string;
+  };
+  faqs: DestinationFaq[];
+  related: RelatedDestination[];
+  cta: { title: string; description: string; primary: string; secondary: string };
+  ctaEyebrow: string;
+  ctaImage: string;
+  ctaImageAlt: string;
+  whatsappMessage: string;
+};
+
+export type SouthernNdutuData = {
+  meta: DestinationMeta;
+  hero: DestinationHeroData;
+  breadcrumbs: { title: string; href: string }[];
+  nav: DestinationNavItem[];
+  overview: { eyebrow: string; title: string; lead: string; body: string };
+  sidebarFacts: SubRegionData["sidebarFacts"];
+  highlights: HighlightData[];
+  zones: ZoneData[];
+  calving: {
+    eyebrow: string;
+    title: string;
+    introduction: string;
+    image: string;
+    imageAlt: string;
+    momentTitle: string;
+    momentText: string;
+    facts: { label: string; value: string }[];
+    predatorTitle: string;
+    predators: WildlifeTileData[];
+    wildlifeStatement: string;
+    sourceNote: string;
+  };
+  wildlife: { showcase: WildlifeTileData[]; sightings: SightingData[]; note: string };
+  seasons: SeasonData;
+  seasonNote: string;
+  aprilNote: string;
+  experiences: ExperienceData[];
+  schedule: DayScheduleData[];
+  gettingThere: GettingThereData;
+  stay: SubRegionData["stay"];
+  journeys: {
+    title: string;
+    subtitle: string;
+    packageTag: string;
+    fallbackTitle: string;
+    fallbackDescription: string;
+    fallbackCta: string;
+  };
+  faqs: DestinationFaq[];
+  related: RelatedDestination[];
+  cta: { title: string; description: string; primary: string; secondary: string };
+  ctaEyebrow: string;
+  ctaImage: string;
+  ctaImageAlt: string;
+  whatsappMessage: string;
+};
 
 export type DestinationHubData = {
   meta: DestinationMeta; hero: DestinationHeroData; breadcrumbs: { title: string; href: string }[];
