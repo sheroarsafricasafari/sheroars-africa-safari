@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import GreatMigrationPage, { getGreatMigrationMetadata } from "@/components/destinations/GreatMigrationPage";
+import { greatMigration } from "@/data/destinations/great-migration";
 
-export const metadata: Metadata = {
-  title: "The Great Migration | SheRoarsAfricaSafari",
-};
+export const metadata: Metadata = getGreatMigrationMetadata(greatMigration);
 
-export default function Page() {
-  return (
-    <PagePlaceholder title="The Great Migration" path="/safaris/serengeti/great-migration" section="Safaris" />
-  );
+export default function GreatMigrationRoute() {
+  return <GreatMigrationPage data={greatMigration} />;
 }
