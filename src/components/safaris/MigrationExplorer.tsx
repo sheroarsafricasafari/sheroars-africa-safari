@@ -16,9 +16,9 @@ const regions = [
   { id: "east", label: "Eastern track", d: "M420 156 C460 133 499 157 494 194 C489 225 454 239 428 218 C403 199 395 171 420 156Z" },
 ] as const;
 
-export default function MigrationExplorer({ migration }: { migration: SafariHubData["migration"] }) {
+export default function MigrationExplorer({ migration, initialMonth }: { migration: SafariHubData["migration"]; initialMonth?: string }) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(() => Math.max(0, migration.findIndex((item) => item.month === initialMonth)));
   const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const reducedMotion = useReducedMotionPreference();
   const inView = useInView(sectionRef);
