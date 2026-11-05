@@ -8,8 +8,8 @@ const heroSchema = z.object({
   title: z.string().min(1),
   subtitle: z.string().min(1),
   chips: z.array(z.string().min(1)).min(1),
-  primary: z.object({ label: z.string().min(1), href: z.string().startsWith("/") }),
-  secondary: z.object({ label: z.string().min(1), href: z.string().startsWith("/") }),
+  primary: z.object({ label: z.string().min(1), href: z.string().regex(/^(\/|#)/) }),
+  secondary: z.object({ label: z.string().min(1), href: z.string().regex(/^(\/|#)/) }),
 });
 
 export const serengetiHubSchema = z.object({

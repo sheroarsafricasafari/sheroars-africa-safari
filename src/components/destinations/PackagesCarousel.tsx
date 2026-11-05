@@ -11,17 +11,16 @@ import type { SafariPackage } from "@/data/safaris";
 export function PackagesCarouselView({ packages, title, subtitle }: { packages: SafariPackage[]; title: string; subtitle: string }) {
   const [viewportRef, embla] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps", loop: false });
   const [selected, setSelected] = useState(0);
-  const [snapCount, setSnapCount] = useState(0);
+  const snapCount = embla?.scrollSnapList().length ?? 0;
   const onSelect = useCallback(() => {
     if (!embla) return;
     setSelected(embla.selectedScrollSnap());
   }, [embla]);
   useEffect(() => {
     if (!embla) return;
-    setSnapCount(embla.scrollSnapList().length);
     embla.on("select", onSelect);
     return () => { embla.off("select", onSelect); };
-  }, [embla, onSelect, packages.length]);
+  }, [embla, onSelect]);
   return (
     <section aria-label={title}>
       <div className="mb-7 flex flex-wrap items-end justify-between gap-5">

@@ -13,7 +13,6 @@ import {
   StayTiers, WildlifeShowcase,
 } from "@/components/destinations/Editorial";
 import PackagesCarousel from "@/components/destinations/PackagesCarouselServer";
-import MigrationExplorer from "@/components/safaris/MigrationExplorer";
 import JsonLd from "@/components/seo/JsonLd";
 import { safariHub } from "@/data/safariHub";
 import { serengetiHub } from "@/data/destinations/serengeti";

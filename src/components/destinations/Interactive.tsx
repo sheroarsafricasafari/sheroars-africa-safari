@@ -86,7 +86,7 @@ export function RegionExplorer({ regions, pins, note }: { regions: RegionData[];
 
   return (
     <div className="grid gap-8 xl:grid-cols-[1.05fr_0.95fr]">
-      <div className="rounded-3xl bg-forest p-4 text-cream sm:p-7">
+      <div className="min-w-0 rounded-3xl bg-forest p-4 text-cream sm:p-7">
         <div className="mb-4 flex flex-wrap gap-2">
           <button type="button" aria-pressed={showGates} onClick={() => setShowGates(!showGates)} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-4 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"><Signpost size={15} />Show gates</button>
           <button type="button" aria-pressed={showAirstrips} onClick={() => setShowAirstrips(!showAirstrips)} className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 px-4 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"><Plane size={15} />Show airstrips</button>
@@ -113,7 +113,7 @@ export function RegionExplorer({ regions, pins, note }: { regions: RegionData[];
           {regions.map((item) => <button key={item.id} type="button" onClick={() => setSelectedId(item.id)} aria-pressed={selectedId === item.id} className={`min-h-11 shrink-0 rounded-full px-4 text-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold ${selectedId === item.id ? "bg-gold text-forest" : "border border-white/20 text-cream"}`}>{item.shortName}</button>)}
         </div>
       </div>
-      <div aria-live="polite" className="rounded-3xl border border-sand bg-white p-6 shadow-card sm:p-8">
+      <div aria-live="polite" className="min-w-0 rounded-3xl border border-sand bg-white p-6 shadow-card sm:p-8">
         <p className="text-eyebrow text-terracotta">{region.name}</p>
         <h3 className="mt-3 font-heading text-3xl text-earth">{region.character}</h3>
         <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
