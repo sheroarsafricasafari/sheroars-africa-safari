@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import SouthernNdutuPage, { getSouthernNdutuMetadata } from "@/components/destinations/SouthernNdutuPage";
+import { southernNdutu } from "@/data/destinations/serengeti";
 
-export const metadata: Metadata = {
-  title: "Southern Serengeti (Ndutu) | SheRoarsAfricaSafari",
-};
+export const metadata: Metadata = getSouthernNdutuMetadata(southernNdutu);
 
-export default function Page() {
-  return (
-    <PagePlaceholder title="Southern Serengeti (Ndutu)" path="/safaris/serengeti/southern-ndutu" section="Safaris" />
-  );
+export default function SouthernNdutuRoute() {
+  return <SouthernNdutuPage data={southernNdutu} />;
 }
