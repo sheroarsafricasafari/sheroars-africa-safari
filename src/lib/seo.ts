@@ -7,6 +7,7 @@ type MetadataInput = {
   path: string;
   image?: string;
   noIndex?: boolean;
+  absoluteTitle?: boolean;
 };
 
 type BreadcrumbItem = {
@@ -22,10 +23,11 @@ export function buildMetadata({
   path,
   image,
   noIndex = false,
+  absoluteTitle = false,
 }: MetadataInput): Metadata {
   const imageUrl = image ? absoluteUrl(image) : undefined;
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: { canonical: path },
     robots: noIndex ? { index: false, follow: false } : undefined,

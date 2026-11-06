@@ -15,6 +15,7 @@ export type CtaBannerProps = {
   secondaryCta?: { label: string; href: string };
   parallax?: boolean;
   className?: string;
+  id?: string;
 };
 
 export default function CtaBanner({
@@ -26,9 +27,10 @@ export default function CtaBanner({
   secondaryCta = { label: "Chat on WhatsApp", href: siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage) },
   parallax = false,
   className,
+  id,
 }: CtaBannerProps) {
   return (
-    <section className={cn("relative isolate flex min-h-[420px] items-center justify-center overflow-hidden border-t border-gold py-20 text-center text-white", className)}>
+    <section id={id} aria-labelledby={id ? `${id}-heading` : undefined} className={cn("relative isolate flex min-h-[420px] items-center justify-center overflow-hidden border-t border-gold py-20 text-center text-white", className)}>
       {parallax ? (
         <Parallax className="absolute inset-0 overflow-hidden">
           <div className="absolute -inset-y-[6%] inset-x-0"><SmartImage src={image.src} alt={image.alt} sizes="100vw" fill className="object-cover" /></div>
@@ -37,7 +39,7 @@ export default function CtaBanner({
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-terracotta/85 via-earth/80 to-forest/85" />
       <div className="relative mx-auto max-w-3xl px-5">
         <p className="text-eyebrow text-gold">{eyebrow}</p>
-        <h2 className="mt-4 font-heading text-h2 text-white">{title}</h2>
+        <h2 id={id ? `${id}-heading` : undefined} className="mt-4 font-heading text-h2 text-white">{title}</h2>
         <p className="mx-auto mt-4 max-w-2xl leading-7 text-white/85">{description}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button href={primaryCta.href} variant="light" size="lg">{primaryCta.label}</Button>

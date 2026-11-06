@@ -17,6 +17,7 @@ export const siteConfig = {
   hours: "Monday to Saturday, 8:00 to 18:00 East Africa Time", // TODO(CONFIRM): verify business hours.
   responseTime: "within 24 hours", // TODO(CONFIRM): verify the response-time commitment.
   mapUrl: "", // TODO(REPLACE): set the Google Maps link for the office.
+  credentials: [] as { label: string; href?: string }[], // TODO(REPLACE): add verified credentials before displaying any badges.
   socials: {
     instagram: "https://instagram.com/replace-this", // TODO(REPLACE)
     facebook: "https://facebook.com/replace-this", // TODO(REPLACE)
@@ -26,15 +27,29 @@ export const siteConfig = {
 };
 
 export type NavLink = { label: string; href: string };
-export type NavItem = NavLink & { children?: NavLink[] };
+export type NavItem = NavLink & {
+  children?: NavItem[];
+  group?: string;
+  description?: string;
+};
 
 export const navigation: NavItem[] = [
   { label: "Safaris", href: "/safaris", children: [
-    { label: "Serengeti", href: "/safaris/serengeti" },
-    { label: "Ngorongoro", href: "/safaris/ngorongoro" },
-    { label: "Tarangire", href: "/safaris/tarangire" },
-    { label: "Lake Manyara", href: "/safaris/lake-manyara" },
-    { label: "All Safari Packages", href: "/safaris/packages" },
+    { label: "Tanzania Safari", href: "/tanzania-safari", description: "An overview of Tanzania's northern safari destinations and planning seasons." },
+    { label: "Serengeti", href: "/safaris/serengeti", description: "Explore the regions, seasons and signature experiences of the Serengeti.", children: [
+      { label: "Serengeti Overview", href: "/safaris/serengeti", group: "Discover the Serengeti" },
+      { label: "Central Serengeti (Seronera)", href: "/safaris/serengeti/central-seronera", group: "Explore the Regions" },
+      { label: "Northern Serengeti", href: "/safaris/serengeti/northern-serengeti", group: "Explore the Regions" },
+      { label: "Western Corridor", href: "/safaris/serengeti/western-corridor", group: "Explore the Regions" },
+      { label: "Southern Serengeti and Ndutu", href: "/safaris/serengeti/southern-ndutu", group: "Explore the Regions" },
+      { label: "The Great Migration", href: "/safaris/serengeti/great-migration", group: "Plan Your Experience" },
+      { label: "Where to Stay", href: "/safaris/serengeti/where-to-stay", group: "Plan Your Experience" },
+      { label: "Hot-Air Balloon Safari", href: "/safaris/serengeti/hot-air-balloon", group: "Plan Your Experience" },
+    ] },
+    { label: "Ngorongoro", href: "/safaris/ngorongoro", description: "Explore the crater and Ngorongoro highlands." },
+    { label: "Tarangire", href: "/safaris/tarangire", description: "Discover baobab country and elephant herds." },
+    { label: "Lake Manyara", href: "/safaris/lake-manyara", description: "Explore a compact park of forest, escarpment and lake." },
+    { label: "All Safari Packages", href: "/safaris/packages", description: "Browse safari journeys across Tanzania." },
   ] },
   { label: "Kilimanjaro", href: "/kilimanjaro", children: [
     { label: "Routes", href: "/kilimanjaro/routes" },

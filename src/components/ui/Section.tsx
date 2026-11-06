@@ -5,6 +5,7 @@ type SectionProps = {
   background?: "cream" | "sand" | "forest";
   children: ReactNode;
   className?: string;
+  ariaLabelledBy?: string;
 };
 
 const backgrounds = {
@@ -13,9 +14,9 @@ const backgrounds = {
   forest: "bg-forest text-cream",
 };
 
-export default function Section({ id, background = "cream", children, className = "" }: SectionProps) {
+export default function Section({ id, background = "cream", children, className = "", ariaLabelledBy }: SectionProps) {
   return (
-    <section id={id} className={`py-20 md:py-28 ${backgrounds[background]} ${className}`}>
+    <section id={id} aria-labelledby={ariaLabelledBy} className={`py-20 md:py-28 ${backgrounds[background]} ${className}`}>
       {children}
     </section>
   );

@@ -14,7 +14,7 @@ const socials = [
 
 function LinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
-    <div>
+    <div className="min-w-0">
       <h2 className="mb-5 text-sm font-bold uppercase tracking-[0.16em] text-gold">{title}</h2>
       <ul className="grid gap-3 text-sm text-cream/80">
         {links.map((link) => <li key={link.href}><Link className="hover:text-gold" href={link.href}>{link.label}</Link></li>)}
@@ -27,8 +27,8 @@ export default function Footer() {
   return (
     <footer className="bg-forest text-cream">
       <div className="mx-auto max-w-7xl px-5 py-16 sm:px-8 md:py-20">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
-          <div>
+        <div className="grid min-w-0 gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          <div className="min-w-0">
             <Logo light />
             <p className="mt-5 max-w-sm text-sm leading-6 text-cream/75">A women-led travel company crafting safaris, Kilimanjaro climbs and Zanzibar escapes across Tanzania.</p>
             <div className="mt-5 flex gap-4">
@@ -38,7 +38,7 @@ export default function Footer() {
           </div>
           <LinkColumn title="Safaris" links={footerLinks.safaris} />
           <LinkColumn title="Kilimanjaro and More" links={footerLinks.more} />
-          <div>
+          <div className="min-w-0">
             <LinkColumn title="Company" links={footerLinks.company} />
             <div className="mt-6 grid gap-2 text-sm text-cream/75">
               <p>{siteConfig.address}</p>

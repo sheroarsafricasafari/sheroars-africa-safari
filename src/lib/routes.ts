@@ -8,7 +8,7 @@ export type RouteDefinition = {
 
 const staticPaths = [
   "/", "/about", "/team", "/why-she-roars", "/giving-back", "/testimonials", "/gallery",
-  "/safaris", "/safaris/packages", "/safaris/lake-manyara", "/safaris/ngorongoro",
+  "/safaris", "/tanzania-safari", "/safaris/packages", "/safaris/lake-manyara", "/safaris/ngorongoro",
   "/safaris/ngorongoro/crater", "/safaris/ngorongoro/highlands-empakaai",
   "/safaris/ngorongoro/maasai-cultural-visit", "/safaris/ngorongoro/olduvai-gorge",
   "/safaris/ngorongoro/where-to-stay", "/safaris/serengeti", "/safaris/serengeti/central-seronera",
@@ -59,6 +59,7 @@ const sections: [string, string][] = [
 const titleOverrides: Record<string, string> = {
   "/": "Home",
   "/safaris": "Safaris",
+  "/tanzania-safari": "Tanzania Safari",
   "/safaris/packages": "Safari Packages",
   "/safaris/serengeti": "Serengeti National Park",
   "/safaris/serengeti/central-seronera": "Central Serengeti (Seronera)",
