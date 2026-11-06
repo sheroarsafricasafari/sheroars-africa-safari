@@ -7,7 +7,7 @@ import type { DestinationHeroData } from "@/types/destination";
 import { DestinationScrollCue } from "@/components/destinations/Interactive";
 
 // Props: destination hero copy, image, fact chips and the primary/secondary CTA definitions.
-export default function DestinationHero({ data, breadcrumbs }: { data: DestinationHeroData; breadcrumbs?: { title: string; href: string }[] }) {
+export default function DestinationHero({ data, breadcrumbs, className }: { data: DestinationHeroData; breadcrumbs?: { title: string; href: string }[]; className?: string }) {
   const icons = [Award, Sparkles, Map];
   return (
     <PageHero
@@ -19,6 +19,7 @@ export default function DestinationHero({ data, breadcrumbs }: { data: Destinati
       parallax
       breadcrumbs={breadcrumbs}
       id="destination-hero"
+      className={className}
       afterSubtitle={
         <div className="mt-6">
           <ul className="flex flex-wrap justify-center gap-2 md:justify-start">
