@@ -87,7 +87,7 @@ export const serengetiHub: DestinationHubData = {
     description: "Plan a Serengeti safari with a women-led Tanzania team. Explore the four regions, the Great Migration, wildlife, the best time to visit and how to get there.",
   },
   hero: {
-    image: "/images/destinations/serengeti/hero.jpg",
+    image: "/images/destinations/serengeti/hero.webp",
     eyebrow: "SERENGETI NATIONAL PARK",
     title: "The Serengeti",
     subtitle: "Endless golden plains, the Great Migration and Africa's most dramatic wildlife, explored by a team that knows every kopje and river crossing.",
@@ -190,16 +190,16 @@ export const serengetiHub: DestinationHubData = {
     note: "Movements vary with the rains.",
   },
   wildlife: [
-    { name: "Lion", description: "Lions are the Serengeti's signature predator, often seen resting on kopjes.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/lion.jpg", featured: true }, // TODO(CONFIRM): verify likelihood.
-    { name: "Leopard", description: "Look for leopards resting in the trees along riverbeds.", likelihood: "Good chance", image: "/images/destinations/serengeti/wildlife/leopard.jpg" }, // TODO(CONFIRM): verify likelihood.
-    { name: "Cheetah", description: "Open plains give cheetahs room to run and you room to watch.", likelihood: "Good chance", image: "/images/destinations/serengeti/wildlife/cheetah.jpg" }, // TODO(CONFIRM): verify likelihood.
-    { name: "Elephant", description: "Family herds roam the woodlands and river valleys.", likelihood: "Good chance", image: "/images/destinations/serengeti/wildlife/elephant.jpg" }, // TODO(CONFIRM): verify likelihood.
-    { name: "Buffalo", description: "Large herds graze across the central and western plains.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/buffalo.jpg" }, // TODO(CONFIRM): verify likelihood.
+    { name: "Lion", description: "Lions are the Serengeti's signature predator, often seen resting on kopjes.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/lion.webp", featured: true }, // TODO(CONFIRM): verify likelihood.
+    { name: "Leopard", description: "Look for leopards resting in the trees along riverbeds.", likelihood: "Good chance", image: "/images/destinations/serengeti/wildlife/leopard.webp" }, // TODO(CONFIRM): verify likelihood.
+    { name: "Cheetah", description: "Open plains give cheetahs room to run and you room to watch.", likelihood: "Good chance", image: "/images/destinations/serengeti/wildlife/cheetah.jpeg" }, // TODO(CONFIRM): verify likelihood.
+    { name: "Elephant", description: "Family herds roam the woodlands and river valleys.", likelihood: "Good chance", image: "/images/destinations/serengeti/wildlife/elephant.jpeg" }, // TODO(CONFIRM): verify likelihood.
+    { name: "Buffalo", description: "Large herds graze across the central and western plains.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/buffalo.avif" }, // TODO(CONFIRM): verify likelihood.
     { name: "Hippo and Crocodile", description: "Pools along the rivers hold hippo and crocodile.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/hippo-crocodile.jpg" }, // TODO(CONFIRM): verify likelihood.
-    { name: "Giraffe", description: "Tall and elegant against the acacias.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/giraffe.jpg" }, // TODO(CONFIRM): verify likelihood.
-    { name: "Wildebeest and Zebra", description: "The stars of the migration, present in large numbers for much of the year.", likelihood: "Very likely, seasonal movement", image: "/images/destinations/serengeti/wildlife/wildebeest-zebra.jpg" }, // TODO(CONFIRM): verify likelihood and seasonal distribution.
+    { name: "Giraffe", description: "Tall and elegant against the acacias.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/giraffe.jpeg" }, // TODO(CONFIRM): verify likelihood.
+    { name: "Wildebeest and Zebra", description: "The stars of the migration, present in large numbers for much of the year.", likelihood: "Very likely, seasonal movement", image: "/images/destinations/serengeti/wildlife/wildebeest-zebra.jpeg" }, // TODO(CONFIRM): verify likelihood and seasonal distribution.
     { name: "Black Rhino", description: "Rare and carefully protected, mostly around Moru Kopjes.", likelihood: "Rare", image: "/images/destinations/serengeti/wildlife/black-rhino.jpg" }, // TODO(CONFIRM): verify likelihood and location.
-    { name: "Birds", description: "More than 500 species, from ostrich and secretary bird to vultures and crowned cranes.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/birds.jpg" }, // TODO(CONFIRM): verify species count and likelihood.
+    { name: "Birds", description: "More than 500 species, from ostrich and secretary bird to vultures and crowned cranes.", likelihood: "Very likely", image: "/images/destinations/serengeti/wildlife/birds.webp" }, // TODO(CONFIRM): verify species count and likelihood.
   ],
   wildlifeNote: "All of the Big Five live in the Serengeti, but black rhino are rare and sightings are never guaranteed.",
   seasons: {
@@ -232,9 +232,9 @@ export const serengetiHub: DestinationHubData = {
     note: "Many travelers combine the two: drive in through Ngorongoro and fly out, or the reverse. We will suggest the best combination for your dates.", // TODO(CONFIRM): verify all drive and flight times.
   },
   experiences: [
-    { title: "Game Drives", tags: ["Dawn", "Dusk", "Full-day"], text: "Dawn and dusk drives in a private 4x4 with a pop-up roof, led by a guide who reads the landscape.", image: "/images/destinations/serengeti/experiences/game-drives.jpg", href: "/safaris/packages" },
+    { title: "Game Drives", tags: ["Dawn", "Dusk", "Full-day"], text: "Dawn and dusk drives in a private 4x4 with a pop-up roof, led by a guide who reads the landscape.", image: "/images/destinations/serengeti/experiences/game-drives.avif", href: "/safaris/packages" },
     { title: "Hot-Air Balloon Safari", tags: ["Sunrise", "Bucket list"], text: "Float over the plains at sunrise, followed by a bush breakfast.", image: "/images/destinations/serengeti/experiences/balloon-safari.jpg", href: "/safaris/serengeti/hot-air-balloon" },
-    { title: "Bush Breakfasts and Sundowners", tags: ["Romance", "Celebrations"], text: "Breakfast in the bush or a sundowner on a kopje.", image: "/images/destinations/serengeti/experiences/bush-breakfast.jpg", href: "/plan-your-safari?type=Safari" }, // TODO(CONFIRM): verify availability.
+    { title: "Bush Breakfasts and Sundowners", tags: ["Romance", "Celebrations"], text: "Breakfast in the bush or a sundowner on a kopje.", image: "/images/destinations/serengeti/experiences/bush-breakfast.avif", href: "/plan-your-safari?type=Safari" }, // TODO(CONFIRM): verify availability.
     { title: "Photography Safaris", tags: ["Golden hour"], text: "Positioning, patience and golden light.", image: "/images/destinations/serengeti/experiences/photography.jpg", href: "/experiences/photography-safaris" },
     { title: "Cultural Encounters", tags: ["Culture", "Near Ngorongoro"], text: "Combine your safari with a Maasai cultural visit near Ngorongoro.", image: "/images/destinations/serengeti/experiences/cultural-encounters.jpg", href: "/safaris/ngorongoro/maasai-cultural-visit" },
   ],

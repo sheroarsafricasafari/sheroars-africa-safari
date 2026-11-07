@@ -148,19 +148,41 @@ export function TipsGrid({ items }: { items: TipData[] }) {
   </StaggerGroup>;
 }
 
-export function ExperienceCards({ items }: { items: ExperienceData[] }) {
+export function ExperienceCards({ items, variant = "default" }: { items: ExperienceData[]; variant?: "default" | "overlay" }) {
   return <StaggerGroup className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-    {items.map((item) => <StaggerItem key={item.title}>
-      <TiltCard className="h-full overflow-hidden rounded-2xl border border-sand bg-white shadow-sm">
-        <article className="h-full">
-          <div className="relative aspect-[4/3] bg-sand"><SmartImage src={item.image} alt={item.title} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover" /></div>
-          <div className="p-5">
-            <div className="flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-sand px-3 py-1 text-xs font-semibold text-earth">{tag}</span>)}</div>
-            <h3 className="mt-4 font-heading text-2xl text-earth">{item.title}</h3><p className="mt-2 text-sm leading-6 text-muted">{item.text}</p>
-            <Link href={item.href} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">Explore experience <span aria-hidden="true">→</span></Link>
-          </div>
-        </article>
-      </TiltCard>
+    {items.map((item) => <StaggerItem key={item.title} className="h-full">
+      {variant === "overlay" ? (
+        <TiltCard className="h-full overflow-hidden rounded-2xl shadow-card">
+          <Link
+            href={item.href}
+            className="group relative block min-h-[420px] h-full overflow-hidden rounded-2xl bg-earth text-white shadow-card focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-terracotta sm:min-h-[460px]"
+          >
+            <SmartImage src={item.image} alt={item.title} sizes="(max-width: 640px) 88vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105" />
+            <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/35 to-transparent" />
+            <span className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+              <span className="flex flex-wrap gap-2">
+                {item.tags.map((tag) => <span key={tag} className="rounded-full border border-white/35 bg-earth/35 px-3 py-1 text-xs font-semibold text-white backdrop-blur-sm">{tag}</span>)}
+              </span>
+              <span className="mt-4 block font-heading text-2xl sm:text-3xl">{item.title}</span>
+              <span className="mt-2 block text-sm leading-6 text-white/90">{item.text}</span>
+              <span className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-gold underline underline-offset-4">
+                Explore experience <span aria-hidden="true">→</span>
+              </span>
+            </span>
+          </Link>
+        </TiltCard>
+      ) : (
+        <TiltCard className="h-full overflow-hidden rounded-2xl border border-sand bg-white shadow-sm">
+          <article className="h-full">
+            <div className="relative aspect-[4/3] bg-sand"><SmartImage src={item.image} alt={item.title} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover" /></div>
+            <div className="p-5">
+              <div className="flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-sand px-3 py-1 text-xs font-semibold text-earth">{tag}</span>)}</div>
+              <h3 className="mt-4 font-heading text-2xl text-earth">{item.title}</h3><p className="mt-2 text-sm leading-6 text-muted">{item.text}</p>
+              <Link href={item.href} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">Explore experience <span aria-hidden="true">→</span></Link>
+            </div>
+          </article>
+        </TiltCard>
+      )}
     </StaggerItem>)}
   </StaggerGroup>;
 }

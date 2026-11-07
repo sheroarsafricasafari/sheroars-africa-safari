@@ -1,18 +1,34 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { KeyboardEvent } from "react";
 import Link from "next/link";
+import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check } from "lucide-react";
 import SmartImage from "@/components/ui/SmartImage";
 import type { SafariHubData } from "@/types/safari-hub";
 import useReducedMotionPreference from "@/components/motion/useReducedMotionPreference";
 
 export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] }) {
   const [active, setActive] = useState(0);
+  const [mobileActive, setMobileActive] = useState(0);
+  const [mobileViewportRef, mobileApi] = useEmblaCarousel({ align: "start", containScroll: "trimSnaps", loop: false });
   const cardLinks = useRef<Array<HTMLAnchorElement | null>>([]);
   const reducedMotion = useReducedMotionPreference();
+
+  useEffect(() => {
+    if (!mobileApi) return;
+    const updateMobileActive = () => setMobileActive(mobileApi.selectedScrollSnap());
+    updateMobileActive();
+    mobileApi.on("select", updateMobileActive);
+    mobileApi.on("reInit", updateMobileActive);
+    return () => {
+      mobileApi.off("select", updateMobileActive);
+      mobileApi.off("reInit", updateMobileActive);
+    };
+  }, [mobileApi]);
+
   const activateWithArrow = (index: number, event: KeyboardEvent<HTMLAnchorElement>) => {
     const nextIndex = event.key === "ArrowRight" || event.key === "ArrowDown"
       ? (index + 1) % parks.length
@@ -27,6 +43,16 @@ export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] 
     event.preventDefault();
     setActive(nextIndex);
     cardLinks.current[nextIndex]?.focus();
+  };
+
+  const scrollMobile = (direction: "previous" | "next") => {
+    if (direction === "previous") mobileApi?.scrollPrev();
+    else mobileApi?.scrollNext();
+  };
+
+  const selectMobile = (index: number) => {
+    mobileApi?.scrollTo(index);
+    setMobileActive(index);
   };
 
   return (
@@ -90,29 +116,64 @@ export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] 
         })}
       </div>
 
-      <div className="grid gap-4 md:hidden">
-        {parks.map((park) => (
-          <Link
-            key={park.name}
-            href={park.href}
-            className="group block overflow-hidden rounded-3xl bg-white shadow-card transition-shadow hover:shadow-lift focus-visible:outline focus-visible:outline-4 focus-visible:outline-terracotta"
-          >
-            <div className="relative min-h-64 text-white">
-              <SmartImage src={park.image} alt={`${park.name} landscape`} sizes="100vw" fill className="object-cover transition-transform duration-500 motion-reduce:transition-none group-hover:scale-105" />
-              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/90 to-transparent" />
-              <span className="absolute inset-x-6 bottom-6">
-                <span className="block font-heading text-3xl">{park.name}</span>
-                <span className="mt-1 block text-sm text-white/85">{park.tagline}</span>
-              </span>
-            </div>
-            <div className="space-y-4 p-5 text-sm text-muted">
-              <ul className="grid gap-2">{park.facts.slice(0, 3).map((fact) => <li key={fact} className="flex gap-2"><Check aria-hidden="true" className="size-4 shrink-0 text-terracotta" />{fact}</li>)}</ul>
-              <p><strong className="text-earth">Best time:</strong> {park.bestTime}</p>
-              <p>{park.wildlife.join(" · ")}</p>
-              <span className="inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline">Explore {park.name}<ArrowRight aria-hidden="true" size={16} /></span>
-            </div>
-          </Link>
-        ))}
+      <div className="md:hidden">
+        <div ref={mobileViewportRef} className="overflow-hidden">
+          <div className="-ml-3 flex touch-pan-y sm:-ml-4">
+            {parks.map((park, index) => (
+              <div key={park.name} className="min-w-0 flex-[0_0_88%] pl-3 sm:flex-[0_0_76%] sm:pl-4">
+                <Link
+                  href={park.href}
+                  onFocus={() => setMobileActive(index)}
+                  onClick={() => setMobileActive(index)}
+                  className="group relative block h-[min(74svh,560px)] min-h-[440px] overflow-hidden rounded-3xl bg-earth text-white shadow-card focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
+                >
+                  <SmartImage src={park.image} alt={`${park.name} landscape`} sizes="(max-width: 640px) 88vw, 76vw" fill className="object-cover transition-transform duration-500 motion-reduce:transition-none group-hover:scale-105" />
+                  <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/45 to-transparent" />
+                  <span className="absolute inset-x-5 bottom-5 sm:inset-x-7 sm:bottom-7">
+                    <span className="text-eyebrow text-gold">Northern Circuit</span>
+                    <span className="mt-2 block font-heading text-3xl sm:text-4xl">{park.name}</span>
+                    <span className="mt-2 block text-sm leading-6 text-cream/90 sm:text-base">{park.tagline}</span>
+                    <span className="mt-4 grid gap-2 text-xs leading-5 text-cream/90 sm:text-sm">
+                      {park.facts.slice(0, 3).map((fact) => (
+                        <span key={fact} className="flex items-start gap-2">
+                          <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
+                          {fact}
+                        </span>
+                      ))}
+                    </span>
+                    <span className="mt-4 block text-xs leading-5 text-cream/85 sm:text-sm">
+                      <strong className="text-white">Best time:</strong> {park.bestTime}
+                    </span>
+                    <span className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-gold underline underline-offset-4">
+                      Explore {park.name}<ArrowRight aria-hidden="true" size={17} />
+                    </span>
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="mt-5 flex items-center gap-3">
+          <button type="button" onClick={() => scrollMobile("previous")} aria-label="Previous destination" className="flex size-11 shrink-0 items-center justify-center rounded-full border border-earth/20 text-earth focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">
+            <ArrowLeft aria-hidden="true" size={18} />
+          </button>
+          <div className="flex min-w-0 flex-1 items-center justify-center gap-2" role="group" aria-label="Select a destination">
+            {parks.map((park, index) => (
+              <button
+                key={park.name}
+                type="button"
+                onClick={() => selectMobile(index)}
+                aria-label={`Show ${park.name}`}
+                aria-current={mobileActive === index ? "true" : undefined}
+                className={`h-2.5 rounded-full transition-[width,background-color] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta motion-reduce:transition-none ${mobileActive === index ? "w-8 bg-terracotta" : "w-2.5 bg-earth/25 hover:bg-earth/50"}`}
+              />
+            ))}
+          </div>
+          <span className="shrink-0 text-xs font-semibold tabular-nums text-muted">{mobileActive + 1} / {parks.length}</span>
+          <button type="button" onClick={() => scrollMobile("next")} aria-label="Next destination" className="flex size-11 shrink-0 items-center justify-center rounded-full border border-earth/20 text-earth focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">
+            <ArrowRight aria-hidden="true" size={18} />
+          </button>
+        </div>
       </div>
     </>
   );

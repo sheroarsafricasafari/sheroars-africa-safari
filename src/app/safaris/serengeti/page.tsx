@@ -112,7 +112,7 @@ export default function SerengetiPage() {
 
       <DestinationSection id="experiences" tone="sand">
         <SectionHeading eyebrow="MAKE IT YOURS" title="Experiences Across the Plains" subtitle="From the road to the sky, thoughtful experiences add texture to your days." />
-        <ExperienceCards items={serengetiHub.experiences} />
+        <ExperienceCards items={serengetiHub.experiences} variant="overlay" />
       </DestinationSection>
 
       <DestinationSection id="stay" tone="cream">

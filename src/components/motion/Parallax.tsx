@@ -24,7 +24,7 @@ export default function Parallax({
   const style = axis === "x" ? { x: movement, willChange: "transform" as const } : { y: movement, willChange: "transform" as const };
   return (
     <div ref={ref} className={className}>
-      <motion.div style={reducedMotion ? undefined : style}>
+      <motion.div className="relative h-full" style={reducedMotion ? undefined : style}>
         {children}
       </motion.div>
     </div>
