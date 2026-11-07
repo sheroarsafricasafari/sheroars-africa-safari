@@ -10,7 +10,7 @@ export const safariHub = {
       bestTime: "Year-round, with the migration moving through different regions",
       wildlife: ["Lion", "Leopard", "Cheetah", "Elephant", "Buffalo", "Hippo", "Giraffe", "Wildebeest", "Zebra"],
       href: "/safaris/serengeti",
-      image: "/images/safaris/hub/serengeti.jpg",
+      image: "/images/safaris/hub/serengeti.jpeg",
     },
     {
       name: "Ngorongoro",
@@ -19,7 +19,7 @@ export const safariHub = {
       bestTime: "Year-round game viewing",
       wildlife: ["Lion", "Elephant", "Buffalo", "Hippo", "Hyena", "Black rhino (rare, not guaranteed)", "Flamingos (seasonal)"],
       href: "/safaris/ngorongoro",
-      image: "/images/safaris/hub/ngorongoro.jpg",
+      image: "/images/safaris/hub/ngorongoro.jpeg",
     },
     {
       name: "Tarangire",
@@ -28,7 +28,7 @@ export const safariHub = {
       bestTime: "Dry season, June to October",
       wildlife: ["Elephant", "Lion", "Giraffe", "Zebra", "Buffalo", "Wildebeest", "Fringe-eared oryx", "Lesser kudu", "Hundreds of bird species"],
       href: "/safaris/tarangire",
-      image: "/images/safaris/hub/tarangire.jpg",
+      image: "/images/safaris/hub/tarangire.jpeg",
     },
     {
       name: "Lake Manyara",
@@ -37,7 +37,7 @@ export const safariHub = {
       bestTime: "Year-round, birdlife best in the wetter months",
       wildlife: ["Elephant", "Lion", "Hippo", "Giraffe", "Flamingo", "Waterbirds"],
       href: "/safaris/lake-manyara",
-      image: "/images/safaris/hub/lake-manyara.jpg",
+      image: "/images/safaris/hub/lake-manyara.jpeg",
     },
   ],
   // TODO(CONFIRM): migration regions and timing are approximate and must be reviewed before publication.
@@ -57,7 +57,6 @@ export const safariHub = {
   ],
   styles: [
     { title: "Private Safaris", description: "Your own vehicle and guide, with space to set your pace.", href: "/safaris/packages", image: "/images/safaris/hub/private-safari.jpg" },
-    { title: "Women-Only Group Safaris", description: "A welcoming small-group departure for women travelers.", href: "/safaris/packages/7-day-women-only-group-safari", image: "/images/safaris/hub/women-only.jpg" },
     { title: "Honeymoon and Romance", description: "Thoughtful moments and stays for a special journey.", href: "/experiences/honeymoon-and-romance", image: "/images/Experiences/honeymoon.jpg" },
     { title: "Family Safaris", description: "A considered pace and memorable wildlife encounters for all ages.", href: "/experiences/family-safaris", image: "/images/Experiences/family.jpg" },
     { title: "Photography Safaris", description: "Room to watch, wait and frame the wild.", href: "/experiences/photography-safaris", image: "/images/Experiences/photography.jpg" },
@@ -73,14 +72,14 @@ export const safariHub = {
   ],
   wildlifeSpotlight: [
     { name: "Lion", slug: "lion", text: "Often seen resting between hunts or moving through the grass.", image: "/images/safaris/wildlife/lion.jpg" },
-    { name: "Elephant", slug: "elephant", text: "Family herds gather near water and shade.", image: "/images/safaris/wildlife/elephant.jpg" },
-    { name: "Leopard", slug: "leopard", text: "A quiet presence, often resting in a tree.", image: "/images/safaris/wildlife/leopard.jpg" },
-    { name: "Buffalo", slug: "buffalo", text: "Large herds graze across the plains and woodland.", image: "/images/safaris/wildlife/buffalo.jpg" },
-    { name: "Rhino", slug: "rhino", text: "Black rhino are rare and sightings are never guaranteed in Ngorongoro.", image: "/images/safaris/wildlife/rhino.jpg" },
-    { name: "Cheetah", slug: "cheetah", text: "Look for this fast cat scanning open ground from a rise.", image: "/images/safaris/wildlife/cheetah.jpg" },
-    { name: "Giraffe", slug: "giraffe", text: "Tall silhouettes move between acacia trees.", image: "/images/safaris/wildlife/giraffe.jpg" },
-    { name: "Wildebeest", slug: "wildebeest", text: "The herds move across the ecosystem with the seasons.", image: "/images/safaris/wildlife/wildebeest.jpg" },
-    { name: "Hippo", slug: "hippo", text: "Often found cooling in rivers and pools.", image: "/images/safaris/wildlife/hippo.jpg" },
+    { name: "Elephant", slug: "elephant", text: "Family herds gather near water and shade.", image: "/images/safaris/wildlife/elephant.jpeg" },
+    { name: "Leopard", slug: "leopard", text: "A quiet presence, often resting in a tree.", image: "/images/safaris/wildlife/leopard.jpeg" },
+    { name: "Buffalo", slug: "buffalo", text: "Large herds graze across the plains and woodland.", image: "/images/safaris/wildlife/buffalo.jpeg" },
+    { name: "Rhino", slug: "rhino", text: "Black rhino are rare and sightings are never guaranteed in Ngorongoro.", image: "/images/safaris/wildlife/rhino.jpeg" },
+    { name: "Cheetah", slug: "cheetah", text: "Look for this fast cat scanning open ground from a rise.", image: "/images/safaris/wildlife/cheetah.jpeg" },
+    { name: "Giraffe", slug: "giraffe", text: "Tall silhouettes move between acacia trees.", image: "/images/safaris/wildlife/giraffe.jpeg" },
+    { name: "Wildebeest", slug: "wildebeest", text: "The herds move across the ecosystem with the seasons.", image: "/images/safaris/wildlife/wildebeest.jpeg" },
+    { name: "Hippo", slug: "hippo", text: "Often found cooling in rivers and pools.", image: "/images/safaris/wildlife/hippo.jpeg" },
     { name: "Flamingo", slug: "flamingo", text: "Seasonal flocks may gather along alkaline lakes.", image: "/images/safaris/wildlife/flamingo.jpg" },
   ],
   hubFaqs: [

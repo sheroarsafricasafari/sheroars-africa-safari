@@ -35,9 +35,10 @@ export type NavItem = NavLink & {
 
 export const navigation: NavItem[] = [
   { label: "Safaris", href: "/safaris", children: [
-    { label: "Tanzania Safari", href: "/tanzania-safari", description: "An overview of Tanzania's northern safari destinations and planning seasons." },
-    { label: "Serengeti", href: "/safaris/serengeti", description: "Explore the regions, seasons and signature experiences of the Serengeti.", children: [
-      { label: "Serengeti Overview", href: "/safaris/serengeti", group: "Discover the Serengeti" },
+    { label: "Safari Homepage", href: "/safaris", group: "Start Planning", description: "Explore Tanzania's safari destinations and find your next journey." },
+    { label: "Tanzania Safari", href: "/tanzania-safari", group: "Start Planning", description: "An overview of Tanzania's northern safari destinations and planning seasons." },
+    { label: "Safari Packages", href: "/safaris/packages", group: "Start Planning", description: "Browse safari journeys across Tanzania." },
+    { label: "Serengeti", href: "/safaris/serengeti", group: "Destinations", description: "Explore the regions, seasons and signature experiences of the Serengeti.", children: [
       { label: "Central Serengeti (Seronera)", href: "/safaris/serengeti/central-seronera", group: "Explore the Regions" },
       { label: "Northern Serengeti", href: "/safaris/serengeti/northern-serengeti", group: "Explore the Regions" },
       { label: "Western Corridor", href: "/safaris/serengeti/western-corridor", group: "Explore the Regions" },
@@ -46,10 +47,18 @@ export const navigation: NavItem[] = [
       { label: "Where to Stay", href: "/safaris/serengeti/where-to-stay", group: "Plan Your Experience" },
       { label: "Hot-Air Balloon Safari", href: "/safaris/serengeti/hot-air-balloon", group: "Plan Your Experience" },
     ] },
-    { label: "Ngorongoro", href: "/safaris/ngorongoro", description: "Explore the crater and Ngorongoro highlands." },
-    { label: "Tarangire", href: "/safaris/tarangire", description: "Discover baobab country and elephant herds." },
-    { label: "Lake Manyara", href: "/safaris/lake-manyara", description: "Explore a compact park of forest, escarpment and lake." },
-    { label: "All Safari Packages", href: "/safaris/packages", description: "Browse safari journeys across Tanzania." },
+    { label: "Ngorongoro", href: "/safaris/ngorongoro", group: "Destinations", description: "Explore the crater and Ngorongoro highlands.", children: [
+      { label: "Ngorongoro Crater", href: "/safaris/ngorongoro/crater", group: "Explore the Area" },
+      { label: "Highlands and Empakaai", href: "/safaris/ngorongoro/highlands-empakaai", group: "Explore the Area" },
+      { label: "Maasai Cultural Visit", href: "/safaris/ngorongoro/maasai-cultural-visit", group: "Explore the Area" },
+      { label: "Olduvai Gorge", href: "/safaris/ngorongoro/olduvai-gorge", group: "Explore the Area" },
+      { label: "Where to Stay", href: "/safaris/ngorongoro/where-to-stay", group: "Plan Your Experience" },
+    ] },
+    { label: "Tarangire", href: "/safaris/tarangire", group: "Destinations", description: "Discover baobab country and elephant herds.", children: [
+      { label: "Elephants and Baobabs", href: "/safaris/tarangire/elephants-and-baobabs", group: "Explore the Park" },
+      { label: "Where to Stay", href: "/safaris/tarangire/where-to-stay", group: "Plan Your Experience" },
+    ] },
+    { label: "Lake Manyara", href: "/safaris/lake-manyara", group: "Destinations", description: "Explore a compact park of forest, escarpment and lake." },
   ] },
   { label: "Kilimanjaro", href: "/kilimanjaro", children: [
     { label: "Routes", href: "/kilimanjaro/routes" },

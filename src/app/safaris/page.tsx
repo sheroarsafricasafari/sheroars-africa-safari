@@ -16,7 +16,6 @@ import SmartImage from "@/components/ui/SmartImage";
 import TiltCard from "@/components/motion/TiltCard";
 import MagneticButton from "@/components/motion/MagneticButton";
 import Marquee from "@/components/motion/Marquee";
-import Parallax from "@/components/motion/Parallax";
 import SplitReveal from "@/components/motion/SplitReveal";
 import DrawPath from "@/components/motion/DrawPath";
 import { StaggerGroup, StaggerItem } from "@/components/motion/StaggerGroup";
@@ -32,7 +31,7 @@ export const metadata = buildMetadata({
   title: "Tanzania Safaris: Serengeti, Ngorongoro, Tarangire and Lake Manyara",
   description,
   path: "/safaris",
-  image: "/images/safaris/hub/hero.jpg",
+  image: "/images/safaris/hub/serengeti.jpeg",
 });
 
 const wildlifeIcons = [Sunrise, Coffee, Sun, Binoculars, Camera, Moon];
@@ -65,11 +64,19 @@ export default function SafarisPage() {
 
       <section className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-forest text-white">
         <HeroSignal />
-        <Parallax className="absolute inset-0 overflow-hidden">
-          <div className="absolute -inset-y-[6%] inset-x-0">
-            <SmartImage src="/images/safaris/hub/hero.jpg" alt="Golden evening light across the Serengeti plains" sizes="100vw" fill priority className="object-cover" />
-          </div>
-        </Parallax>
+        <SmartImage src="/images/safaris/hub/serengeti.jpeg" alt="Golden evening light across the Serengeti plains" sizes="100vw" fill priority className="object-cover" />
+        <video
+          aria-hidden="true"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/safaris/hub/serengeti.jpeg"
+          className="absolute inset-0 size-full object-cover"
+        >
+          <source src="/videos/safaris/hub/safari-home-hero.mp4.mp4" type="video/mp4" />
+        </video>
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-earth/80 to-transparent" />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/85 via-earth/20 to-transparent" />
         <Container className="relative w-full pb-20 pt-36 md:pb-28">
@@ -123,7 +130,7 @@ export default function SafarisPage() {
       <section className="bg-cream py-20 md:py-28">
         <Container>
           <SectionHeading eyebrow="SIGNATURE JOURNEYS" title="Safaris Designed to Make You Roar" />
-          <FeaturedCarousel packages={safaris} />
+          <FeaturedCarousel packages={safaris.filter((item) => item.slug !== "7-day-women-only-group-safari")} />
           <div className="mt-10 text-center"><Button href="/safaris/packages" variant="secondary">View All Safari Packages</Button></div>
         </Container>
       </section>

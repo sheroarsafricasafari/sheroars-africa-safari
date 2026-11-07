@@ -11,9 +11,9 @@ import useReducedMotionPreference from "@/components/motion/useReducedMotionPref
 
 export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] }) {
   const [active, setActive] = useState(0);
-  const tabRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const cardLinks = useRef<Array<HTMLAnchorElement | null>>([]);
   const reducedMotion = useReducedMotionPreference();
-  const activateWithArrow = (index: number, event: KeyboardEvent<HTMLButtonElement>) => {
+  const activateWithArrow = (index: number, event: KeyboardEvent<HTMLAnchorElement>) => {
     const nextIndex = event.key === "ArrowRight" || event.key === "ArrowDown"
       ? (index + 1) % parks.length
       : event.key === "ArrowLeft" || event.key === "ArrowUp"
@@ -26,13 +26,12 @@ export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] 
     if (nextIndex < 0) return;
     event.preventDefault();
     setActive(nextIndex);
-    tabRefs.current[nextIndex]?.focus();
+    cardLinks.current[nextIndex]?.focus();
   };
-  const selectedPark = parks[active];
 
   return (
     <>
-      <div role="group" aria-label="Choose a national park" className="hidden h-[640px] gap-3 md:flex">
+      <div role="group" aria-label="Explore Tanzania's national parks" className="hidden h-[640px] gap-3 md:flex">
         {parks.map((park, index) => {
           const expanded = active === index;
           return (
@@ -42,16 +41,13 @@ export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] 
             >
               <SmartImage src={park.image} alt={`${park.name} landscape`} sizes="(max-width: 1200px) 25vw, 30vw" fill className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105" />
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/20 to-earth/10" />
-              <button
-                ref={(element) => { tabRefs.current[index] = element; }}
-                type="button"
+              <Link
+                ref={(element) => { cardLinks.current[index] = element; }}
+                href={park.href}
                 tabIndex={expanded ? 0 : -1}
-                aria-pressed={expanded}
-                aria-expanded={expanded}
-                aria-label={`${park.name}: ${park.tagline}`}
+                aria-label={`Explore ${park.name}: ${park.tagline}`}
                 onMouseEnter={() => setActive(index)}
                 onFocus={() => setActive(index)}
-                onClick={() => setActive(index)}
                 onKeyDown={(event) => activateWithArrow(index, event)}
                 className="absolute inset-0 z-10 cursor-pointer rounded-3xl focus-visible:outline focus-visible:outline-4 focus-visible:outline-gold"
               />
@@ -93,27 +89,29 @@ export default function ParkSelector({ parks }: { parks: SafariHubData["parks"] 
           );
         })}
       </div>
-      {selectedPark ? <div className="mt-5 hidden justify-end md:flex"><Link href={selectedPark.href} className="inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">Explore {selectedPark.name}<ArrowRight aria-hidden="true" size={17} /></Link></div> : null}
 
       <div className="grid gap-4 md:hidden">
         {parks.map((park) => (
-          <details key={park.name} className="group overflow-hidden rounded-3xl bg-white shadow-card">
-            <summary className="relative min-h-64 cursor-pointer list-none p-6 text-white [&::-webkit-details-marker]:hidden">
-              <SmartImage src={park.image} alt={`${park.name} landscape`} sizes="100vw" fill className="object-cover" />
+          <Link
+            key={park.name}
+            href={park.href}
+            className="group block overflow-hidden rounded-3xl bg-white shadow-card transition-shadow hover:shadow-lift focus-visible:outline focus-visible:outline-4 focus-visible:outline-terracotta"
+          >
+            <div className="relative min-h-64 text-white">
+              <SmartImage src={park.image} alt={`${park.name} landscape`} sizes="100vw" fill className="object-cover transition-transform duration-500 motion-reduce:transition-none group-hover:scale-105" />
               <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/90 to-transparent" />
               <span className="absolute inset-x-6 bottom-6">
                 <span className="block font-heading text-3xl">{park.name}</span>
                 <span className="mt-1 block text-sm text-white/85">{park.tagline}</span>
-                <span className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-gold">Details <span aria-hidden="true" className="ml-2 transition-transform motion-reduce:transition-none group-open:rotate-90">›</span></span>
               </span>
-            </summary>
+            </div>
             <div className="space-y-4 p-5 text-sm text-muted">
               <ul className="grid gap-2">{park.facts.slice(0, 3).map((fact) => <li key={fact} className="flex gap-2"><Check aria-hidden="true" className="size-4 shrink-0 text-terracotta" />{fact}</li>)}</ul>
               <p><strong className="text-earth">Best time:</strong> {park.bestTime}</p>
               <p>{park.wildlife.join(" · ")}</p>
-              <Link href={park.href} className="inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline">Explore {park.name}<ArrowRight aria-hidden="true" size={16} /></Link>
+              <span className="inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline">Explore {park.name}<ArrowRight aria-hidden="true" size={16} /></span>
             </div>
-          </details>
+          </Link>
         ))}
       </div>
     </>

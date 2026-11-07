@@ -9,10 +9,10 @@ import Button from "@/components/ui/Button";
 import Logo from "@/components/layout/Logo";
 import { useNavbarTheme } from "@/components/layout/NavbarTheme";
 
-function getNestedMenu(item: NavItem, isActive: (href: string) => boolean) {
-  return item.children?.find((child) => child.children && isActive(child.href))
-    ?? item.children?.find((child) => child.children)
-    ?? null;
+function getNestedMenu(item: NavItem, pathname: string) {
+  return item.children?.find((child) =>
+    child.children?.length && (pathname === child.href || pathname.startsWith(`${child.href}/`)),
+  )?.label ?? null;
 }
 
 function groupNavigation(items: NavItem[]) {
@@ -44,26 +44,35 @@ function MobileNavItem({
 
   const groupedChildren = item.children.some((child) => child.group);
   return (
-    <details className="group/nav-item">
-      <summary className={`flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 py-2 font-semibold marker:hidden [&::-webkit-details-marker]:hidden ${isActive(item.href) ? "text-terracotta" : "text-earth"}`}>
-        <span>{item.label}</span>
-        <ChevronDown aria-hidden="true" size={16} className="shrink-0 transition-transform group-open/nav-item:rotate-180 motion-reduce:transition-none" />
-      </summary>
-      <div className="grid gap-1 pb-3 pl-4">
-        {groupedChildren
-          ? groupNavigation(item.children).map((group) => (
-            <div key={group.title} className="pt-2">
-              <p className="px-1 pb-1 text-[10px] font-bold uppercase tracking-[0.16em] text-terracotta">{group.title}</p>
-              {group.items.map((child) => (
-                <MobileNavItem key={child.href} item={child} isActive={isActive} onNavigate={onNavigate} />
-              ))}
-            </div>
-          ))
-          : item.children.map((child) => (
-            <MobileNavItem key={child.href} item={child} isActive={isActive} onNavigate={onNavigate} />
-          ))}
-      </div>
-    </details>
+    <div className="flex items-start gap-2">
+      <Link
+        href={item.href}
+        onClick={onNavigate}
+        aria-current={isActive(item.href) ? "page" : undefined}
+        className={`flex min-h-11 flex-1 items-center rounded-md py-2 text-sm font-semibold ${isActive(item.href) ? "text-terracotta" : "text-earth"}`}
+      >
+        {item.label}
+      </Link>
+      <details className="group/nav-item">
+        <summary aria-label={`Show ${item.label} pages`} className="flex size-11 cursor-pointer list-none items-center justify-center rounded-full text-muted marker:hidden hover:bg-sand [&::-webkit-details-marker]:hidden">
+          <ChevronDown aria-hidden="true" size={16} className="shrink-0 transition-transform group-open/nav-item:rotate-180 motion-reduce:transition-none" />
+        </summary>
+        <div className="grid gap-1 border-l border-sand pb-3 pl-4">
+          {groupedChildren
+            ? groupNavigation(item.children).map((group) => (
+              <div key={group.title} className="pt-2">
+                <p className="px-1 pb-1 text-[10px] font-bold uppercase tracking-[0.16em] text-terracotta">{group.title}</p>
+                {group.items.map((child) => (
+                  <MobileNavItem key={child.href} item={child} isActive={isActive} onNavigate={onNavigate} />
+                ))}
+              </div>
+            ))
+            : item.children.map((child) => (
+              <MobileNavItem key={child.href} item={child} isActive={isActive} onNavigate={onNavigate} />
+            ))}
+        </div>
+      </details>
+    </div>
   );
 }
 
@@ -132,7 +141,7 @@ export default function Navbar() {
   const solid = !hasTransparentHero || scrolled;
   const openDesktopMenu = (item: NavItem) => {
     setOpenMenu(item.label);
-    setActiveSubmenu(getNestedMenu(item, isActive)?.label ?? null);
+    setActiveSubmenu(getNestedMenu(item, pathname));
   };
 
   return (
@@ -143,7 +152,7 @@ export default function Navbar() {
           {navigation.map((item) => item.children ? (
             <div
               key={item.label}
-              className="relative"
+              className="relative flex items-center gap-0.5"
               onMouseEnter={() => openDesktopMenu(item)}
               onMouseLeave={() => setOpenMenu(null)}
               onKeyDown={(event) => {
@@ -157,20 +166,29 @@ export default function Navbar() {
                 }
               }}
             >
+              <Link
+                href={item.href}
+                aria-current={pathname === item.href ? "page" : undefined}
+                onFocus={() => openDesktopMenu(item)}
+                className={`inline-flex items-center py-3 text-[13px] font-semibold hover:text-terracotta ${isActive(item.href) ? "text-terracotta" : ""}`}
+              >
+                {item.label}
+              </Link>
               <button
                 ref={(node) => {
                   if (node) desktopTriggerRefs.current.set(item.label, node);
                   else desktopTriggerRefs.current.delete(item.label);
                 }}
                 type="button"
+                aria-label={`Open ${item.label} menu`}
                 aria-expanded={openMenu === item.label}
                 aria-haspopup="true"
                 aria-controls={`desktop-menu-${item.label.toLowerCase().replaceAll(" ", "-")}`}
-                onClick={() => openDesktopMenu(item)}
+                onClick={() => openMenu === item.label ? setOpenMenu(null) : openDesktopMenu(item)}
                 onFocus={() => openDesktopMenu(item)}
-                className={`inline-flex items-center gap-1 py-3 text-[13px] font-semibold hover:text-terracotta ${isActive(item.href) ? "text-terracotta" : ""}`}
+                className={`inline-flex size-8 items-center justify-center rounded-full hover:bg-sand/70 hover:text-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta ${isActive(item.href) ? "text-terracotta" : ""}`}
               >
-                {item.label}<ChevronDown size={14} />
+                <ChevronDown aria-hidden="true" size={14} />
               </button>
               {openMenu === item.label ? (
                 item.children.some((child) => child.children?.length) ? (
@@ -180,54 +198,61 @@ export default function Navbar() {
                     className="absolute left-0 top-full z-50 grid w-[min(680px,calc(100vw-2rem))] grid-cols-[190px_minmax(0,1fr)] overflow-hidden rounded-2xl border border-sand/70 bg-cream/80 text-earth shadow-2xl backdrop-blur-xl"
                   >
                     <div className="border-r border-sand/70 bg-white/35 p-3">
-                      <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">Explore Tanzania</p>
-                      <ul className="grid gap-1">
-                        {item.children.map((child) => {
-                          const nested = Boolean(child.children?.length);
-                          const selected = nested && activeSubmenu === child.label;
-                          return (
-                            <li key={child.href}>
-                              {nested ? (
-                                <button
-                                  type="button"
-                                  aria-expanded={selected}
-                                  aria-controls="serengeti-pages-menu"
-                                  onMouseEnter={() => setActiveSubmenu(child.label)}
-                                  onFocus={() => setActiveSubmenu(child.label)}
-                                  onClick={() => setActiveSubmenu(child.label)}
-                                  className={`flex min-h-10 w-full items-center justify-between gap-2 rounded-xl px-2.5 py-2 text-left text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta ${selected ? "bg-forest text-cream" : "text-earth hover:bg-sand"}`}
-                                >
-                                  <span>{child.label}</span>
-                                  <ChevronDown aria-hidden="true" size={15} className="-rotate-90 shrink-0" />
-                                </button>
-                              ) : (
-                                <Link
-                                  href={child.href}
-                                  onClick={() => setOpenMenu(null)}
-                                  className={`block min-h-10 rounded-xl px-2.5 py-2 text-sm font-semibold transition-colors hover:bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta ${isActive(child.href) ? "text-terracotta" : "text-earth"}`}
-                                >
-                                  {child.label}
-                                  {child.description ? <span className="mt-1 block text-xs font-normal leading-5 text-muted">{child.description}</span> : null}
-                                </Link>
-                              )}
-                            </li>
-                          );
-                        })}
-                      </ul>
+                      <p className="px-2 pb-2 text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">{item.label} destinations and guides</p>
+                      <div className="grid gap-2">
+                        {groupNavigation(item.children).map((group) => (
+                          <section key={group.title}>
+                            <h2 className="px-2 pb-1 text-[9px] font-bold uppercase tracking-[0.14em] text-muted">{group.title}</h2>
+                            <ul className="grid gap-0.5">
+                              {group.items.map((child) => {
+                                const nested = Boolean(child.children?.length);
+                                const selected = nested && activeSubmenu === child.label;
+                                return (
+                                  <li key={child.href}>
+                                    {nested ? (
+                                      <button
+                                        type="button"
+                                        aria-expanded={selected}
+                                        aria-controls="desktop-pages-panel"
+                                        onMouseEnter={() => setActiveSubmenu(child.label)}
+                                        onFocus={() => setActiveSubmenu(child.label)}
+                                        onClick={() => setActiveSubmenu(child.label)}
+                                        className={`flex min-h-10 w-full items-center justify-between gap-2 rounded-xl px-2.5 py-2 text-left text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta ${selected ? "bg-forest text-cream" : "text-earth hover:bg-sand"}`}
+                                      >
+                                        <span>{child.label}</span>
+                                        <ChevronDown aria-hidden="true" size={15} className="-rotate-90 shrink-0" />
+                                      </button>
+                                    ) : (
+                                      <Link
+                                        href={child.href}
+                                        onClick={() => setOpenMenu(null)}
+                                        className={`block min-h-10 rounded-xl px-2.5 py-2 text-sm font-semibold transition-colors hover:bg-sand focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta ${isActive(child.href) ? "text-terracotta" : "text-earth"}`}
+                                      >
+                                        {child.label}
+                                        {child.description ? <span className="mt-1 block text-xs font-normal leading-5 text-muted">{child.description}</span> : null}
+                                      </Link>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </section>
+                        ))}
+                      </div>
                     </div>
-                    <div id="serengeti-pages-menu" className="min-w-0 p-4 sm:p-5">
+                    <div id="desktop-pages-panel" className="min-w-0 p-4 sm:p-5">
                       {item.children.filter((child) => child.children?.length).map((child) => {
                         if (child.label !== activeSubmenu || !child.children) return null;
                         return (
                           <section key={child.href} aria-label={`${child.label} pages`}>
                             <div className="flex flex-wrap items-start justify-between gap-3 border-b border-sand/70 pb-3">
                               <div>
-                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">Discover</p>
+                                <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">Explore destination</p>
                                 <h2 className="mt-1 font-heading text-xl text-earth">{child.label}</h2>
                                 <p className="mt-1 max-w-md text-xs leading-4 text-muted">{child.description}</p>
                               </div>
                               <Link href={child.href} onClick={() => setOpenMenu(null)} className="inline-flex min-h-10 items-center rounded-full border border-forest px-3 text-xs font-semibold text-forest transition-colors hover:bg-forest hover:text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">
-                                Serengeti overview
+                                {child.label} overview
                               </Link>
                             </div>
                             <div className="mt-3 grid gap-x-4 gap-y-3 sm:grid-cols-2">
@@ -256,8 +281,8 @@ export default function Navbar() {
                       })}
                       {!item.children.some((child) => child.label === activeSubmenu && child.children?.length) ? (
                         <div className="flex h-full min-h-40 flex-col justify-center rounded-xl bg-sand/45 p-5">
-                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">Thoughtful journeys, across Tanzania</p>
-                          <p className="mt-2 max-w-md font-heading text-2xl text-earth">Find the landscape that feels like yours.</p>
+                          <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-terracotta">Explore at your own pace</p>
+                          <p className="mt-2 max-w-md font-heading text-2xl text-earth">Choose a destination to discover its regions, experiences and stays.</p>
                           <Link href="/safaris/packages" onClick={() => setOpenMenu(null)} className="mt-4 inline-flex min-h-11 w-fit items-center rounded-full bg-forest px-4 text-sm font-semibold text-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">Browse safari packages</Link>
                         </div>
                       ) : null}

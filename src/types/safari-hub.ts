@@ -42,7 +42,7 @@ export const wildlifeSpotlightSchema = z.object({
 export const safariHubSchema = z.object({
   parks: z.array(safariParkSchema).length(4),
   migration: z.array(migrationMonthSchema).length(12),
-  styles: z.array(safariStyleSchema).length(6),
+  styles: z.array(safariStyleSchema).length(5),
   daySchedule: z.array(scheduleStepSchema).length(6),
   wildlifeSpotlight: z.array(wildlifeSpotlightSchema).length(10),
   hubFaqs: z.array(z.object({ question: z.string(), answer: z.string(), href: z.string().startsWith("/").optional() })).length(6),
