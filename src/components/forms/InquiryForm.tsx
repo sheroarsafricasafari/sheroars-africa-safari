@@ -10,6 +10,7 @@ import type { ReactNode } from "react";
 import { ArrowRight, Clock3, LoaderCircle, LockKeyhole, Plus, Minus } from "lucide-react";
 import { getAllPackages } from "@/data";
 import { siteConfig } from "@/data/site";
+import { getAllSerengetiPackages } from "@/lib/serengeti-packages";
 import { submitInquiry, type FormType, type InquiryPayload, type SubmitResult } from "@/lib/forms/submitInquiry";
 import { getInquirySchema, type InquiryFormValues } from "@/types/inquiry";
 import FinalStepPanel from "./FinalStepPanel";
@@ -18,7 +19,10 @@ import SelectInput from "./SelectInput";
 import TextArea from "./TextArea";
 import TextInput from "./TextInput";
 
-const packages = getAllPackages();
+const packages = [
+  ...getAllPackages().map(({ slug, title }) => ({ slug, title })),
+  ...getAllSerengetiPackages().map(({ slug, title }) => ({ slug, title })),
+];
 const emptyValues: DefaultValues<InquiryFormValues> = {
   name: "", email: "", phone: "", country: "", interest: "", month: "", year: "2026",
   flexibleDates: false, tripLength: "", adults: "2", children: "0", childrenAges: "",
@@ -271,7 +275,7 @@ export default function InquiryForm({ variant = "plan", initialValues }: Props) 
             <ChoiceGroup label="Who is traveling?" options={["Solo", "Couple", "Friends", "Family", "Group"]} value={values.travelersType ?? ""} onChange={(value) => set("travelersType", value as string)} />
           </div></section>
           <section><SectionHeading step="03" title="Your dream" /><div className="space-y-6">
-            <ChoiceGroup label="Accommodation style" options={["Camping", "Comfortable lodges", "Luxury", "Mix of styles", "Not sure yet"]} value={values.accommodation ?? ""} onChange={(value) => set("accommodation", value as string)} />
+            <ChoiceGroup label="Accommodation style" options={["Camping", "Mid-range", "Comfortable lodges", "Luxury", "Mix of styles", "Not sure yet"]} value={values.accommodation ?? ""} onChange={(value) => set("accommodation", value as string)} />
             <SelectField name="budget" label="Approximate budget per person, excluding international flights" value={values.budget ?? ""} onChange={(value) => set("budget", value)} options={["Under USD 1,500", "USD 1,500 to 3,000", "USD 3,000 to 5,000", "USD 5,000 to 8,000", "USD 8,000 or more", "Not sure yet"].map((item) => ({ value: item, label: item }))} />
             <ChoiceGroup label="Special interests (choose any)" options={interestOptions} multiple value={values.interests ?? []} onChange={(value) => set("interests", value as string[])} />
             <Field id="inquiry-message" label="Anything else to share?" error={errorFor("message")}>

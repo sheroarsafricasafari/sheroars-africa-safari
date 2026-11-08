@@ -44,7 +44,7 @@ export default function SerengetiPackageNavigation({ shortTitle, enquiryHref }: 
     <>
       <nav aria-label="Package sections" className="sticky top-[var(--navbar-height,78px)] z-30 border-b border-earth/10 bg-cream/95 shadow-sm backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center px-5 sm:px-8">
-          <div className="flex min-w-0 flex-1 snap-x gap-6 overflow-x-auto" role="list">
+          <div className="flex min-w-0 flex-1 snap-x gap-6 overflow-x-auto">
             {links.map(([id, label]) => (
               <a
                 key={id}

@@ -1,5 +1,6 @@
+import { Suspense } from "react";
 import { MessageCircle } from "lucide-react";
-import InquiryForm from "@/components/forms/InquiryForm";
+import InquiryFormWithQuery from "@/components/forms/InquiryFormWithQuery";
 import PageHero from "@/components/inner/PageHero";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -27,7 +28,9 @@ export default function Page() {
       <section className="py-12 md:py-16">
         <Container className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_360px]">
           <div className="rounded-[28px] border border-sand bg-white p-5 shadow-soft md:p-8">
-            <InquiryForm variant="plan" />
+            <Suspense fallback={<div role="status" className="min-h-96 animate-pulse rounded-2xl bg-sand motion-reduce:animate-none">Loading enquiry form…</div>}>
+              <InquiryFormWithQuery />
+            </Suspense>
           </div>
 
           <aside className="space-y-6">

@@ -40,8 +40,8 @@ function parseFilters(query: string): Filters {
     month: Number.isInteger(parsedMonth) && parsedMonth >= 1 && parsedMonth <= 12 ? month : "",
     regions: (params.get("region") ?? "").split(",").filter((value) => regions.includes(value)),
     tiers: (params.get("tier") ?? "").split(",").filter((value): value is AccommodationTier => validTiers.has(value as AccommodationTier)),
-    access: (params.get("access") ?? "").split(","),
-    experiences: (params.get("experience") ?? "").split(","),
+    access: (params.get("access") ?? "").split(",").filter(Boolean),
+    experiences: (params.get("experience") ?? "").split(",").filter(Boolean),
   };
 }
 
@@ -110,6 +110,7 @@ function comparisonValue(item: SerengetiPackage, key: string) {
     }
     case "Main experience": return item.highlights.join(" · ");
     case "Departure": return item.departureType.label;
+    case "Group size": return item.groupSize.minimum !== undefined && item.groupSize.maximum !== undefined ? `${item.groupSize.minimum} to ${item.groupSize.maximum} guests` : "Not specified";
     case "Balloon": return item.pricing.balloonIncluded ? "Included in mid-range and luxury proposed prices" : "Not specified";
     case "Seasonal considerations": return item.seasonNote;
     default: return "Not specified";
@@ -133,9 +134,9 @@ function Explorer({ items }: { items: SerengetiPackage[] }) {
     return items.filter((item) => {
       const text = [item.title, item.shortTitle, item.subtitle, item.summary, item.sellingPoint, ...item.highlights, ...item.bestFor, ...item.regions.map(({ name }) => name)].join(" ").toLowerCase();
       const regionMatch = !filters.regions.length || filters.regions.some((region) => item.regionSearchTerms.some((searchTerm) => searchTerm.toLowerCase().includes(region.toLowerCase())));
-      const tierMatch = !filters.tiers.length || filters.tiers.every((selectedTier) => item.pricing.tiers.some((price) => price.tier === selectedTier && price.availability !== "unavailable"));
+      const tierMatch = !filters.tiers.length || filters.tiers.some((selectedTier) => item.pricing.tiers.some((price) => price.tier === selectedTier && price.availability !== "unavailable"));
       const accessMatch = !filters.access.length || filters.access.includes(item.access.label);
-      const experienceMatch = !filters.experiences.length || filters.experiences.every((experience) => item.experienceTags.includes(experience));
+      const experienceMatch = !filters.experiences.length || filters.experiences.some((experience) => item.experienceTags.includes(experience));
       const monthMatch = !filters.month || item.bestMonths.includes(Number(filters.month));
       return (!query || text.includes(query))
         && (!filters.duration || item.durationDays === Number(filters.duration))
@@ -160,7 +161,7 @@ function Explorer({ items }: { items: SerengetiPackage[] }) {
 
   return (
     <div>
-      <section aria-label="Filter Serengeti packages" className="sticky top-[var(--navbar-height,78px)] z-30 border-y border-earth/10 bg-cream/95 py-4 shadow-sm backdrop-blur-md">
+      <section aria-label="Filter Serengeti packages" className="border-y border-earth/10 bg-cream py-4 shadow-sm">
         <div className="mx-auto max-w-7xl space-y-4 px-5 sm:px-8">
           <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
             <label className="block min-w-56 flex-1">
@@ -239,7 +240,7 @@ function Explorer({ items }: { items: SerengetiPackage[] }) {
                   <caption className="sr-only">Selected Serengeti safari package comparison</caption>
                   <thead><tr className="bg-forest text-cream"><th scope="col" className="sticky left-0 min-w-40 bg-forest p-3">Compare</th>{selectedItems.map((item) => <th scope="col" key={item.slug} className="min-w-56 p-3 align-top">{item.shortTitle}</th>)}</tr></thead>
                   <tbody>
-                    {["Duration", "Regions", "Best travel period", "Access", "Pace", "Accommodation", "Camping", "Main experience", "Departure", "Balloon", "Seasonal considerations"].map((key) => (
+                    {["Duration", "Regions", "Best travel period", "Access", "Pace", "Accommodation", "Camping", "Main experience", "Departure", "Group size", "Balloon", "Seasonal considerations"].map((key) => (
                       <tr key={key} className="border-t border-sand align-top odd:bg-cream/60">
                         <th scope="row" className="sticky left-0 bg-inherit p-3 font-semibold text-earth">{key}</th>
                         {selectedItems.map((item) => <td key={item.slug} className="p-3 leading-6 text-muted">{comparisonValue(item, key)}</td>)}

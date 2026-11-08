@@ -1,4 +1,5 @@
 import { safaris } from "@/data/safaris";
+import { serengetiPackages } from "@/data/serengeti-packages";
 
 export type RouteDefinition = {
   path: string;
@@ -15,6 +16,7 @@ const staticPaths = [
   "/safaris/serengeti/great-migration", "/safaris/serengeti/hot-air-balloon",
   "/safaris/serengeti/northern-serengeti", "/safaris/serengeti/southern-ndutu",
   "/safaris/serengeti/western-corridor", "/safaris/serengeti/where-to-stay",
+  "/safaris/serengeti/packages",
   "/safaris/tarangire", "/safaris/tarangire/elephants-and-baobabs", "/safaris/tarangire/where-to-stay",
   "/kilimanjaro", "/kilimanjaro/climb-and-safari", "/kilimanjaro/climb-and-zanzibar",
   "/kilimanjaro/faq", "/kilimanjaro/group-departures", "/kilimanjaro/guide",
@@ -48,6 +50,7 @@ const staticPaths = [
   "/travel-guide/what-to-expect-on-safari", "/blog", "/faq", "/contact", "/book",
   "/booking-terms", "/plan-your-safari", "/privacy-policy", "/terms", "/group-departures",
   ...safaris.map(({ slug }) => `/safaris/packages/${slug}`),
+  ...serengetiPackages.map(({ slug }) => `/safaris/serengeti/packages/${slug}`),
 ];
 
 const sections: [string, string][] = [
@@ -69,6 +72,7 @@ const titleOverrides: Record<string, string> = {
   "/safaris/serengeti/southern-ndutu": "Southern Serengeti and Ndutu",
   "/safaris/serengeti/where-to-stay": "Where to Stay",
   "/safaris/serengeti/western-corridor": "Western Corridor",
+  "/safaris/serengeti/packages": "Serengeti Safari Packages",
   "/kilimanjaro/packages": "Climb Packages",
   "/kilimanjaro/routes": "Kilimanjaro Routes",
   "/team": "Meet the Roarers",
@@ -79,6 +83,8 @@ function humanize(path: string) {
   if (titleOverrides[path]) return titleOverrides[path];
   const packageTitle = safaris.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
   if (packageTitle) return packageTitle;
+  const serengetiPackageTitle = serengetiPackages.find(({ slug }) => path === `/safaris/serengeti/packages/${slug}`)?.title;
+  if (serengetiPackageTitle) return serengetiPackageTitle;
   if (path === "/") return "Home";
   return path.split("/").filter(Boolean).at(-1)!.split("-")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");

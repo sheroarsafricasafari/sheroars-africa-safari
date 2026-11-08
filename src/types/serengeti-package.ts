@@ -60,6 +60,10 @@ export const serengetiPackageSchema = z.object({
     nights: z.number().int().nonnegative().optional(),
     note: z.string().optional(),
   })).min(1),
+  routeEndpoints: z.object({
+    start: z.string().nullable(),
+    end: z.string().nullable(),
+  }),
   itinerary: z.array(z.object({
     id: z.string().min(1),
     day: z.number().int().positive(),

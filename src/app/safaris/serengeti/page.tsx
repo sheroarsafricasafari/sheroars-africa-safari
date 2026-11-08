@@ -1,4 +1,5 @@
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { ArrowRight } from "lucide-react";
@@ -128,6 +129,11 @@ export default function SerengetiPage() {
       <DestinationSection id="journeys" tone="cream">
         <SectionHeading eyebrow="A STARTING POINT" title={serengetiHub.journeys.title} subtitle={serengetiHub.journeys.subtitle} />
         <PackagesCarousel {...serengetiHub.journeys} />
+        <div className="mt-7 text-center">
+          <Link href="/safaris/serengeti/packages" className="inline-flex min-h-11 items-center rounded-full border border-terracotta px-5 font-semibold text-terracotta underline-offset-4 hover:bg-terracotta hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta">
+            Explore all eight Serengeti safari packages
+          </Link>
+        </div>
       </DestinationSection>
 
       <DestinationSection id="faq" tone="sand">

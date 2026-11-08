@@ -61,7 +61,7 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
       <SerengetiPackageNavigation shortTitle={item.shortTitle} enquiryHref={enquiryHref} />
 
       <div className="mx-auto max-w-7xl space-y-14 px-5 py-12 sm:px-8 md:space-y-20 md:py-16">
-        <section id="overview" className="scroll-mt-32">
+        <section id="overview" className="scroll-mt-36">
           <SectionHeading eyebrow="THE JOURNEY" title={`${item.shortTitle} at a glance`} />
           <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
             <div className="space-y-4 text-base leading-8 text-muted">{item.overview.map((text) => <p key={text}>{text}</p>)}</div>
@@ -73,6 +73,7 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
                 ["Pace", item.pace.label],
                 ["Travel period", item.season],
                 ["Departure", item.departureType.label],
+                ["Group size", item.groupSize.minimum !== undefined && item.groupSize.maximum !== undefined ? `${item.groupSize.minimum} to ${item.groupSize.maximum} guests` : "Not specified (TODO(CONFIRM))"],
               ].map(([label, value]) => <div key={label} className="rounded-2xl bg-sand p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-terracotta">{label}</dt><dd className="mt-2 text-sm leading-6 text-earth">{value}</dd></div>)}
             </dl>
           </div>
@@ -83,12 +84,16 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
           <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {item.highlights.map((highlight) => <article key={highlight} className="flex min-h-20 items-start gap-3 rounded-2xl border border-sand bg-white p-5"><Check aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-terracotta" /><p className="font-semibold leading-6 text-earth">{highlight}</p></article>)}
           </div>
+          <div className="mt-7 rounded-2xl bg-sand p-5">
+            <h3 className="font-heading text-xl text-earth">This journey may suit</h3>
+            <ul className="mt-3 flex flex-wrap gap-2">{item.bestFor.map((reason) => <li key={reason} className="rounded-full border border-earth/10 bg-white px-3 py-2 text-sm text-earth">{reason}</li>)}</ul>
+          </div>
           <div className="mt-8"><SerengetiPackageSeason item={item} /></div>
         </section>
 
-        <section id="journey" className="scroll-mt-32">
+        <section id="journey" className="scroll-mt-36">
           <SectionHeading eyebrow="THE ROUTE" title="Regions on this journey" />
-          <SerengetiPackageRoute stops={item.route} />
+          <SerengetiPackageRoute stops={item.route} endpoints={item.routeEndpoints} />
           <p className="mt-4 text-sm leading-6 text-muted">The route is schematic and not a navigation map. Travel order is based only on the supplied region sequence; unlisted transfer details are not implied.</p>
           <div className="mt-8 rounded-2xl border border-gold/40 bg-white p-5">
             <h3 className="font-semibold text-earth">Wildlife and migration</h3>
@@ -96,12 +101,12 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
           </div>
         </section>
 
-        <section id="itinerary" className="scroll-mt-32">
+        <section id="itinerary" className="scroll-mt-36">
           <SectionHeading eyebrow="DAY BY DAY" title="Your itinerary" />
           <SerengetiPackageItinerary item={item} />
         </section>
 
-        <section id="accommodation" className="scroll-mt-32">
+        <section id="accommodation" className="scroll-mt-36">
           <SectionHeading eyebrow="REST BETWEEN GAME DRIVES" title="Accommodation options" />
           <div className="grid gap-4 md:grid-cols-3">
             {item.accommodation.map((stay) => (
@@ -116,7 +121,7 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
           <p className="mt-4 text-sm text-muted">Examples of where you may stay (or similar) will be listed only after property and location details are verified.</p>
         </section>
 
-        <section id="pricing" className="scroll-mt-32">
+        <section id="pricing" className="scroll-mt-36">
           <SectionHeading eyebrow="INDICATIVE PRICING" title="Proposed prices in USD" />
           <div className="grid gap-4 md:grid-cols-3">
             {item.pricing.tiers.map((price) => (
@@ -136,7 +141,7 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
           <div className="mt-7"><SerengetiPackageEstimator item={item} /></div>
         </section>
 
-        <section id="included" className="scroll-mt-32">
+        <section id="included" className="scroll-mt-36">
           <SectionHeading eyebrow="THE DETAILS" title="Inclusions, exclusions and add-ons" />
           <div className="grid gap-5 md:grid-cols-2">
             {[
@@ -155,14 +160,14 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
           </div>
         </section>
 
-        <section id="good-to-know" className="scroll-mt-32">
+        <section id="good-to-know" className="scroll-mt-36">
           <SectionHeading eyebrow="BEFORE YOU TRAVEL" title="Good to know" />
           <div className="grid gap-4 md:grid-cols-2">
             {item.goodToKnow.map((note) => <article key={note.title} className="rounded-2xl border border-sand bg-white p-5"><div className="flex items-start gap-3"><CircleHelp aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-terracotta" /><div><h3 className="font-semibold text-earth">{note.title}</h3><p className="mt-2 text-sm leading-6 text-muted">{note.text}</p></div></div></article>)}
           </div>
         </section>
 
-        <section id="faq" className="scroll-mt-32">
+        <section id="faq" className="scroll-mt-36">
           <SectionHeading eyebrow="YOUR QUESTIONS" title="Frequently asked questions" />
           <FaqAccordion items={item.faqs} />
         </section>
