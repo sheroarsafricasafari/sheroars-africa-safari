@@ -3,9 +3,12 @@ import CtaBanner from "@/components/inner/CtaBanner";
 import JsonLd from "@/components/seo/JsonLd";
 import {
   CraterCrossSection,
+  CraterFloorMap,
+} from "@/components/ngorongoro/CraterDiagrams";
+import DescentRail from "@/components/ngorongoro/DescentRail";
+import {
   CraterDay,
   CraterFacts,
-  CraterFloorMap,
   CraterJourneys,
   CraterRespect,
   CraterRules,
@@ -62,6 +65,7 @@ export default function NgorongoroCraterPage() {
   return (
     <main>
       <JsonLd data={touristTripJsonLd} />
+      <DescentRail stops={ngorongoroCrater.descentRail} />
       <NgHero data={ngorongoroCrater.hero} breadcrumbs={craterBreadcrumbs} />
       <NgQuickFacts items={ngorongoroCrater.quickFacts} />
       <NgStory

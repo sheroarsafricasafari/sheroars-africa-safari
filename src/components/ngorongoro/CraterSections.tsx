@@ -17,68 +17,6 @@ import SmartImage from "@/components/ui/SmartImage";
 import type { PackageCardProps } from "@/components/inner/PackageCard";
 import { ngorongoroCrater } from "@/data/ngorongoro";
 
-export function CraterCrossSection({ data }: { data: typeof ngorongoroCrater.anatomy }) {
-  return (
-    <section id="anatomy" className="scroll-mt-24 bg-cream py-16 md:py-24">
-      <Container>
-        <SectionHeading eyebrow={data.eyebrow} title={data.title} subtitle={data.intro} />
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative min-h-[300px] overflow-hidden rounded-[2rem] border border-sand bg-gradient-to-b from-sky-100 via-cream to-sand sm:min-h-[400px]">
-            <svg aria-hidden="true" viewBox="0 0 900 410" className="absolute inset-0 size-full">
-              <path d="M25 25C95 60 124 157 205 210C264 249 292 275 332 289C398 311 488 311 554 289C598 274 630 244 689 208C770 158 810 58 875 25L875 368H25Z" fill="#435b3d" />
-              <path d="M190 220C270 265 315 327 446 335C575 327 624 264 708 218L708 368H190Z" fill="#caa36b" />
-              <path d="M362 326C397 311 470 311 512 328C484 352 398 355 362 326Z" fill="#74a8aa" />
-            </svg>
-            <p className="absolute bottom-3 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-earth sm:bottom-5 sm:left-6">{data.schematicLabel}</p>
-          </div>
-          <ol className="grid content-center gap-2 sm:grid-cols-2 lg:grid-cols-1">
-            {data.hotspots.map((item, index) => (
-              <li key={item.id} className="flex items-start gap-3 rounded-xl bg-white p-3 text-sm leading-6 text-earth">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-terracotta text-xs font-bold text-white">{index + 1}</span>
-                <span><strong className="block">{item.title}</strong>{item.text}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-export function CraterFloorMap({
-  data,
-  places,
-}: {
-  data: typeof ngorongoroCrater.floorMap;
-  places: typeof ngorongoroCrater.floorPlaces;
-}) {
-  return (
-    <section className="py-16 md:py-24">
-      <Container>
-        <SectionHeading eyebrow={data.eyebrow} title={data.title} subtitle={data.intro} />
-        <div className="grid gap-8 lg:grid-cols-2">
-          <div className="relative min-h-[300px] overflow-hidden rounded-[2rem] border border-sand bg-[#e7dfc9] sm:min-h-[400px]">
-            <svg aria-hidden="true" viewBox="0 0 900 520" className="absolute inset-0 size-full">
-              <path d="M450 28C660 28 845 158 842 284C839 403 664 492 449 492C232 492 57 403 58 282C59 157 240 28 450 28Z" fill="#d2bd8d" stroke="#59734a" strokeWidth="22" />
-              <path d="M450 81C620 81 778 169 780 282C782 379 632 438 449 438C266 438 122 377 120 282C118 169 279 81 450 81Z" fill="#c6a968" />
-              <path d="M283 286C325 219 440 196 511 217C578 236 637 298 624 346C609 400 501 414 411 386C330 361 255 333 283 286Z" fill="#80b4b1" />
-            </svg>
-            <p className="absolute bottom-3 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-earth sm:bottom-5 sm:left-6">{data.schematicLabel}</p>
-          </div>
-          <ol className="grid content-center gap-3 sm:grid-cols-2">
-            {places.map((place, index) => (
-              <li key={place.id} className="rounded-2xl bg-cream p-4">
-                <h3 className="font-heading text-lg text-earth">{String(index + 1).padStart(2, "0")} {place.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{place.text}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Container>
-    </section>
-  );
-}
-
 export function CraterFacts({ data }: { data: typeof ngorongoroCrater.facts }) {
   return (
     <section className="bg-forest py-16 md:py-24">
