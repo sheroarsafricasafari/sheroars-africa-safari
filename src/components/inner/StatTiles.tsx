@@ -1,7 +1,7 @@
 import { cn } from "@/lib/cn";
 
 // Props: fact tiles with supplied values and labels, and className.
-type StatTilesProps = { items: { value: string; label: string }[]; className?: string };
+type StatTilesProps = { items: readonly { value: string; label: string }[]; className?: string };
 
 export default function StatTiles({ items, className }: StatTilesProps) {
   return (
