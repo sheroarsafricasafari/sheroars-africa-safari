@@ -154,7 +154,7 @@ export const serengetiPackageSchema = z.object({
   status: z.literal("proposed"),
 });
 
-export const serengetiPackagesSchema = z.array(serengetiPackageSchema).length(8);
+export const serengetiPackagesSchema = z.array(serengetiPackageSchema).length(7);
 
 export type SerengetiMonth = z.infer<typeof serengetiMonthSchema>;
 export type AccommodationTier = z.infer<typeof accommodationTierSchema>;

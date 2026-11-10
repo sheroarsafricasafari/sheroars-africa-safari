@@ -31,7 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col">
+      <body className="flex min-h-full flex-col" suppressHydrationWarning>
         <a href="#main-content" className="sr-only z-[100] rounded bg-cream px-4 py-3 text-earth focus:not-sr-only focus:fixed focus:left-4 focus:top-4">
           Skip to content
         </a>

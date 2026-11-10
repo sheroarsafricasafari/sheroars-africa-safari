@@ -14,17 +14,25 @@ export default function BlogPreview() {
       <SectionHeading {...homeCopy.blogHeading} />
       <div className="grid gap-6 md:grid-cols-3">
         {blogPreview.map((article) => (
-          <Reveal key={article.href} className="group overflow-hidden rounded-2xl bg-white shadow-sm">
-            <Link href={article.href}>
-              <div className="relative aspect-[16/10] overflow-hidden">
-                <SmartImage src={article.image} alt={article.title} sizes="(max-width: 768px) 100vw, 33vw" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
-              </div>
-              <div className="p-5">
+          <Reveal key={article.href} className="h-full">
+            <Link
+              href={article.href}
+              className="group relative flex aspect-[4/5] min-h-[28rem] h-full flex-col overflow-hidden rounded-2xl bg-forest text-white shadow-card focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-terracotta"
+            >
+              <SmartImage
+                src={article.image}
+                alt={article.title}
+                sizes="(max-width: 768px) 100vw, 33vw"
+                fill
+                className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105"
+              />
+              <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/25 to-transparent" />
+              <span className="relative mt-auto p-5 sm:p-6">
                 <span className="text-xs font-bold uppercase tracking-wider text-terracotta">{article.category}</span>
-                <h3 className="mt-2 font-heading text-2xl">{article.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-muted">{article.excerpt}</p>
-                <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-terracotta">Read more <ArrowRight size={16} /></span>
-              </div>
+                <h3 className="mt-2 font-heading text-2xl text-white">{article.title}</h3>
+                <span className="mt-2 block text-sm leading-6 text-white/90">{article.excerpt}</span>
+                <span className="mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-gold">Read more <ArrowRight aria-hidden="true" size={16} /></span>
+              </span>
             </Link>
           </Reveal>
         ))}

@@ -13,10 +13,11 @@ import {
   ExperienceCards, FactStrip, GettingThere, PullQuote, SeasonCards, SeasonGrid,
   StayTiers, WildlifeShowcase,
 } from "@/components/destinations/Editorial";
-import PackagesCarousel from "@/components/destinations/PackagesCarouselServer";
+import SerengetiPackageCarousel from "@/components/safaris/serengeti/SerengetiPackageCarousel";
 import JsonLd from "@/components/seo/JsonLd";
 import { safariHub } from "@/data/safariHub";
 import { serengetiHub } from "@/data/destinations/serengeti";
+import { getAllSerengetiPackages } from "@/lib/serengeti-packages";
 import { buildFaqJsonLd, buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/data/site";
 
@@ -49,6 +50,7 @@ const touristDestinationJsonLd = {
 };
 
 const faqJsonLd = buildFaqJsonLd(serengetiHub.faqs);
+const serengetiPackages = getAllSerengetiPackages();
 
 export default function SerengetiPage() {
   return (
@@ -127,11 +129,14 @@ export default function SerengetiPage() {
       </DestinationSection>
 
       <DestinationSection id="journeys" tone="cream">
-        <SectionHeading eyebrow="A STARTING POINT" title={serengetiHub.journeys.title} subtitle={serengetiHub.journeys.subtitle} />
-        <PackagesCarousel {...serengetiHub.journeys} />
+        <SectionHeading eyebrow="FEATURED SERENGETI SAFARI PACKAGES" title="Serengeti Safari Packages" subtitle="Explore a selection of proposed Serengeti journeys, with seasonal routes and package details to help you choose." />
+        <p className="mb-5 rounded-xl border border-gold/50 bg-gold/15 p-4 text-sm font-semibold text-earth">
+          Prices are indicative and confirmed in your written quote.
+        </p>
+        <SerengetiPackageCarousel packages={serengetiPackages} />
         <div className="mt-7 text-center">
           <Link href="/safaris/serengeti/packages" className="inline-flex min-h-11 items-center rounded-full border border-terracotta px-5 font-semibold text-terracotta underline-offset-4 hover:bg-terracotta hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta">
-            Explore all eight Serengeti safari packages
+            Explore all seven Serengeti safari packages
           </Link>
         </div>
       </DestinationSection>

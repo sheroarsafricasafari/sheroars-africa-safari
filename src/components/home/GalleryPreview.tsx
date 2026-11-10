@@ -8,14 +8,14 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 
 const galleryImages = [
-  { src: "/images/gallery/gallery-1.jpg", alt: "Wildlife on the Serengeti plains", layout: "md:col-span-2 md:row-span-2" },
-  { src: "/images/gallery/gallery-2.jpg", alt: "A view across the Ngorongoro landscape", layout: "" },
-  { src: "/images/gallery/gallery-3.jpg", alt: "A close view of Tanzania's savanna", layout: "" },
-  { src: "/images/gallery/gallery-4.jpg", alt: "Sunrise over the mountains", layout: "md:row-span-2" },
-  { src: "/images/gallery/gallery-5.jpg", alt: "An elephant in its natural habitat", layout: "" },
-  { src: "/images/gallery/gallery-6.jpg", alt: "A quiet moment by the ocean", layout: "" },
-  { src: "/images/gallery/gallery-7.jpg", alt: "A trail through Tanzania's highlands", layout: "md:col-span-2" },
-  { src: "/images/gallery/gallery-8.jpg", alt: "Golden evening light across the landscape", layout: "" },
+  { src: "/images/gallery/serengeti-plains.webp", alt: "Wildlife on the Serengeti plains", layout: "md:col-span-2 md:row-span-2" },
+  { src: "/images/gallery/ngorongoro-landscape.jpg", alt: "A view across the Ngorongoro landscape", layout: "" },
+  { src: "/images/gallery/tanzania-savanna.jpg", alt: "A close view of Tanzania's savanna", layout: "" },
+  { src: "/images/gallery/mountain-sunrise.jpeg", alt: "Sunrise over the mountains", layout: "md:row-span-2" },
+  { src: "/images/gallery/elephant.jpeg", alt: "An elephant in its natural habitat", layout: "" },
+  { src: "/images/gallery/zanzibar-coast.avif", alt: "A quiet moment by the ocean", layout: "" },
+  { src: "/images/gallery/highland-trail.jpg", alt: "A trail through Tanzania's highlands", layout: "md:col-span-2" },
+  { src: "/images/gallery/golden-savanna.jpg", alt: "Golden evening light across the landscape", layout: "" },
 ];
 
 export default function GalleryPreview() {

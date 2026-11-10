@@ -11,7 +11,7 @@ import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 import { siteConfig } from "@/data/site";
 
 const packages = getAllSerengetiPackages();
-const description = "Compare eight proposed Serengeti safari journeys by region, season, length, access, and accommodation preference. Prices are indicative and confirmed in your written quote.";
+const description = "Compare seven proposed Serengeti safari journeys by region, season, length, access, and accommodation preference. Prices are indicative and confirmed in your written quote.";
 const breadcrumbs = [
   { title: "Home", href: "/" },
   { title: "Safaris", href: "/safaris" },
@@ -45,7 +45,7 @@ export default function SerengetiPackagesPage() {
       <PageHero
         eyebrow="SERENGETI SAFARI COLLECTION"
         title="Find Your Serengeti Safari"
-        subtitle="Eight proposed journeys through the Serengeti, shaped by the region, season, time available, and style of travel that suits you."
+        subtitle="Seven proposed journeys through the Serengeti, shaped by the region, season, time available, and style of travel that suits you."
         image={{ src: "/images/destinations/serengeti/hero.webp", alt: "Open plains of the Serengeti" }}
         breadcrumbs={breadcrumbs}
         primaryCta={{ label: "Explore the packages", href: "#packages" }}
@@ -67,7 +67,7 @@ export default function SerengetiPackagesPage() {
 
       <section id="packages" aria-label="Explore Serengeti safari packages" className="scroll-mt-32 bg-cream pb-10">
         <Container className="mb-6">
-          <SectionHeading eyebrow="THE SERENGETI COLLECTION" title="Explore eight proposed journeys" align="left" />
+          <SectionHeading eyebrow="THE SERENGETI COLLECTION" title="Explore seven proposed journeys" align="left" />
         </Container>
         <SerengetiPackageExplorer items={packages} />
       </section>
