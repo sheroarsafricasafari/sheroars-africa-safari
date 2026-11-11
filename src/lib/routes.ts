@@ -66,6 +66,8 @@ const titleOverrides: Record<string, string> = {
   "/safaris/packages": "Safari Packages",
   "/safaris/ngorongoro": "Ngorongoro Conservation Area",
   "/safaris/ngorongoro/crater": "Ngorongoro Crater",
+  "/safaris/ngorongoro/highlands-empakaai": "Highlands and Empakaai",
+  "/safaris/ngorongoro/olduvai-gorge": "Olduvai Gorge",
   "/safaris/serengeti": "Serengeti National Park",
   "/safaris/serengeti/central-seronera": "Central Serengeti (Seronera)",
   "/safaris/serengeti/great-migration": "The Great Migration",
