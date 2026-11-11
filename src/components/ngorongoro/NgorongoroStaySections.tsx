@@ -10,8 +10,7 @@ import { NgorongoroStayFilters, NgorongoroStayMatcher, StayElevationDiagram } fr
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
-import { ngorongoroStays } from "@/data/ngorongoro-stays";
-import { ngorongoroStayBreadcrumbs, ngorongoroStayPage } from "@/data/ngorongoro-stay-page";
+import { ngorongoroStayBreadcrumbs, ngorongoroStayPage, ngorongoroStays } from "@/data/ngorongoro-stays";
 import { safaris } from "@/data/safaris";
 import { siteConfig } from "@/data/site";
 

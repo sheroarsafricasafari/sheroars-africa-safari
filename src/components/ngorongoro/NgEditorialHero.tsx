@@ -16,7 +16,7 @@ import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SmartImage from "@/components/ui/SmartImage";
 import type { maasaiPage } from "@/data/ngorongoro-maasai";
-import type { ngorongoroStayPage } from "@/data/ngorongoro-stay-page";
+import type { ngorongoroStayPage } from "@/data/ngorongoro-stays";
 import styles from "./NgHero.module.css";
 
 type EditorialHeroData = typeof maasaiPage.hero | typeof ngorongoroStayPage.hero;

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import JsonLd from "@/components/seo/JsonLd";
 import NgorongoroStayPageSections from "@/components/ngorongoro/NgorongoroStaySections";
-import { ngorongoroStays } from "@/data/ngorongoro-stays";
-import { ngorongoroStayPage } from "@/data/ngorongoro-stay-page";
+import { ngorongoroStayPage, ngorongoroStays } from "@/data/ngorongoro-stays";
 import { siteConfig } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
 

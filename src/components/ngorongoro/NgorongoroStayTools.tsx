@@ -8,7 +8,7 @@ import SmartImage from "@/components/ui/SmartImage";
 import useReducedMotionPreference from "@/components/motion/useReducedMotionPreference";
 import type { Stay, StayTier } from "@/data/ngorongoro-stays";
 import { stayMatcherQuestions, stayRegionLabels, stayTierLabels, stayTierSummaries, stayZoneLabels } from "@/data/ngorongoro-stays";
-import type { ngorongoroStayPage } from "@/data/ngorongoro-stay-page";
+import type { ngorongoroStayPage } from "@/data/ngorongoro-stays";
 
 type MatcherDimension = "rim" | "karatu" | "camping" | "mid-range" | "luxury" | "upgrade";
 type MatcherOption = { label: string; weights: Partial<Record<MatcherDimension, number>> };
