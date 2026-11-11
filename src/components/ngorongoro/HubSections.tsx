@@ -40,10 +40,10 @@ export function NgRimDivider({ fill = "#fbf6ee" }: { fill?: string }) {
 export function NgQuickFacts({
   items,
 }: {
-  items: typeof ngorongoroHub.quickFacts | typeof import("@/data/ngorongoro").ngorongoroCrater.quickFacts;
+  items: readonly { label: string; text: string; icon: string; links?: readonly { label: string; href: string }[] }[];
 }) {
   return (
-    <section aria-label="Ngorongoro quick facts" className="relative z-20 -mt-7 pb-10 sm:-mt-12">
+    <section aria-label="Quick facts" className="relative z-20 -mt-7 pb-10 sm:-mt-12">
       <Container>
         <dl className="grid gap-px overflow-hidden rounded-3xl border border-sand bg-sand shadow-lift sm:grid-cols-2 lg:grid-cols-5">
           {items.map((item) => {
@@ -76,19 +76,23 @@ export function NgQuickFacts({
 export function NgStory({
   story,
   pullQuote,
+  imageSide = "left",
+  headingId = "ngorongoro-story-heading",
 }: {
-  story: typeof ngorongoroHub.story | typeof import("@/data/ngorongoro").ngorongoroCrater.story;
+  story: { image: string; imageAlt: string; eyebrow: string; title: string; paragraphs: readonly string[] };
   pullQuote?: string;
+  imageSide?: "left" | "right";
+  headingId?: string;
 }) {
   return (
-    <section className="py-16 md:py-24">
+    <section aria-labelledby={headingId} className="py-16 md:py-24">
       <Container className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
-        <div className="relative min-h-[340px] overflow-hidden rounded-[2rem] bg-sand sm:min-h-[440px]">
+        <div className={`relative min-h-[340px] overflow-hidden rounded-[2rem] bg-sand sm:min-h-[440px] ${imageSide === "right" ? "md:order-2" : ""}`}>
           <SmartImage src={story.image} alt={story.imageAlt} sizes="(max-width: 768px) 100vw, 50vw" fill className="object-cover" />
           <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/35 to-transparent" />
         </div>
-        <div>
-          <SectionHeading eyebrow={story.eyebrow} title={story.title} align="left" />
+        <div className={imageSide === "right" ? "md:order-1" : ""}>
+          <SectionHeading id={headingId} eyebrow={story.eyebrow} title={story.title} align="left" />
           <div className="space-y-5 text-base leading-8 text-muted">
             {story.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
           </div>
@@ -231,13 +235,20 @@ export function NgJourneys({
   data,
   packages,
 }: {
-  data: typeof ngorongoroHub.journeys;
+  data: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    noPackages: string;
+    links: readonly { label: string; href: string }[];
+    callout?: string;
+  };
   packages: PackageCardProps[];
 }) {
   return (
-    <section id="journeys" className="scroll-mt-24 py-16 md:py-24">
+    <section id="journeys" aria-labelledby="ngorongoro-journeys-heading" className="scroll-mt-24 py-16 md:py-24">
       <Container>
-        <SectionHeading eyebrow={data.eyebrow} title={data.title} subtitle={data.subtitle} />
+        <SectionHeading id="ngorongoro-journeys-heading" eyebrow={data.eyebrow} title={data.title} subtitle={data.subtitle} />
         {packages.length ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {packages.map((item) => <PackageCard key={item.slug} {...item} priceFrom={null} />)}
@@ -245,6 +256,7 @@ export function NgJourneys({
         ) : (
           <p className="mx-auto max-w-2xl rounded-2xl bg-sand p-6 text-center leading-7 text-muted">{data.noPackages}</p>
         )}
+        {data.callout ? <Callout variant="note" className="mx-auto mt-7 max-w-4xl">{data.callout}</Callout> : null}
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {data.links.map((link) => <Button key={link.href} href={link.href} variant="secondary">{link.label}</Button>)}
         </div>
@@ -279,12 +291,18 @@ export function NgFaqSection({
 }: {
   title: string;
   eyebrow: string;
-  items: typeof ngorongoroHub.faq | typeof import("@/data/ngorongoro").ngorongoroCrater.faq;
+  items: readonly {
+    question: string;
+    answer: string;
+    href?: string;
+    linkLabel?: string;
+    externalLink?: { label: string; href: string };
+  }[];
 }) {
   return (
-    <section className="bg-cream py-16 md:py-24">
+    <section aria-labelledby="ngorongoro-faq-heading" className="bg-cream py-16 md:py-24">
       <Container className="max-w-5xl">
-        <SectionHeading eyebrow={eyebrow} title={title} />
+        <SectionHeading id="ngorongoro-faq-heading" eyebrow={eyebrow} title={title} />
         <FaqAccordion items={[...items]} jsonLd />
       </Container>
     </section>

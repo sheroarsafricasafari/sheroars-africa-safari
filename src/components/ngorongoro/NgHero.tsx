@@ -41,10 +41,12 @@ export default function NgHero({
   data,
   breadcrumbs,
   fallbackImage,
+  divider = "rim",
 }: {
   data: HeroData;
   breadcrumbs: readonly { title: string; href: string }[];
   fallbackImage?: string;
+  divider?: "rim" | "strata";
 }) {
   const image = resolvePublicImage(data.image, fallbackImage);
 
@@ -95,9 +97,18 @@ export default function NgHero({
         </div>
       </Container>
 
-      <svg aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-16 w-full md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
-        <path d="M0 72C165 110 275 90 408 51C559 7 669 16 808 54C954 94 1052 103 1186 67C1280 42 1363 43 1440 59V120H0V72Z" fill="#fbf6ee" />
-      </svg>
+      {divider === "strata" ? (
+        <svg aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-20 w-full md:h-28" viewBox="0 0 1440 140" preserveAspectRatio="none">
+          <path d="M0 30C260 48 405 13 690 32C964 50 1191 12 1440 34V140H0Z" fill="#d9a441" />
+          <path d="M0 48C248 66 431 35 684 51C963 69 1174 33 1440 54V140H0Z" fill="#b5532f" />
+          <path d="M0 70C257 84 445 58 700 73C975 89 1193 53 1440 75V140H0Z" fill="#2a1f17" />
+          <path d="M0 89C267 102 433 81 710 94C985 107 1195 78 1440 97V140H0Z" fill="#fbf6ee" />
+        </svg>
+      ) : (
+        <svg aria-hidden="true" className="absolute inset-x-0 bottom-0 z-10 h-16 w-full md:h-24" viewBox="0 0 1440 120" preserveAspectRatio="none">
+          <path d="M0 72C165 110 275 90 408 51C559 7 669 16 808 54C954 94 1052 103 1186 67C1280 42 1363 43 1440 59V120H0V72Z" fill="#fbf6ee" />
+        </svg>
+      )}
     </section>
   );
 }
