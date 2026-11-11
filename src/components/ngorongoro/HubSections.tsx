@@ -234,6 +234,7 @@ export function NgLogistics({ data }: { data: typeof ngorongoroHub.logistics }) 
 export function NgJourneys({
   data,
   packages,
+  hidePrices = false,
 }: {
   data: {
     eyebrow: string;
@@ -244,6 +245,7 @@ export function NgJourneys({
     callout?: string;
   };
   packages: PackageCardProps[];
+  hidePrices?: boolean;
 }) {
   return (
     <section id="journeys" aria-labelledby="ngorongoro-journeys-heading" className="scroll-mt-24 py-16 md:py-24">
@@ -251,7 +253,7 @@ export function NgJourneys({
         <SectionHeading id="ngorongoro-journeys-heading" eyebrow={data.eyebrow} title={data.title} subtitle={data.subtitle} />
         {packages.length ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {packages.map((item) => <PackageCard key={item.slug} {...item} priceFrom={null} />)}
+            {packages.map((item) => <PackageCard key={item.slug} {...item} priceFrom={null} hidePrice={hidePrices} />)}
           </div>
         ) : (
           <p className="mx-auto max-w-2xl rounded-2xl bg-sand p-6 text-center leading-7 text-muted">{data.noPackages}</p>
