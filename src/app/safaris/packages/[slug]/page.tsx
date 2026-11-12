@@ -15,7 +15,7 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return [...safaris, ...ngorongoroPackages].map(({ slug }) => ({ slug }));
+  return [...new Set([...safaris, ...ngorongoroPackages].map(({ slug }) => slug))].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {

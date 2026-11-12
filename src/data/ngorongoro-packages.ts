@@ -44,6 +44,7 @@ type PackageInput = {
   routeEndpoints?: { start: string; end: string };
   destinations: string[];
   collections?: string[];
+  cardImageExtension?: "jpg" | "avif";
   pace: string;
   style: string;
   badge: string;
@@ -197,11 +198,11 @@ function makePackage(input: PackageInput): NgorongoroPackage {
   const midRangePrices = groupPrices(input.midRangePrices);
   const luxuryPrices = groupPrices(input.luxuryPrices);
   const heroImage = {
-    src: `/images/safaris/ngorongoro-packages/${input.slug}/hero.jpg`,
+    src: `/images/safaris/ngorongoro-packages/${input.slug}-hero.jpg`,
     alt: `${input.title} in Tanzania's Ngorongoro highlands`,
   };
   const packageImage = (index: number) => ({
-    src: `/images/safaris/ngorongoro-packages/${input.slug}/gallery-${index}.jpg`,
+    src: `/images/safaris/ngorongoro-packages/${input.slug}-gallery-${index}.jpg`,
     alt: `${input.title}: ${[
       "the highland route",
       "a crater landscape",
@@ -308,7 +309,10 @@ function makePackage(input: PackageInput): NgorongoroPackage {
     relatedPackages: input.relatedPackages,
     relatedLink: input.relatedLink,
     heroImage,
-    cardImage: heroImage,
+    cardImage: {
+      src: `/images/safaris/ngorongoro-packages/${input.slug}-card.${input.cardImageExtension ?? "jpg"}`,
+      alt: `${input.title} safari tour card`,
+    },
     seo: input.seo,
     status: "published",
   } as NgorongoroPackage;
@@ -687,6 +691,7 @@ export const ngorongoroPackages: NgorongoroPackage[] = [
   makePackage({
     slug: "4-day-serengeti-ngorongoro-safari",
     title: "4-Day Serengeti and Ngorongoro Crater Safari",
+    cardImageExtension: "avif",
     tagline: "The open plains and the great bowl.",
     overview: "Two of Africa's most famous wildlife landscapes in four days. Two nights on the Serengeti plains give you room to breathe, and the crater finale gives you concentration. It is a classic for good reason.",
     durationDays: 4,
@@ -783,6 +788,7 @@ export const ngorongoroPackages: NgorongoroPackage[] = [
   makePackage({
     slug: "5-day-ndutu-calving-ngorongoro-safari",
     title: "5-Day Ndutu Calving Season and Ngorongoro Safari",
+    cardImageExtension: "avif",
     tagline: "Newborn calves on the plains, then the crater.",
     overview: "From December to March the southern plains fill with wildebeest and thousands of newborn calves, and the predators follow. This safari spends two nights at Ndutu in the middle of it, then climbs to the crater rim for a descent into the caldera.",
     durationDays: 5,
@@ -1032,6 +1038,7 @@ export const ngorongoroPackages: NgorongoroPackage[] = [
   makePackage({
     slug: "5-day-ngorongoro-highlands-culture-walking-safari",
     title: "5-Day Ngorongoro Highlands, Culture and Walking Safari",
+    cardImageExtension: "avif",
     tagline: "Beyond the game drive.",
     overview: "The crater is only one chapter. This safari adds a ranger-led walk at Empakaai, a respectful Maasai cultural visit, Olduvai Gorge and a lively village walk at Mto wa Mbu, all from a comfortable base on the rim.",
     durationDays: 5,
@@ -1166,6 +1173,7 @@ export const ngorongoroPackages: NgorongoroPackage[] = [
   makePackage({
     slug: "6-day-tanzania-family-wildlife-safari",
     title: "6-Day Tanzania Family Wildlife Safari",
+    cardImageExtension: "avif",
     tagline: "A safari at a child's pace.",
     overview: "Three parks, a pool and a day of nothing at all. The drives are shorter, the lodges are family friendly and the guide turns animal spotting into a game. A private vehicle means you can stop whenever small legs need it.",
     durationDays: 6,

@@ -92,7 +92,7 @@ export const ngorongoroHub = {
         linkLabel: "Explore this highlight",
         text: "Meet a Maasai community and learn how people and wildlife have shared this land for generations.",
         href: "/safaris/ngorongoro/maasai-cultural-visit",
-        image: "/images/safaris/ngorongoro/hub/tile-maasai.jpg",
+        image: "/images/safaris/ngorongoro/hub/tile-maasai.jpeg",
         alt: "Maasai pastoral lands in the Ngorongoro Conservation Area",
       },
       {
@@ -244,10 +244,10 @@ export const ngorongoroCrater = {
   metadata: {
     title: "Ngorongoro Crater Safari: Wildlife, Facts and Tips",
     description: "Plan a Ngorongoro Crater safari with a women-led Tanzania team. Lions, elephants and, with luck, black rhino. Facts, tips and best time to go.",
-    image: "/images/safaris/ngorongoro/crater/hero.jpg",
+    image: "/images/safaris/ngorongoro/crater-hero.webp",
   },
   hero: {
-    image: "/images/safaris/ngorongoro/crater/hero.jpg",
+    image: "/images/safaris/ngorongoro/crater-hero.webp",
     eyebrow: "THE NGORONGORO CRATER",
     title: "Ngorongoro Crater Safari: Descend Into the Wild",
     subtitle: "Drive down a steep volcanic wall at first light and find lions in the grass, elephants in a forest of fever trees and flamingos on a soda lake, all before lunch. This is the Ngorongoro Crater, and nowhere else on safari feels quite like it.",
@@ -268,7 +268,7 @@ export const ngorongoroCrater = {
     { label: "Best for", text: "Lions, elephants, hippos, birdlife and a chance of black rhino", icon: "wildlife" },
   ],
   story: {
-    image: "/images/safaris/ngorongoro/crater/story.jpg",
+    image: "/images/safaris/ngorongoro/crater-story.jpg",
     imageAlt: "The Ngorongoro Crater floor, ringed by steep forested walls",
     eyebrow: "THE STORY",
     title: "How a Volcano Became a Wildlife Kingdom",
@@ -341,12 +341,12 @@ export const ngorongoroCrater = {
     intro: "The crater is small enough that you can see a lot in one morning, and rich enough that you will want to. Here is who you may meet, and how likely it is. Wildlife is wild, so nothing is promised.",
     animals: [
       { name: "Lion", frequency: "Often seen", text: "The crater's most famous residents. Prides here hunt on the open plains, so the action is often easy to watch.", image: "/images/safaris/wildlife/lion.jpg", alt: "Lions resting on the grass of the Ngorongoro Crater floor", size: "large" },
-      { name: "Spotted hyena", frequency: "Often seen", text: "Large clans, clever hunters and enthusiastic scavengers. You will often hear them before you see them.", image: "/images/safaris/ngorongoro/crater/hyena.jpg", alt: "A spotted hyena on the Ngorongoro Crater floor", size: "normal" },
+      { name: "Spotted hyena", frequency: "Often seen", text: "Large clans, clever hunters and enthusiastic scavengers. You will often hear them before you see them.", image: "/images/safaris/ngorongoro/crater-hyena.webp", alt: "A spotted hyena on the Ngorongoro Crater floor", size: "normal" },
       { name: "African elephant", frequency: "Often seen", text: "Many of the crater's elephants are older bulls. Look for them in and around the Lerai Forest.", image: "/images/safaris/wildlife/elephant.jpeg", alt: "Elephant beneath fever trees in the Lerai Forest", size: "normal", note: "TODO(CONFIRM): confirm description of the crater's elephant population." },
       { name: "African buffalo", frequency: "Often seen", text: "Heavy, watchful and usually in herds.", image: "/images/safaris/wildlife/buffalo.jpeg", alt: "African buffalo grazing on the crater floor", size: "normal" },
       { name: "Hippo", frequency: "Often seen", text: "Find them at Ngoitokitok Springs and in the swamps.", image: "/images/safaris/wildlife/hippo.jpeg", alt: "Hippos resting in water at Ngoitokitok Springs", size: "normal" },
-      { name: "Zebra and wildebeest", frequency: "Often seen", text: "The grazing majority of the crater.", image: "/images/safaris/ngorongoro/crater/zebra.jpg", alt: "Zebra and wildebeest grazing on the crater floor", size: "wide" },
-      { name: "Eland and gazelles", frequency: "Often seen", text: "Thomson's and Grant's gazelles and the large eland share the open plains.", image: "/images/safaris/ngorongoro/crater/eland.jpg", alt: "Eland and gazelles on the open crater plains", size: "normal" },
+      { name: "Zebra and wildebeest", frequency: "Often seen", text: "The grazing majority of the crater.", image: "/images/safaris/ngorongoro/crater-zebra-wildebeest.jpg", alt: "Zebra and wildebeest grazing on the crater floor", size: "wide" },
+      { name: "Eland and gazelles", frequency: "Often seen", text: "Thomson's and Grant's gazelles and the large eland share the open plains.", image: "/images/safaris/ngorongoro/crater-eland-gazelles.jpg", alt: "Eland and gazelles on the open crater plains", size: "normal" },
       { name: "Black rhino", frequency: "Rare, never guaranteed", text: "Critically endangered and very closely protected. The crater is one of the places in Tanzania where you may see one, usually at a distance. Ask your guide to start looking early.", image: "/images/safaris/wildlife/rhino.jpeg", alt: "A black rhino grazing on the crater floor", size: "wide" },
       { name: "Leopard", frequency: "Rare", text: "Present but elusive, usually near forested walls and rocky outcrops.", image: "/images/safaris/wildlife/leopard.jpeg", alt: "A leopard near the forested walls of the crater", size: "normal" },
       { name: "Lesser flamingo", frequency: "Seasonal", text: "Tied to the water level of Lake Magadi, often better in wetter months.", image: "/images/safaris/wildlife/flamingo.jpg", alt: "Flamingos along the shore of Lake Magadi", size: "normal" },

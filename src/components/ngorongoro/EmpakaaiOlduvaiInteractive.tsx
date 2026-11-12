@@ -120,7 +120,7 @@ export function HikeProfile({ data }: { data: typeof empakaaiPage.hike.profile }
           transition={{ duration: 1.8, ease: "easeInOut" }}
         />
         {[35, 203, 414, 606].map((x, index) => (
-          <foreignObject key={labels[index]} x={x - 23} y={[19, 124, 172, 124][index] - 23} width="46" height="46">
+          <foreignObject key={`${labels[index]}-${index}`} x={x - 23} y={[19, 124, 172, 124][index] - 23} width="46" height="46">
             <button
               type="button"
               aria-label={labels[index]}

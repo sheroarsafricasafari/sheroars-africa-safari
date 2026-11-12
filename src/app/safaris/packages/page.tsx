@@ -19,7 +19,9 @@ import { siteConfig } from "@/data/site";
 import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
 const description = "Browse tailor-made Tanzania safari packages, including ten Ngorongoro journeys. Filter by length, destination and travel style.";
-const packageCatalog = [...safaris, ...ngorongoroPackages];
+const packageCatalog = Array.from(
+  new Map([...safaris, ...ngorongoroPackages].map((item) => [item.slug, item])).values(),
+);
 const sharedInclusions = [
   "Airport pick-up and drop-off", // TODO(CONFIRM): confirm service on all packages.
   "Accommodation as listed", // TODO(CONFIRM): confirm accommodation arrangements.
