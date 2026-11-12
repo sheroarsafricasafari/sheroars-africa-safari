@@ -7,19 +7,35 @@ import { ArrowRight, MapPin, Search, X } from "lucide-react";
 import Link from "next/link";
 import SmartImage from "@/components/ui/SmartImage";
 import type { SafariPackage } from "@/data/safaris";
+import SerengetiPackageCard from "@/components/safaris/serengeti/SerengetiPackageCard";
+import type { NgorongoroPackage } from "@/data/ngorongoro-packages";
 import useReducedMotionPreference from "@/components/motion/useReducedMotionPreference";
 
-type Filters = { q: string; duration: string; park: string[]; style: string; sort: string };
+type ExplorerPackage = SafariPackage | NgorongoroPackage;
+type Filters = { q: string; duration: string; park: string[]; style: string; destination: string; sort: string };
 const durationOptions = ["All", "3 days", "4 to 5", "6 to 7", "8 or more"];
 const parkOptions = ["Serengeti", "Ngorongoro", "Tarangire", "Lake Manyara", "Zanzibar"];
-const styleOptions = ["Great Migration", "Women-Only", "Safari and Beach", "Short Safaris"];
-const defaults: Filters = { q: "", duration: "All", park: [], style: "All", sort: "Recommended" };
+const styleOptions = ["Great Migration", "Women-Only", "Safari and Beach", "Short Safaris", "Short stays", "Luxury", "Family", "Culture and walking", "After Kilimanjaro", "With the Serengeti"];
+const destinationOptions = ["All", "Ngorongoro"];
+const defaults: Filters = { q: "", duration: "All", park: [], style: "All", destination: "All", sort: "Recommended" };
+
+function isNgorongoroPackage(item: ExplorerPackage): item is NgorongoroPackage {
+  return "durationDays" in item;
+}
+
+function packageDays(item: ExplorerPackage) {
+  return isNgorongoroPackage(item) ? item.durationDays : item.days;
+}
+
+function packageParks(item: ExplorerPackage) {
+  return isNgorongoroPackage(item) ? item.destinations : item.parks;
+}
 
 function ExplorerSkeleton() {
   return <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true" aria-label="Loading safari packages">{Array.from({ length: 3 }, (_, i) => <div key={i} className="h-[420px] animate-pulse rounded-3xl bg-sand motion-reduce:animate-none" />)}</div>;
 }
 
-function Explorer({ packages }: { packages: SafariPackage[] }) {
+function Explorer({ packages }: { packages: ExplorerPackage[] }) {
   const router = useRouter();
   const pathname = usePathname();
   const params = useSearchParams();
@@ -35,6 +51,7 @@ function Explorer({ packages }: { packages: SafariPackage[] }) {
       return option ? [option] : [];
     }),
     style: params.get("style") ?? "All",
+    destination: params.get("destination")?.toLowerCase() === "ngorongoro" ? "Ngorongoro" : "All",
     sort: params.get("sort") ?? "Recommended",
   };
   const [filters, setFilters] = useState(initial);
@@ -45,6 +62,7 @@ function Explorer({ packages }: { packages: SafariPackage[] }) {
     if (filters.duration !== "All") next.set("duration", filters.duration);
     if (filters.park.length) next.set("park", filters.park.join(","));
     if (filters.style !== "All") next.set("style", filters.style);
+    if (filters.destination !== "All") next.set("destination", filters.destination.toLowerCase());
     if (filters.sort !== "Recommended") next.set("sort", filters.sort);
     if (monthParam) next.set("month", monthParam);
     const query = next.toString();
@@ -54,22 +72,27 @@ function Explorer({ packages }: { packages: SafariPackage[] }) {
   const visible = useMemo(() => {
     const query = filters.q.trim().toLowerCase();
     const filtered = packages.filter((item) => {
-      const matchesQuery = !query || [item.title, item.summary, item.highlight, ...item.parks].join(" ").toLowerCase().includes(query);
+      const parks = packageParks(item);
+      const days = packageDays(item);
+      const matchesQuery = !query || [item.title, item.summary, isNgorongoroPackage(item) ? item.tagline : item.highlight, ...parks].join(" ").toLowerCase().includes(query);
       const matchesDuration = filters.duration === "All"
-        || filters.duration === "3 days" && item.days === 3
-        || filters.duration === "4 to 5" && item.days >= 4 && item.days <= 5
-        || filters.duration === "6 to 7" && item.days >= 6 && item.days <= 7
-        || filters.duration === "8 or more" && item.days >= 8;
-      const matchesPark = !filters.park.length || filters.park.some((park) => item.parks.includes(park));
-      const matchesStyle = filters.style === "All"
-        || filters.style === "Great Migration" && item.tags.includes("Great Migration")
-        || filters.style === "Women-Only" && item.tags.includes("Women-Only")
-        || filters.style === "Safari and Beach" && item.tags.includes("Safari and Beach")
-        || filters.style === "Short Safaris" && item.days <= 4;
-      return matchesQuery && matchesDuration && matchesPark && matchesStyle;
+        || filters.duration === "3 days" && days === 3
+        || filters.duration === "4 to 5" && days >= 4 && days <= 5
+        || filters.duration === "6 to 7" && days >= 6 && days <= 7
+        || filters.duration === "8 or more" && days >= 8;
+      const matchesPark = !filters.park.length || filters.park.some((park) => parks.includes(park));
+      const matchesDestination = filters.destination === "All"
+        || isNgorongoroPackage(item) && item.destinations.includes(filters.destination);
+      const matchesStyle = filters.style === "All" || (isNgorongoroPackage(item)
+        ? item.collections.includes(filters.style) || item.style === filters.style
+        : filters.style === "Great Migration" && item.tags.includes("Great Migration")
+          || filters.style === "Women-Only" && item.tags.includes("Women-Only")
+          || filters.style === "Safari and Beach" && item.tags.includes("Safari and Beach")
+          || filters.style === "Short Safaris" && days <= 4);
+      return matchesQuery && matchesDuration && matchesPark && matchesDestination && matchesStyle;
     });
-    if (filters.sort === "Shortest first") filtered.sort((a, b) => a.days - b.days);
-    if (filters.sort === "Longest first") filtered.sort((a, b) => b.days - a.days);
+    if (filters.sort === "Shortest first") filtered.sort((a, b) => packageDays(a) - packageDays(b));
+    if (filters.sort === "Longest first") filtered.sort((a, b) => packageDays(b) - packageDays(a));
     return filtered;
   }, [filters, packages]);
 
@@ -92,6 +115,7 @@ function Explorer({ packages }: { packages: SafariPackage[] }) {
             <ChipSet label="Duration" options={durationOptions} selected={[filters.duration]} onChange={(value) => update("duration", value[0] ?? "All")} />
             <ChipSet label="Parks" options={parkOptions} selected={filters.park} onChange={(value) => update("park", value)} multiple />
             <ChipSet label="Style" options={styleOptions} selected={filters.style === "All" ? [] : [filters.style]} onChange={(value) => update("style", value[0] ?? "All")} />
+            <ChipSet label="Destination" options={destinationOptions.slice(1)} selected={filters.destination === "All" ? [] : [filters.destination]} onChange={(value) => update("destination", value[0] ?? "All")} />
           </div>
           <p className="text-sm text-muted" aria-live="polite">Showing {visible.length} of {packages.length} safaris</p>
         </div>
@@ -108,20 +132,24 @@ function Explorer({ packages }: { packages: SafariPackage[] }) {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={reducedMotion ? undefined : { opacity: 0, scale: 0.96 }}
                 transition={{ duration: reducedMotion ? 0 : 0.25 }}
-                className={index === 0 && filters.duration === "All" && filters.sort === "Recommended" ? "group overflow-hidden rounded-3xl bg-white shadow-card lg:col-span-2 lg:grid lg:grid-cols-2" : "group overflow-hidden rounded-3xl bg-white shadow-card"}
+                className={isNgorongoroPackage(item) ? "overflow-visible bg-transparent shadow-none" : index === 0 && filters.duration === "All" && filters.sort === "Recommended" ? "group overflow-hidden rounded-3xl bg-white shadow-card lg:col-span-2 lg:grid lg:grid-cols-2" : "group overflow-hidden rounded-3xl bg-white shadow-card"}
               >
-                <Link href={`/safaris/packages/${item.slug}`} className="relative block min-h-64 overflow-hidden bg-sand focus-visible:outline focus-visible:outline-4 focus-visible:outline-terracotta">
-                  <SmartImage src={item.image} alt={`${item.title} in ${item.parks.join(", ")}`} sizes={index === 0 ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 640px) 100vw, 33vw"} fill className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105" />
-                  {item.badge ? <span className="absolute left-4 top-4 rounded-full bg-forest px-3 py-2 text-xs font-bold text-gold">{item.badge}</span> : null}
-                  <span className="absolute bottom-4 right-4 rounded-full bg-cream px-3 py-2 text-xs font-bold text-earth">{item.days} days</span>
-                </Link>
-                <div className="flex flex-col p-5 sm:p-6">
-                  <div className="flex items-start justify-between gap-3"><h3 className="font-heading text-2xl text-earth">{item.title}</h3><span className="shrink-0 rounded-full bg-sand px-3 py-1 text-xs font-semibold">{item.pace}</span></div>
-                  <p className="mt-2 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-terracotta"><MapPin aria-hidden="true" size={14} />{item.parks.join(", ")}</p>
-                  <p className="mt-4 leading-6 text-muted">{item.summary}</p>
-                  <p className="mt-4 text-sm font-semibold text-earth">{item.priceFrom === null ? "Price on request" : `From $${item.priceFrom.toLocaleString()} per person`}</p>
-                  <Link href={`/safaris/packages/${item.slug}`} className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 font-semibold text-terracotta">View Journey<ArrowRight aria-hidden="true" size={17} className="transition-transform group-hover:translate-x-1" /></Link>
-                </div>
+                {isNgorongoroPackage(item) ? <SerengetiPackageCard item={item} /> : (
+                  <>
+                    <Link href={`/safaris/packages/${item.slug}`} className="relative block min-h-64 overflow-hidden bg-sand focus-visible:outline focus-visible:outline-4 focus-visible:outline-terracotta">
+                      <SmartImage src={item.image} alt={`${item.title} in ${item.parks.join(", ")}`} sizes={index === 0 ? "(max-width: 1024px) 100vw, 50vw" : "(max-width: 640px) 100vw, 33vw"} fill className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105" />
+                      {item.badge ? <span className="absolute left-4 top-4 rounded-full bg-forest px-3 py-2 text-xs font-bold text-gold">{item.badge}</span> : null}
+                      <span className="absolute bottom-4 right-4 rounded-full bg-cream px-3 py-2 text-xs font-bold text-earth">{item.days} days</span>
+                    </Link>
+                    <div className="flex flex-col p-5 sm:p-6">
+                      <div className="flex items-start justify-between gap-3"><h3 className="font-heading text-2xl text-earth">{item.title}</h3><span className="shrink-0 rounded-full bg-sand px-3 py-1 text-xs font-semibold">{item.pace}</span></div>
+                      <p className="mt-2 flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-terracotta"><MapPin aria-hidden="true" size={14} />{item.parks.join(", ")}</p>
+                      <p className="mt-4 leading-6 text-muted">{item.summary}</p>
+                      <p className="mt-4 text-sm font-semibold text-earth">{item.priceFrom === null ? "Price on request" : `From $${item.priceFrom.toLocaleString()} per person`}</p>
+                      <Link href={`/safaris/packages/${item.slug}`} className="mt-auto inline-flex min-h-11 items-center gap-2 pt-5 font-semibold text-terracotta">View Journey<ArrowRight aria-hidden="true" size={17} className="transition-transform group-hover:translate-x-1" /></Link>
+                    </div>
+                  </>
+                )}
               </motion.article>
             ))}
           </AnimatePresence>
@@ -158,6 +186,6 @@ function ChipSet({ label, options, selected, onChange, multiple = false }: {
   );
 }
 
-export default function PackagesExplorer({ packages }: { packages: SafariPackage[] }) {
+export default function PackagesExplorer({ packages }: { packages: ExplorerPackage[] }) {
   return <Suspense fallback={<ExplorerSkeleton />}><Explorer packages={packages} /></Suspense>;
 }

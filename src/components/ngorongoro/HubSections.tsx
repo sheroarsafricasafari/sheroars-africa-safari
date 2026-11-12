@@ -16,6 +16,10 @@ import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 import { ngorongoroHub } from "@/data/ngorongoro";
+import { ngorongoroPackageHub } from "@/data/ngorongoro-packages";
+import type { NgorongoroPackage } from "@/data/ngorongoro-packages";
+import SerengetiPackageCard from "@/components/safaris/serengeti/SerengetiPackageCard";
+import { StaggerGroup, StaggerItem } from "@/components/motion/StaggerGroup";
 import type { PackageCardProps } from "@/components/inner/PackageCard";
 
 const factIcons = {
@@ -262,6 +266,91 @@ export function NgJourneys({
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {data.links.map((link) => <Button key={link.href} href={link.href} variant="secondary">{link.label}</Button>)}
         </div>
+      </Container>
+    </section>
+  );
+}
+
+export function NgorongoroRelatedPackages({
+  data,
+  packages,
+}: {
+  data: { eyebrow: string; title: string; subtitle: string; noPackages: string; links: readonly { label: string; href: string }[]; callout?: string };
+  packages: NgorongoroPackage[];
+}) {
+  return (
+    <section id="journeys" aria-labelledby="ngorongoro-related-packages-heading" className="scroll-mt-24 py-16 md:py-24">
+      <Container>
+        <SectionHeading id="ngorongoro-related-packages-heading" eyebrow={data.eyebrow} title={data.title} subtitle={data.subtitle} />
+        {packages.length ? (
+          <StaggerGroup className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {packages.slice(0, 4).map((item) => <StaggerItem key={item.slug}><SerengetiPackageCard item={item} compact /></StaggerItem>)}
+          </StaggerGroup>
+        ) : (
+          <p className="mx-auto max-w-2xl rounded-2xl bg-sand p-6 text-center leading-7 text-muted">{data.noPackages}</p>
+        )}
+        {data.callout ? <Callout variant="note" className="mx-auto mt-7 max-w-4xl">{data.callout}</Callout> : null}
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {data.links.map((link) => <Button key={link.href} href={link.href} variant="secondary">{link.label}</Button>)}
+          <Button href="/safaris/packages?destination=ngorongoro" variant="primary">Browse all Ngorongoro safaris</Button>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
+export function NgorongoroPackagesHub({ packages }: { packages: NgorongoroPackage[] }) {
+  const featuredPackages = ngorongoroPackageHub.featuredSlugs.flatMap((slug) => {
+    const item = packages.find((candidate) => candidate.slug === slug);
+    return item ? [item] : [];
+  });
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  return (
+    <section id="journeys" aria-labelledby="ngorongoro-packages-heading" className="scroll-mt-24 bg-cream py-16 md:py-24">
+      <Container>
+        <SectionHeading id="ngorongoro-packages-heading" eyebrow={ngorongoroPackageHub.eyebrow} title={ngorongoroPackageHub.title} subtitle={ngorongoroPackageHub.subtitle} />
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          {ngorongoroPackageHub.styleChips.map((chip) => <Link key={chip.label} href={chip.href} className="inline-flex min-h-11 items-center rounded-full border border-earth/15 bg-white px-4 text-sm font-semibold text-earth transition hover:border-terracotta hover:text-terracotta focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">{chip.label}</Link>)}
+        </div>
+        <StaggerGroup className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {featuredPackages.map((item) => <StaggerItem key={item.slug}><SerengetiPackageCard item={item} /></StaggerItem>)}
+        </StaggerGroup>
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          <Button href={ngorongoroPackageHub.primaryLink.href} variant="primary">{ngorongoroPackageHub.primaryLink.label}</Button>
+          <Button href={ngorongoroPackageHub.secondaryLink.href} variant="secondary">{ngorongoroPackageHub.secondaryLink.label}</Button>
+        </div>
+
+        <div className="mt-16">
+          <SectionHeading eyebrow="FIND YOUR FIT" title={ngorongoroPackageHub.compareTitle} />
+          <div className="overflow-x-auto rounded-3xl border border-sand bg-white shadow-card">
+            <table className="w-full min-w-[760px] text-left text-sm">
+              <caption className="border-b border-sand p-4 text-left text-xs leading-5 text-muted">{ngorongoroPackageHub.compareCaption}</caption>
+              <thead className="bg-forest text-white"><tr>{ngorongoroPackageHub.compareHeaders.map((header) => <th key={header} scope="col" className="p-4 font-semibold">{header}</th>)}</tr></thead>
+              <tbody>
+                {packages.map((item) => {
+                  const amount = item.pricing.groupPricesByTier?.["mid-range"]?.find(({ travellers }) => travellers === 2)?.amount;
+                  const months = item.bestMonths.length === 12 ? "Year-round" : item.bestMonths.map((month) => monthNames[month - 1]).join(", ");
+                  return (
+                    <tr key={item.slug} className="border-t border-sand align-top text-muted">
+                      <th scope="row" className="p-4 font-semibold text-earth">{item.title}</th>
+                      <td className="p-4">{item.durationDays} days</td>
+                      <td className="p-4">{item.style}</td>
+                      <td className="p-4">{amount ? `$${amount.toLocaleString("en-US")}` : "On request"}</td>
+                      <td className="p-4">{months}</td>
+                      <td className="p-4"><Link href={`/safaris/packages/${item.slug}`} className="font-semibold text-terracotta underline underline-offset-4">View</Link></td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <Callout variant="note" className="mx-auto mt-8 max-w-4xl">
+          {ngorongoroPackageHub.callout.text}{" "}
+          <Link href={ngorongoroPackageHub.callout.href} className="font-semibold text-terracotta underline underline-offset-4">{ngorongoroPackageHub.callout.label}</Link>
+        </Callout>
       </Container>
     </section>
   );

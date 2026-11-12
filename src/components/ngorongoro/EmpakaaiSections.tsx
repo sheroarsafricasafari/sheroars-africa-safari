@@ -18,29 +18,15 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 import Reveal from "@/components/ui/Reveal";
 import { EmpakaaiCrossSection, EmpakaaiDayTimeline, HikeProfile } from "@/components/ngorongoro/EmpakaaiOlduvaiInteractive";
-import { NgFaqSection, NgJourneys, NgQuickFacts, NgStory } from "@/components/ngorongoro/HubSections";
+import { NgFaqSection, NgorongoroRelatedPackages, NgQuickFacts, NgStory } from "@/components/ngorongoro/HubSections";
 import { empakaaiBreadcrumbs, empakaaiPage } from "@/data/ngorongoro-empakaai";
-import { safaris } from "@/data/safaris";
+import { getNgorongoroRelatedPackages } from "@/data/ngorongoro-packages";
 import { siteConfig } from "@/data/site";
 import CtaBanner from "@/components/inner/CtaBanner";
 import NgHero from "@/components/ngorongoro/NgHero";
-import type { PackageCardProps } from "@/components/inner/PackageCard";
 
 const hikeStepIcons = [ShieldCheck, Mountain, Trees, Bird, ArrowUp];
 const ruleIcons = [ShieldCheck, Wind, ThermometerSun, Sun, Footprints, Clock3, Bird, Mountain];
-
-const journeys: PackageCardProps[] = safaris
-  .filter((safari) => safari.parks.includes("Ngorongoro"))
-  .map((safari) => ({
-    slug: safari.slug,
-    title: safari.title,
-    days: safari.days,
-    parks: safari.parks,
-    summary: safari.summary,
-    priceFrom: null,
-    image: { src: safari.image, alt: safari.title },
-    badge: safari.badge,
-  }));
 
 export default function EmpakaaiPageContent() {
   return (
@@ -171,7 +157,7 @@ export default function EmpakaaiPageContent() {
         </Container>
       </section>
 
-      <NgJourneys data={empakaaiPage.journeys} packages={journeys} />
+      <NgorongoroRelatedPackages data={empakaaiPage.journeys} packages={getNgorongoroRelatedPackages("empakaai")} />
       <NgFaqSection eyebrow={empakaaiPage.faqSection.eyebrow} title={empakaaiPage.faqSection.title} items={empakaaiPage.faq} />
       <CtaBanner
         eyebrow={empakaaiPage.cta.eyebrow}

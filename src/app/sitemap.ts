@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { routeRegistry } from "@/lib/routes";
+import { ngorongoroPackages } from "@/data/ngorongoro-packages";
 import { safaris } from "@/data/safaris";
 import { siteConfig } from "@/data/site";
 
@@ -7,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     ...routeRegistry.map(({ path }) => path),
     ...safaris.map(({ slug }) => `/safaris/packages/${slug}`),
+    ...ngorongoroPackages.map(({ slug }) => `/safaris/packages/${slug}`),
   ];
 
   return [...new Set(paths)]

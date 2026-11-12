@@ -1,31 +1,17 @@
 import Link from "next/link";
 import { ArrowRight, Coffee, Mountain, Trees } from "lucide-react";
-import type { PackageCardProps } from "@/components/inner/PackageCard";
 import Callout from "@/components/inner/Callout";
 import CtaBanner from "@/components/inner/CtaBanner";
 import FaqAccordion from "@/components/inner/FaqAccordion";
-import { NgJourneys, NgStory } from "@/components/ngorongoro/HubSections";
+import { NgorongoroRelatedPackages, NgStory } from "@/components/ngorongoro/HubSections";
 import NgEditorialHero from "@/components/ngorongoro/NgEditorialHero";
 import { NgorongoroStayFilters, NgorongoroStayMatcher, StayElevationDiagram } from "@/components/ngorongoro/NgorongoroStayTools";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { ngorongoroStayBreadcrumbs, ngorongoroStayPage, ngorongoroStays } from "@/data/ngorongoro-stays";
-import { safaris } from "@/data/safaris";
+import { getNgorongoroRelatedPackages } from "@/data/ngorongoro-packages";
 import { siteConfig } from "@/data/site";
-
-const journeys: PackageCardProps[] = safaris
-  .filter((safari) => safari.slug !== "7-day-women-only-group-safari" && safari.parks.includes("Ngorongoro"))
-  .map((safari) => ({
-    slug: safari.slug,
-    title: safari.title,
-    days: safari.days,
-    parks: safari.parks,
-    summary: safari.summary,
-    priceFrom: null,
-    image: { src: safari.image, alt: safari.title },
-    badge: safari.badge,
-  }));
 
 export default function NgorongoroStayPageSections() {
   return (
@@ -159,7 +145,7 @@ export default function NgorongoroStayPageSections() {
       </section>
 
       <div className="bg-sand/60">
-        <NgJourneys data={ngorongoroStayPage.journeys} packages={journeys} hidePrices />
+        <NgorongoroRelatedPackages data={ngorongoroStayPage.journeys} packages={getNgorongoroRelatedPackages("stays")} />
       </div>
 
       <section aria-labelledby="ngorongoro-stay-faq-heading" className="bg-cream py-16 md:py-24">

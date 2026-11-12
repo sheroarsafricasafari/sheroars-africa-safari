@@ -14,7 +14,7 @@ import CtaBanner from "@/components/inner/CtaBanner";
 import NgHero from "@/components/ngorongoro/NgHero";
 import {
   NgFaqSection,
-  NgJourneys,
+  NgorongoroRelatedPackages,
   NgQuickFacts,
   NgStory,
 } from "@/components/ngorongoro/HubSections";
@@ -24,13 +24,13 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 import { siteConfig } from "@/data/site";
 import { olduvaiBreadcrumbs, olduvaiPage } from "@/data/ngorongoro-olduvai";
-import type { PackageCardProps } from "@/components/inner/PackageCard";
+import type { NgorongoroPackage } from "@/data/ngorongoro-packages";
 import { OlduvaiTimeline } from "@/components/ngorongoro/EmpakaaiOlduvaiInteractive";
 
 const visitIcons = [MapPin, Landmark, Wind, Route];
 const ruleIcons = [MapPin, Landmark, Sun, BookOpen, Route, Footprints];
 
-export default function OlduvaiPageSections({ journeys }: { journeys: PackageCardProps[] }) {
+export default function OlduvaiPageSections({ journeys }: { journeys: NgorongoroPackage[] }) {
   return (
     <main>
       <NgHero data={olduvaiPage.hero} breadcrumbs={olduvaiBreadcrumbs} divider="strata" />
@@ -181,7 +181,7 @@ export default function OlduvaiPageSections({ journeys }: { journeys: PackageCar
         </Container>
       </section>
 
-      <NgJourneys
+      <NgorongoroRelatedPackages
         data={olduvaiPage.journeys}
         packages={journeys}
       />

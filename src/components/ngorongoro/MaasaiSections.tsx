@@ -3,28 +3,14 @@ import { ArrowRight, Check, CircleHelp, ShieldAlert } from "lucide-react";
 import Callout from "@/components/inner/Callout";
 import CtaBanner from "@/components/inner/CtaBanner";
 import FaqAccordion from "@/components/inner/FaqAccordion";
-import { NgJourneys, NgStory } from "@/components/ngorongoro/HubSections";
+import { NgorongoroRelatedPackages, NgStory } from "@/components/ngorongoro/HubSections";
 import NgEditorialHero from "@/components/ngorongoro/NgEditorialHero";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
 import SectionHeading from "@/components/ui/SectionHeading";
 import { maasaiBreadcrumbs, maasaiPage } from "@/data/ngorongoro-maasai";
-import { safaris } from "@/data/safaris";
+import { getNgorongoroRelatedPackages } from "@/data/ngorongoro-packages";
 import { siteConfig } from "@/data/site";
-import type { PackageCardProps } from "@/components/inner/PackageCard";
-
-const visits = safaris
-  .filter((safari) => safari.slug !== "7-day-women-only-group-safari" && safari.parks.includes("Ngorongoro"))
-  .map((safari) => ({
-    slug: safari.slug,
-    title: safari.title,
-    days: safari.days,
-    parks: safari.parks,
-    summary: safari.summary,
-    priceFrom: null,
-    image: { src: safari.image, alt: safari.title },
-    badge: safari.badge,
-  })) satisfies PackageCardProps[];
 
 export default function MaasaiPageSections() {
   const fee = maasaiPage.feeTransparency;
@@ -181,7 +167,7 @@ export default function MaasaiPageSections() {
         </Container>
       </section>
 
-      <NgJourneys data={maasaiPage.journeys} packages={visits} hidePrices />
+      <NgorongoroRelatedPackages data={maasaiPage.journeys} packages={getNgorongoroRelatedPackages("maasai")} />
 
       <section aria-labelledby="maasai-faq-heading" className="bg-cream py-16 md:py-24">
         <Container className="max-w-5xl">

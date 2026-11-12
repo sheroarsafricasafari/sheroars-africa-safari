@@ -14,10 +14,12 @@ import SmartImage from "@/components/ui/SmartImage";
 import SplitReveal from "@/components/motion/SplitReveal";
 import HeroSignal from "@/components/layout/HeroSignal";
 import { safaris } from "@/data/safaris";
+import { ngorongoroPackages } from "@/data/ngorongoro-packages";
 import { siteConfig } from "@/data/site";
 import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
-const description = "Browse tailor-made Tanzania safari packages, from 3-day Northern Circuit introductions to 8-day safari and Zanzibar escapes. Filter by length, park and style.";
+const description = "Browse tailor-made Tanzania safari packages, including ten Ngorongoro journeys. Filter by length, destination and travel style.";
+const packageCatalog = [...safaris, ...ngorongoroPackages];
 const sharedInclusions = [
   "Airport pick-up and drop-off", // TODO(CONFIRM): confirm service on all packages.
   "Accommodation as listed", // TODO(CONFIRM): confirm accommodation arrangements.
@@ -52,12 +54,15 @@ export const metadata = buildMetadata({
 
 export default function SafariPackagesPage() {
   const breadcrumbs = [{ title: "Home", href: "/" }, { title: "Safaris", href: "/safaris" }, { title: "Packages", href: "/safaris/packages" }];
+  const packageDays = (item: (typeof packageCatalog)[number]) => "durationDays" in item ? item.durationDays : item.days;
+  const packageParks = (item: (typeof packageCatalog)[number]) => "destinations" in item ? item.destinations : item.parks;
+  const packagePace = (item: (typeof packageCatalog)[number]) => "durationDays" in item ? item.pace.label : item.pace;
   const comparisonRows = [
-    { label: "Days", values: safaris.map((item) => `${item.days} days`) },
-    { label: "Parks", values: safaris.map((item) => item.parks.join(", ")) },
-    { label: "Pace", values: safaris.map((item) => item.pace) },
-    { label: "Best for", values: safaris.map((item) => item.bestFor.join(", ")) },
-    { label: "Great Migration potential", values: safaris.map((item) => item.tags.includes("Great Migration") ? "Seasonal" : item.parks.includes("Serengeti") ? true : false) }, // TODO(CONFIRM): confirm migration potential by package and season.
+    { label: "Days", values: packageCatalog.map((item) => `${packageDays(item)} days`) },
+    { label: "Parks", values: packageCatalog.map((item) => packageParks(item).join(", ")) },
+    { label: "Pace", values: packageCatalog.map(packagePace) },
+    { label: "Best for", values: packageCatalog.map((item) => item.bestFor.join(", ")) },
+    { label: "Great Migration potential", values: packageCatalog.map((item) => "durationDays" in item ? item.collections.includes("With the Serengeti") : item.tags.includes("Great Migration") ? "Seasonal" : item.parks.includes("Serengeti") ? true : false) }, // TODO(CONFIRM): confirm migration potential by package and season.
   ];
 
   return (
@@ -66,7 +71,7 @@ export default function SafariPackagesPage() {
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: "Tanzania Safari Packages",
-        itemListElement: safaris.map((item, index) => ({
+        itemListElement: packageCatalog.map((item, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: item.title,
@@ -103,13 +108,13 @@ export default function SafariPackagesPage() {
 
       <section id="safari-results" className="bg-cream pb-16 md:pb-24">
         <Container className="mb-8"><SectionHeading eyebrow="YOUR NEXT JOURNEY" title="Explore the Safari Collection" align="left" /></Container>
-        <PackagesExplorer packages={safaris} />
+        <PackagesExplorer packages={packageCatalog} />
       </section>
 
       <section className="bg-sand py-20 md:py-24">
         <Container>
           <SectionHeading eyebrow="AT A GLANCE" title="Compare Our Safaris at a Glance" />
-          <ComparisonTable columns={safaris.map((item) => item.title)} rows={comparisonRows} caption="Compare safari duration, destinations, pace, travel style and seasonal migration potential." />
+          <ComparisonTable columns={packageCatalog.map((item) => item.title)} rows={comparisonRows} caption="Compare safari duration, destinations, pace, travel style and seasonal migration potential." />
           <p className="mt-4 text-xs leading-5 text-muted">Migration movement is seasonal and cannot be guaranteed. Ask us to discuss your dates. <span className="sr-only">TODO(CONFIRM): confirm comparison guidance.</span></p>
         </Container>
       </section>

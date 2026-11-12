@@ -1,5 +1,6 @@
 import { safaris } from "@/data/safaris";
 import { serengetiPackages } from "@/data/serengeti-packages";
+import { ngorongoroPackages } from "@/data/ngorongoro-packages";
 
 export type RouteDefinition = {
   path: string;
@@ -50,6 +51,7 @@ const staticPaths = [
   "/travel-guide/what-to-expect-on-safari", "/blog", "/faq", "/contact", "/book",
   "/booking-terms", "/plan-your-safari", "/privacy-policy", "/terms", "/group-departures",
   ...safaris.map(({ slug }) => `/safaris/packages/${slug}`),
+  ...ngorongoroPackages.map(({ slug }) => `/safaris/packages/${slug}`),
   ...serengetiPackages.map(({ slug }) => `/safaris/serengeti/packages/${slug}`),
 ];
 
@@ -89,6 +91,8 @@ function humanize(path: string) {
   if (titleOverrides[path]) return titleOverrides[path];
   const packageTitle = safaris.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
   if (packageTitle) return packageTitle;
+  const ngorongoroPackageTitle = ngorongoroPackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
+  if (ngorongoroPackageTitle) return ngorongoroPackageTitle;
   const serengetiPackageTitle = serengetiPackages.find(({ slug }) => path === `/safaris/serengeti/packages/${slug}`)?.title;
   if (serengetiPackageTitle) return serengetiPackageTitle;
   if (path === "/") return "Home";

@@ -7,16 +7,16 @@ import {
   NgExploreTiles,
   NgFactsGrid,
   NgFaqSection,
-  NgJourneys,
   NgLogistics,
   NgPeopleBand,
+  NgorongoroPackagesHub,
   NgQuickFacts,
   NgSeasons,
   NgStayTeaser,
   NgStory,
 } from "@/components/ngorongoro/HubSections";
 import { ngorongoroBreadcrumbs, ngorongoroHub } from "@/data/ngorongoro";
-import { safaris } from "@/data/safaris";
+import { ngorongoroPackages } from "@/data/ngorongoro-packages";
 import { siteConfig } from "@/data/site";
 import { resolvePublicImage } from "@/lib/ngorongoro-images";
 import { buildMetadata } from "@/lib/seo";
@@ -43,19 +43,6 @@ const touristDestinationJsonLd = {
   containedInPlace: { "@type": "Country", name: "Tanzania" },
 };
 
-const ngorongoroPackages = safaris
-  .filter((safari) => safari.parks.includes("Ngorongoro"))
-  .map((safari) => ({
-    slug: safari.slug,
-    title: safari.title,
-    days: safari.days,
-    parks: safari.parks,
-    summary: safari.summary,
-    priceFrom: null,
-    image: { src: safari.image, alt: safari.title },
-    badge: safari.badge,
-  }));
-
 export default function NgorongoroHubPage() {
   return (
     <main>
@@ -73,7 +60,7 @@ export default function NgorongoroHubPage() {
       <NgCompare data={ngorongoroHub.compare} />
       <NgSeasons data={ngorongoroHub.seasons} />
       <NgLogistics data={ngorongoroHub.logistics} />
-      <NgJourneys data={ngorongoroHub.journeys} packages={ngorongoroPackages} />
+      <NgorongoroPackagesHub packages={ngorongoroPackages} />
       <NgStayTeaser data={ngorongoroHub.stay} />
       <NgFaqSection
         eyebrow={ngorongoroHub.faqSection.eyebrow}

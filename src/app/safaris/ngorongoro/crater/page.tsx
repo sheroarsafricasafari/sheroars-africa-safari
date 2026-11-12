@@ -9,7 +9,6 @@ import DescentRail from "@/components/ngorongoro/DescentRail";
 import {
   CraterDay,
   CraterFacts,
-  CraterJourneys,
   CraterRespect,
   CraterRules,
   CraterSeasonsPacking,
@@ -20,6 +19,7 @@ import {
 import NgHero from "@/components/ngorongoro/NgHero";
 import {
   NgFaqSection,
+  NgorongoroRelatedPackages,
   NgQuickFacts,
   NgStory,
 } from "@/components/ngorongoro/HubSections";
@@ -27,7 +27,7 @@ import {
   craterBreadcrumbs,
   ngorongoroCrater,
 } from "@/data/ngorongoro";
-import { safaris } from "@/data/safaris";
+import { getNgorongoroRelatedPackages } from "@/data/ngorongoro-packages";
 import { siteConfig } from "@/data/site";
 import { getExistingPublicImage } from "@/lib/ngorongoro-images";
 import { buildMetadata, buildTouristTripJsonLd } from "@/lib/seo";
@@ -47,19 +47,6 @@ const touristTripJsonLd = buildTouristTripJsonLd({
   path: "/safaris/ngorongoro/crater",
   image: craterHeroImage,
 });
-
-const ngorongoroPackages = safaris
-  .filter((safari) => safari.parks.includes("Ngorongoro"))
-  .map((safari) => ({
-    slug: safari.slug,
-    title: safari.title,
-    days: safari.days,
-    parks: safari.parks,
-    summary: safari.summary,
-    priceFrom: null,
-    image: { src: safari.image, alt: safari.title },
-    badge: safari.badge,
-  }));
 
 export default function NgorongoroCraterPage() {
   return (
@@ -82,7 +69,7 @@ export default function NgorongoroCraterPage() {
       <CraterSeasonsPacking data={ngorongoroCrater.seasonsAndPacking} />
       <CraterRespect data={ngorongoroCrater.respect} />
       <CraterStayTeaser data={ngorongoroCrater.stay} />
-      <CraterJourneys data={ngorongoroCrater.journeys} packages={ngorongoroPackages} />
+      <NgorongoroRelatedPackages data={ngorongoroCrater.journeys} packages={getNgorongoroRelatedPackages("crater")} />
       <NgFaqSection
         eyebrow={ngorongoroCrater.faqSection.eyebrow}
         title={ngorongoroCrater.faqSection.title}
