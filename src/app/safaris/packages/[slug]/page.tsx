@@ -3,7 +3,9 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import CtaBanner from "@/components/inner/CtaBanner";
 import JsonLd from "@/components/seo/JsonLd";
+import NgorongoroPackageDetail from "@/components/safaris/ngorongoro/NgorongoroPackageDetail";
 import SafariPackageExperience from "@/components/safaris/SafariPackageExperience";
+import { ngorongoroPackages } from "@/data/ngorongoro-packages";
 import { safaris } from "@/data/safaris";
 import { siteConfig } from "@/data/site";
 import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
@@ -13,12 +15,22 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return safaris.map(({ slug }) => ({ slug }));
+  return [...safaris, ...ngorongoroPackages].map(({ slug }) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const safari = safaris.find((item) => item.slug === slug);
+  const ngorongoroPackage = ngorongoroPackages.find((item) => item.slug === slug);
+  if (!safari && !ngorongoroPackage) notFound();
+  if (ngorongoroPackage) {
+    return buildMetadata({
+      title: ngorongoroPackage.seo.title,
+      description: ngorongoroPackage.seo.description,
+      path: `/safaris/packages/${slug}`,
+      image: ngorongoroPackage.heroImage.src,
+    });
+  }
   if (!safari) notFound();
   return buildMetadata({
     title: safari.title,
@@ -38,6 +50,54 @@ export default function SafariPackagePage({ params }: PageProps) {
 
 async function SafariPackageContent({ params }: PageProps) {
   const { slug } = await params;
+  const ngorongoroPackage = ngorongoroPackages.find((item) => item.slug === slug);
+  if (ngorongoroPackage) {
+    const breadcrumbItems = [
+      { title: "Home", href: "/" },
+      { title: "Safaris", href: "/safaris" },
+      { title: "Packages", href: "/safaris/packages" },
+      { title: ngorongoroPackage.title, href: `/safaris/packages/${slug}` },
+    ];
+    return (
+      <>
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "TouristTrip",
+          name: ngorongoroPackage.title,
+          description: ngorongoroPackage.seo.description,
+          url: `${siteConfig.url}/safaris/packages/${slug}`,
+          image: `${siteConfig.url}${ngorongoroPackage.heroImage.src}`,
+          itinerary: {
+            "@type": "ItemList",
+            itemListElement: ngorongoroPackage.itinerary.map((day) => ({
+              "@type": "ListItem",
+              position: day.day,
+              name: day.title,
+              description: day.opening,
+            })),
+          },
+          provider: { "@type": "TravelAgency", name: siteConfig.shortName, url: siteConfig.url },
+        }} />
+        <JsonLd data={buildBreadcrumbJsonLd(breadcrumbItems)} />
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: ngorongoroPackage.faqs.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }} />
+        <NgorongoroPackageDetail
+          item={ngorongoroPackage}
+          relatedPackages={ngorongoroPackage.relatedPackages.flatMap((relatedSlug) => {
+            const related = ngorongoroPackages.find((candidate) => candidate.slug === relatedSlug);
+            return related ? [related] : [];
+          })}
+        />
+      </>
+    );
+  }
   const safari = safaris.find((item) => item.slug === slug);
   if (!safari) notFound();
 

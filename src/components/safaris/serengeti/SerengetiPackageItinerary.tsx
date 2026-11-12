@@ -8,6 +8,7 @@ const mealNames: Record<"B" | "L" | "D", string> = { B: "Breakfast", L: "Lunch",
 
 export default function SerengetiPackageItinerary({ item }: { item: SerengetiPackage }) {
   const [openDays, setOpenDays] = useState<Set<number>>(() => new Set([1]));
+  const [selectedOptions, setSelectedOptions] = useState<Record<number, number>>({});
   const allOpen = item.itinerary.length > 0 && openDays.size === item.itinerary.length;
   const toggleDay = (day: number) => setOpenDays((current) => {
     const next = new Set(current);
@@ -36,6 +37,8 @@ export default function SerengetiPackageItinerary({ item }: { item: SerengetiPac
       </div>
       {item.itinerary.map((day) => {
         const expanded = openDays.has(day.day);
+        const selectedOption = selectedOptions[day.day] ?? 0;
+        const activeTimeline = day.timelineOptions?.[selectedOption]?.activities ?? day.activities;
         return (
           <article id={`day-${day.day}`} key={day.id} className="serengeti-itinerary-day scroll-mt-32 rounded-2xl border border-sand bg-white">
             <h3>
@@ -47,10 +50,27 @@ export default function SerengetiPackageItinerary({ item }: { item: SerengetiPac
             <div id={`day-details-${day.day}`} hidden={!expanded} className="space-y-4 border-t border-sand p-5">
               {day.location ? <p className="font-semibold text-earth">{day.location}</p> : null}
               {day.opening ? <p className="leading-7 text-muted">{day.opening}</p> : null}
-              {day.activities.map((activity, index) => <p key={`${day.id}-${index}`} className="text-sm leading-6 text-muted">{activity.timeLabel ? <strong className="mr-2 text-earth">{activity.timeLabel}</strong> : null}{activity.description}{activity.optional ? " (Optional)" : ""}</p>)}
+              {day.timelineOptions?.length ? (
+                <div className="flex flex-wrap gap-2" role="group" aria-label={`Day ${day.day} itinerary option`}>
+                  {day.timelineOptions.map((option, index) => (
+                    <button
+                      key={option.label}
+                      type="button"
+                      aria-pressed={selectedOption === index}
+                      onClick={() => setSelectedOptions((current) => ({ ...current, [day.day]: index }))}
+                      className={`min-h-11 rounded-full border px-4 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta ${selectedOption === index ? "border-terracotta bg-terracotta text-white" : "border-sand text-earth"}`}
+                    >
+                      {option.label}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+              {activeTimeline.map((activity, index) => <p key={`${day.id}-${selectedOption}-${index}`} className="text-sm leading-6 text-muted">{activity.timeLabel ? <strong className="mr-2 text-earth">{activity.timeLabel}</strong> : null}{activity.description}{activity.optional ? " (Optional)" : ""}</p>)}
+              {day.highlights?.length ? <div className="rounded-xl bg-sand p-4"><p className="font-semibold text-earth">Highlights</p><ul className="mt-2 list-disc space-y-1 pl-5 text-sm leading-6 text-muted">{day.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul></div> : null}
               {day.travelNotes.map((note) => <p key={note} className="text-sm leading-6 text-muted"><strong className="text-earth">Travel note:</strong> {note}</p>)}
               {day.meals.length ? <p className="text-sm text-muted"><strong className="text-earth">Meals:</strong> {day.meals.map((meal) => mealNames[meal]).join(", ")}</p> : null}
               {day.overnightLocation ? <p className="text-sm text-muted"><strong className="text-earth">Overnight:</strong> {day.overnightLocation}</p> : null}
+              {day.footnote ? <p className="border-l-2 border-gold pl-3 text-sm leading-6 text-muted">{day.footnote}</p> : null}
               {day.warnings.map((warning) => <p key={warning} className="rounded-xl bg-sand p-3 text-sm text-earth">{warning}</p>)}
             </div>
           </article>

@@ -32,6 +32,71 @@ export default function SerengetiPackageEstimator({ item }: { item: SerengetiPac
   const isGroupPackage = item.groupSize.minimum !== undefined || item.groupSize.maximum !== undefined;
   const quoteHref = enquiryHref(item, selectedTier, travellers, month);
 
+  if (item.pricing.status === "published") {
+    const publishedPrices = item.pricing.groupPricesByTier?.[selectedTier === "luxury" ? "luxury" : "mid-range"]
+      ?? item.pricing.midRangeGroupPrices;
+    const selectedGroupPrice = publishedPrices.find((price) => price.travellers === travellers);
+    const priceTables = item.pricing.groupPricesByTier;
+
+    return (
+      <div className="rounded-3xl border border-sand bg-white p-5 shadow-card sm:p-7">
+        <p className="text-eyebrow text-terracotta">PUBLISHED PRICING</p>
+        <h3 className="mt-2 font-heading text-2xl text-earth">Choose your accommodation and group size</h3>
+        <p className="mt-2 text-sm leading-6 text-muted">Select a published per-person rate below. Your written quote confirms exact dates, availability and any seasonal supplement.</p>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <label className="block text-sm font-semibold text-earth">
+            Accommodation
+            <select value={selectedTier} onChange={(event) => setSelectedTier(event.target.value as AccommodationTier)} className="mt-2 min-h-11 w-full rounded-xl border border-earth/15 bg-white px-3 font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">
+              {item.pricing.tiers.map((price) => <option key={price.tier} value={price.tier}>{tierNames[price.tier]}</option>)}
+            </select>
+          </label>
+          <label className="block text-sm font-semibold text-earth">
+            Travellers
+            <select value={travellers} onChange={(event) => setTravellers(Number(event.target.value))} className="mt-2 min-h-11 w-full rounded-xl border border-earth/15 bg-white px-3 font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">
+              {publishedPrices.map(({ travellers: size }) => <option key={size} value={size}>{size} {size === 1 ? "traveller" : "travellers"}</option>)}
+            </select>
+          </label>
+          <label className="block text-sm font-semibold text-earth sm:col-span-2">
+            Preferred travel month (optional)
+            <select value={month} onChange={(event) => setMonth(event.target.value)} className="mt-2 min-h-11 w-full rounded-xl border border-earth/15 bg-white px-3 font-normal focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">
+              <option value="">Not selected</option>
+              {["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].map((name) => <option key={name}>{name}</option>)}
+            </select>
+          </label>
+        </div>
+        {priceTables ? (
+          <div className="mt-6 overflow-x-auto rounded-2xl border border-sand">
+            <table className="w-full min-w-[28rem] text-left text-sm">
+              <caption className="sr-only">Per-person prices by accommodation tier and group size</caption>
+              <thead className="bg-sand text-earth"><tr><th scope="col" className="p-3">Travellers</th><th scope="col" className="p-3">Mid-range</th><th scope="col" className="p-3">Luxury</th></tr></thead>
+              <tbody>
+                {priceTables["mid-range"].map((price) => {
+                  const luxuryPrice = priceTables.luxury.find((candidate) => candidate.travellers === price.travellers);
+                  return (
+                    <tr key={price.travellers} className={`border-t border-sand ${travellers === price.travellers ? "bg-gold/15 font-semibold text-earth" : "text-muted"}`}>
+                      <th scope="row" className="p-3">{price.travellers}</th>
+                      <td className="p-3">${price.amount.toLocaleString("en-US")}</td>
+                      <td className="p-3">{luxuryPrice ? `$${luxuryPrice.amount.toLocaleString("en-US")}` : "—"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        ) : null}
+        <p aria-live="polite" className="mt-5 rounded-2xl bg-sand p-4 text-sm leading-6 text-earth">
+          {selectedGroupPrice
+            ? `${tierNames[selectedTier]}: $${selectedGroupPrice.amount.toLocaleString("en-US")} USD per person for ${travellers} ${travellers === 1 ? "traveller" : "travellers"}.`
+            : `Request a written quote for ${tierNames[selectedTier].toLowerCase()} accommodation.`}
+        </p>
+        <p className="mt-3 text-xs leading-5 text-muted">{item.pricing.unitConfirmation}</p>
+        <Link href={quoteHref} className="mt-5 inline-flex min-h-12 items-center justify-center rounded-full bg-terracotta px-6 font-semibold text-white transition hover:bg-terracotta-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta">
+          Request a written quote
+        </Link>
+      </div>
+    );
+  }
+
   let estimateMessage = "Select a tier and group size to review the supplied proposed price.";
   if (groupOutsideBounds) {
     estimateMessage = `This group departure is proposed for ${item.groupSize.minimum} to ${item.groupSize.maximum} guests. Request a quote for a supported group size.`;

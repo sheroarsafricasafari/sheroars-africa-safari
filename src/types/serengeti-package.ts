@@ -13,7 +13,7 @@ export const serengetiPriceSchema = z.object({
   tier: accommodationTierSchema,
   amount: z.number().int().positive().nullable(),
   currency: z.literal("USD"),
-  status: z.literal("proposed"),
+  status: z.enum(["proposed", "published"]),
   availability: z.enum(["available", "limited", "on-request", "unavailable"]),
   twinShare: z.boolean().optional(),
   note: z.string().optional(),
@@ -32,6 +32,12 @@ export const serengetiPackageSchema = z.object({
   bestMonths: z.array(serengetiMonthSchema),
   season: z.string().min(1),
   seasonNote: z.string().min(1),
+  tagline: z.string().optional(),
+  badge: z.string().optional(),
+  style: z.string().optional(),
+  destinations: z.array(z.string().min(1)).optional(),
+  collections: z.array(z.string().min(1)).optional(),
+  goodMonths: z.array(serengetiMonthSchema).optional(),
   access: z.object({
     label: z.string().min(1),
     status: z.enum(["specified", "todo-confirm"]),
@@ -75,11 +81,21 @@ export const serengetiPackageSchema = z.object({
       description: z.string().min(1),
       optional: z.boolean().optional(),
     })),
+    timelineOptions: z.array(z.object({
+      label: z.string().min(1),
+      activities: z.array(z.object({
+        timeLabel: z.string().optional(),
+        description: z.string().min(1),
+        optional: z.boolean().optional(),
+      })),
+    })).optional(),
     travelNotes: z.array(z.string().min(1)),
     meals: z.array(z.enum(["B", "L", "D"])),
     overnightLocation: z.string().optional(),
     accommodationId: z.string().optional(),
     warnings: z.array(z.string().min(1)),
+    highlights: z.array(z.string().min(1)).optional(),
+    footnote: z.string().optional(),
   })),
   itineraryStatus: z.enum(["provided", "todo-confirm"]),
   accommodation: z.array(z.object({
@@ -95,16 +111,44 @@ export const serengetiPackageSchema = z.object({
     areaType: z.enum(["national-park", "conservation-area", "private-reserve", "outside-park"]).nullable(),
     confirmationStatus: z.enum(["confirmed", "proposed", "todo-confirm"]),
   })),
+  staysByTier: z.array(z.object({
+    tier: accommodationTierSchema,
+    segments: z.array(z.object({
+      location: z.string().min(1),
+      nights: z.number().int().positive().optional(),
+      properties: z.array(z.string().min(1)),
+    })),
+    note: z.string().optional(),
+    upgrades: z.array(z.string().min(1)).optional(),
+  })).optional(),
+  gallery: z.array(z.object({
+    src: z.string().startsWith("/"),
+    alt: z.string().min(1),
+  })).optional(),
   pricing: z.object({
-    status: z.literal("proposed"),
+    status: z.enum(["proposed", "published"]),
     currency: z.literal("USD"),
-    tiers: z.array(serengetiPriceSchema).length(3),
+    tiers: z.array(serengetiPriceSchema).min(2),
     midRangeGroupPrices: z.array(z.object({
       travellers: z.number().int().positive(),
       amount: z.number().int().positive(),
       currency: z.literal("USD"),
-      status: z.literal("proposed"),
+      status: z.enum(["proposed", "published"]),
     })),
+    groupPricesByTier: z.object({
+      "mid-range": z.array(z.object({
+        travellers: z.number().int().positive(),
+        amount: z.number().int().positive(),
+        currency: z.literal("USD"),
+        status: z.enum(["proposed", "published"]),
+      })),
+      luxury: z.array(z.object({
+        travellers: z.number().int().positive(),
+        amount: z.number().int().positive(),
+        currency: z.literal("USD"),
+        status: z.enum(["proposed", "published"]),
+      })),
+    }).optional(),
     singleSupplement: z.object({
       amount: z.number().int().positive(),
       currency: z.literal("USD"),
@@ -114,6 +158,7 @@ export const serengetiPackageSchema = z.object({
     unitConfirmation: z.string().min(1),
     balloonIncluded: z.boolean().optional(),
   }),
+  pricingNotes: z.array(z.string().min(1)).optional(),
   inclusions: z.object({
     items: z.array(z.string().min(1)),
     status: z.enum(["provided", "todo-confirm"]),
@@ -139,6 +184,10 @@ export const serengetiPackageSchema = z.object({
     answer: z.string().min(1),
   })),
   relatedPackages: z.array(z.string().min(1)),
+  relatedLink: z.object({
+    label: z.string().min(1),
+    href: z.string().startsWith("/"),
+  }).optional(),
   heroImage: z.object({
     src: z.string().startsWith("/"),
     alt: z.string().min(1),
@@ -151,7 +200,7 @@ export const serengetiPackageSchema = z.object({
     title: z.string().min(1),
     description: z.string().min(1),
   }),
-  status: z.literal("proposed"),
+  status: z.enum(["proposed", "published"]),
 });
 
 export const serengetiPackagesSchema = z.array(serengetiPackageSchema).length(7);
