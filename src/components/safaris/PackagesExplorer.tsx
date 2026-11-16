@@ -16,7 +16,7 @@ type Filters = { q: string; duration: string; park: string[]; style: string; des
 const durationOptions = ["All", "3 days", "4 to 5", "6 to 7", "8 or more"];
 const parkOptions = ["Serengeti", "Ngorongoro", "Tarangire", "Lake Manyara", "Zanzibar"];
 const styleOptions = ["Great Migration", "Women-Only", "Safari and Beach", "Short Safaris", "Short stays", "Luxury", "Family", "Culture and walking", "After Kilimanjaro", "With the Serengeti"];
-const destinationOptions = ["All", "Ngorongoro"];
+const destinationOptions = ["All", "Ngorongoro", "Tarangire"];
 const defaults: Filters = { q: "", duration: "All", park: [], style: "All", destination: "All", sort: "Recommended" };
 
 function isNgorongoroPackage(item: ExplorerPackage): item is NgorongoroPackage {
@@ -51,7 +51,7 @@ function Explorer({ packages }: { packages: ExplorerPackage[] }) {
       return option ? [option] : [];
     }),
     style: params.get("style") ?? "All",
-    destination: params.get("destination")?.toLowerCase() === "ngorongoro" ? "Ngorongoro" : "All",
+    destination: destinationOptions.find((item) => item.toLowerCase() === params.get("destination")?.toLowerCase()) ?? "All",
     sort: params.get("sort") ?? "Recommended",
   };
   const [filters, setFilters] = useState(initial);
@@ -82,7 +82,9 @@ function Explorer({ packages }: { packages: ExplorerPackage[] }) {
         || filters.duration === "8 or more" && days >= 8;
       const matchesPark = !filters.park.length || filters.park.some((park) => parks.includes(park));
       const matchesDestination = filters.destination === "All"
-        || isNgorongoroPackage(item) && item.destinations.includes(filters.destination);
+        || (isNgorongoroPackage(item)
+          ? item.destinations.includes(filters.destination)
+          : item.parks.includes(filters.destination));
       const matchesStyle = filters.style === "All" || (isNgorongoroPackage(item)
         ? item.collections.includes(filters.style) || item.style === filters.style
         : filters.style === "Great Migration" && item.tags.includes("Great Migration")
