@@ -1,0 +1,28 @@
+.dust {
+  position: absolute;
+  pointer-events: none;
+  inset: -20%;
+  opacity: 0.3;
+  background:
+    radial-gradient(circle at 18% 72%, rgb(255 227 159 / 0.42) 0 1px, transparent 2px),
+    radial-gradient(circle at 68% 32%, rgb(255 244 211 / 0.38) 0 1px, transparent 2px),
+    radial-gradient(ellipse at 30% 45%, rgb(255 205 119 / 0.16), transparent 40%),
+    radial-gradient(ellipse at 78% 72%, rgb(243 194 108 / 0.14), transparent 38%);
+  background-size: 41px 41px, 67px 67px, 100% 100%, 100% 100%;
+  animation: dust-drift 48s ease-in-out infinite alternate;
+}
+
+@keyframes dust-drift {
+  from {
+    transform: translate3d(-1.5%, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(1.5%, -1%, 0) scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dust {
+    animation: none;
+  }
+}

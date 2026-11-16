@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import { TarangireHubPage } from "@/components/tarangire/TarangirePages";
+import { tarangirePage } from "@/data/tarangire";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Tarangire National Park | SheRoarsAfricaSafari",
-};
+export const metadata: Metadata = buildMetadata({
+  ...tarangirePage.metadata,
+  path: tarangirePage.path,
+  absoluteTitle: true,
+});
 
 export default function Page() {
-  return (
-    <PagePlaceholder title="Tarangire National Park" path="/safaris/tarangire" section="Safaris" />
-  );
+  return <TarangireHubPage />;
 }

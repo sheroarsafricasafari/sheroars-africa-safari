@@ -1,7 +1,7 @@
 // Compiled from the supplied November 2026 operator and expert-guide notes.
 export type StayTier = "camping" | "mid-range" | "luxury" | "upgrade";
-export type StayRegion = "ngorongoro-rim" | "karatu" | "highlands";
-export type StayZone = "rim-west" | "rim-east" | "rim-north-west" | "karatu";
+export type StayRegion = "ngorongoro-rim" | "karatu" | "highlands" | "tarangire";
+export type StayZone = "rim-west" | "rim-east" | "rim-north-west" | "karatu" | "in-park" | "park-edge";
 
 export type Stay = {
   slug: string;
@@ -14,7 +14,7 @@ export type Stay = {
   description: string;
   bestFor: readonly string[];
   image: { src: string; alt: string };
-  seasonNote: string;
+  seasonNote?: string;
 };
 
 export const stayTierLabels: Record<StayTier, string> = {
@@ -29,12 +29,15 @@ export const stayZoneLabels: Record<StayZone, string> = {
   "rim-east": "Eastern rim",
   "rim-north-west": "North-west rim",
   karatu: "Karatu",
+  "in-park": "Inside the park",
+  "park-edge": "On the park's edge",
 };
 
 export const stayRegionLabels: Record<StayRegion, string> = {
   "ngorongoro-rim": "Ngorongoro rim",
   karatu: "Karatu",
   highlands: "Highlands",
+  tarangire: "Tarangire",
 };
 
 export const ngorongoroStays: readonly Stay[] = [

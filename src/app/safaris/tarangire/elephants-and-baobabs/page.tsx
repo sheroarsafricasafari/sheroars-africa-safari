@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import { TarangireElephantsPage } from "@/components/tarangire/TarangirePages";
+import { tarangireElephantsPage } from "@/data/tarangire-elephants-baobabs";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Tarangire Elephants and Baobabs | SheRoarsAfricaSafari",
-};
+export const metadata: Metadata = buildMetadata({
+  ...tarangireElephantsPage.metadata,
+  path: tarangireElephantsPage.path,
+  absoluteTitle: true,
+});
 
 export default function Page() {
-  return (
-    <PagePlaceholder title="Tarangire Elephants and Baobabs" path="/safaris/tarangire/elephants-and-baobabs" section="Safaris" />
-  );
+  return <TarangireElephantsPage />;
 }
