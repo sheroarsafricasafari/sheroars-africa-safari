@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { packagePricingSchema } from "@/types/tarangire-package";
 
 export const itineraryDaySchema = z.object({
   day: z.number().int().positive(),
@@ -66,6 +67,7 @@ export const packageSchema = z.object({
   badge: z.string().optional(),
   tags: z.array(z.string()),
   image: z.string().min(1),
+  pricing: packagePricingSchema.optional(),
   related: z.array(z.string()),
   nights: z.number().int().nonnegative().optional(),
   startPoint: z.string().optional(),
@@ -87,6 +89,7 @@ export const packageSchema = z.object({
 });
 
 export type ItineraryDay = z.infer<typeof itineraryDaySchema>;
+export type PackagePricing = z.infer<typeof packagePricingSchema>;
 export type Package = z.infer<typeof packageSchema>;
 
 export const detailedPackageSchema = packageSchema.extend({

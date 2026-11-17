@@ -181,7 +181,7 @@ export function DestinationCards() {
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-[0.035] [background-image:radial-gradient(ellipse_at_center,transparent_0_38%,#fbf6ee_39%,transparent_40%),radial-gradient(ellipse_at_center,transparent_0_58%,#fbf6ee_59%,transparent_60%)] [background-size:140px_90px]" />
       <Container className="relative">
         <SectionHeading id="destinations-heading" eyebrow={sectionCopy.destinations.eyebrow} title={sectionCopy.destinations.title} subtitle={sectionCopy.destinations.subtitle} tone="light" />
-        <ul className="grid gap-5 lg:grid-cols-3 lg:gap-6">
+        <ul className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 lg:gap-6">
           {destinationCards.map((card, index) => (
             <li key={card.slug} id={`destination-${card.slug}`} className={index === 1 ? "lg:translate-y-8" : ""}>
               <Reveal className="h-full" delay={index * 0.08}>
@@ -214,11 +214,7 @@ export function DestinationCards() {
 }
 
 export function CompareDestinations() {
-  const columns = [
-    { title: "Tarangire", index: 0 },
-    { title: "Ngorongoro", index: 1 },
-    { title: "Serengeti", index: 2 },
-  ];
+  const columns = destinationCards.map(({ title }, index) => ({ title, index }));
   return (
     <Section id="compare" background="cream" ariaLabelledBy="compare-heading">
       <Container>
@@ -232,7 +228,7 @@ export function CompareDestinations() {
               {comparisonRows.map((row) => (
                 <tr key={row.label} className="border-t border-sand odd:bg-white even:bg-cream/70">
                   <th scope="row" className="p-4 text-sm font-bold text-terracotta">{row.label}</th>
-                  {row.values.map((value, index) => <td key={columns[index].title} className="p-4 text-sm leading-6 text-muted">{value}</td>)}
+                  {row.values.map((value, index) => <td key={columns[index]?.title ?? index} className="p-4 text-sm leading-6 text-muted">{value}</td>)}
                 </tr>
               ))}
             </tbody>

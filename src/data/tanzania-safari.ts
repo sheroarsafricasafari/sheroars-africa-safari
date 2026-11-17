@@ -1,8 +1,8 @@
 export type SeasonRating = "best" | "good" | "mixed" | "low";
 
 export type DestinationCard = {
-  slug: "ngorongoro" | "serengeti" | "tarangire";
-  index: "01" | "02" | "03";
+  slug: "ngorongoro" | "serengeti" | "tarangire" | "lake-manyara";
+  index: "01" | "02" | "03" | "04";
   eyebrow: string;
   title: string;
   description: string;
@@ -16,8 +16,8 @@ export type FaqPart = { text: string; href?: string };
 export type FaqItem = { question: string; answer: FaqPart[] };
 
 export const tanzaniaSafariMeta = {
-  title: "Tanzania Safari | Serengeti, Ngorongoro and Tarangire",
-  description: "Plan a Tanzania safari with a women-led team. Explore the Serengeti, Ngorongoro Crater and Tarangire, with tailor-made itineraries for every travel style.",
+  title: "Tanzania Safari | Serengeti, Ngorongoro, Tarangire and Lake Manyara",
+  description: "Plan a Tanzania safari with a women-led team. Explore the Serengeti, Ngorongoro Crater, Tarangire and Lake Manyara, with tailor-made itineraries for every travel style.",
   path: "/tanzania-safari",
   image: "/images/tanzania-safari/hero.jpg",
 };
@@ -25,13 +25,13 @@ export const tanzaniaSafariMeta = {
 export const sectionCopy = {
   destinations: {
     eyebrow: "EXPLORE TANZANIA'S ICONIC SAFARI DESTINATIONS",
-    title: "Three Extraordinary Places. One Unforgettable Safari.",
-    subtitle: "Discover the landscapes that make northern Tanzania so extraordinary. From the Great Migration to the wildlife-rich crater floor and the ancient baobab trees, each destination offers a different way to experience Africa.",
+    title: "Four Extraordinary Places. One Unforgettable Safari.",
+    subtitle: "Discover the landscapes that make northern Tanzania so extraordinary. From the Great Migration and wildlife-rich crater floor to ancient baobabs, a groundwater forest and a Rift Valley lake, each destination offers a different way to experience Africa.",
   },
   comparison: {
     eyebrow: "THE PERFECT NORTHERN CIRCUIT",
-    title: "Three Destinations, Three Different Worlds",
-    subtitle: "Compare a Serengeti safari, Ngorongoro safari and Tarangire safari across Tanzania's northern national parks and conservation areas.",
+    title: "Four Destinations, Four Different Worlds",
+    subtitle: "Compare Serengeti, Ngorongoro, Tarangire and Lake Manyara across Tanzania's northern national parks and conservation areas.",
   },
   whenToGo: {
     eyebrow: "PLAN YOUR JOURNEY",
@@ -80,14 +80,14 @@ export const sectionCopy = {
 export const safariHero = {
   eyebrow: "THE WILD HEART OF AFRICA",
   title: "Discover the Magic of Tanzania Safaris",
-  subtitle: "From the endless plains of the Serengeti to the vast volcanic Ngorongoro Crater and the ancient baobabs of Tarangire, Tanzania offers some of Africa's most extraordinary wildlife experiences. We plan every journey around you.",
+  subtitle: "From the endless plains of the Serengeti and volcanic Ngorongoro Crater to Tarangire's baobabs and Lake Manyara's Rift Valley forest, Tanzania offers some of Africa's most extraordinary wildlife experiences. We plan every journey around you.",
   image: "/images/tanzania-safari/hero.jpg",
   imageAlt: "A wide Serengeti plain at golden hour with acacia trees and grazing wildlife",
   badges: ["Extraordinary Wildlife", "Iconic National Parks", "Tailor-Made Journeys"],
 };
 
 export const quickFacts = [
-  { label: "Best known for", text: "The Serengeti, the Great Migration, Ngorongoro Crater and Tarangire's elephants", icon: "binoculars" },
+  { label: "Best known for", text: "The Great Migration, Ngorongoro Crater, Tarangire elephants and Lake Manyara's tree-climbing lions", icon: "binoculars" },
   { label: "When to go", text: "Year-round, with June to October as the main dry season", icon: "sun" },
   { label: "Getting there", text: "Fly into Kilimanjaro (JRO) or Arusha (ARK) for the northern circuit", icon: "plane" },
   // TODO(CONFIRM): Confirm the light-aircraft and vehicle arrangements actually offered.
@@ -104,7 +104,7 @@ export const intro = {
   paragraphs: [
     "A Tanzania safari is a journey into some of the world's most celebrated wildlife landscapes. Across the north of the country, open plains, volcanic highlands, river valleys and ancient baobab forests are home to lions, elephants, leopards, buffalo, giraffes, zebras, cheetahs, hippos and many more species, alongside an exceptional variety of birdlife.",
     "The Northern Tanzania safari circuit makes it possible to experience several of these landscapes in a single journey. Safari vehicles, expert guides and carefully chosen lodges and camps connect national parks and conservation areas that each offer something different. Wildlife is wild, so sightings can never be guaranteed, but the variety of habitats gives every safari a real chance of memorable encounters.",
-    "Every destination has its own personality. Some offer endless open horizons, others reveal dramatic volcanic landscapes or ancient baobab forests. Together, Ngorongoro, the Serengeti and Tarangire create an extraordinary safari journey through northern Tanzania.",
+    "Every destination has its own personality. Some offer endless open horizons, others reveal dramatic volcanic landscapes, ancient baobab forests or a groundwater forest beside the Rift Valley lake. Together, Ngorongoro, the Serengeti, Tarangire and Lake Manyara create an extraordinary safari journey through northern Tanzania.",
   ],
 };
 
@@ -142,35 +142,46 @@ export const destinationCards: DestinationCard[] = [
     image: "/images/tanzania-safari/tarangire.jpg",
     imageAlt: "Elephants walking beneath ancient baobab trees in Tarangire National Park",
   },
+  {
+    slug: "lake-manyara",
+    index: "04",
+    eyebrow: "THE RIFT VALLEY FLOOR",
+    title: "Lake Manyara",
+    description: "Explore a groundwater forest, a seasonal soda lake, open floodplain and the Great Rift Valley escarpment on a compact Northern Circuit safari.",
+    tags: ["Tree-Climbing Lions", "Elephants", "400+ Bird Species"],
+    href: "/safaris/lake-manyara",
+    image: "/images/lake-manyara/destination-card.jpg",
+    imageAlt: "Lake Manyara forest and soda lake beneath the Rift Valley escarpment",
+  },
 ];
 
 export const comparisonRows = [
   {
     label: "Landscape",
-    values: ["Baobab-dotted savanna, termite mounds and a river valley", "A huge volcanic caldera, crater floor and highland forest", "Vast open plains, rocky kopjes, rivers and woodland"],
+    values: ["A huge volcanic caldera, crater floor and highland forest", "Vast open plains, rocky kopjes, rivers and woodland", "Baobab-dotted savanna, termite mounds and a river valley", "Groundwater forest, soda lake, floodplain and Rift Valley escarpment"],
   },
   {
     label: "Best known for",
-    values: ["Elephants and ancient baobab trees", "Dramatic scenery and wildlife concentrations on the crater floor", "The Great Migration and big cats"],
+    values: ["Dramatic scenery and wildlife concentrations on the crater floor", "The Great Migration and big cats", "Elephants and ancient baobab trees", "Tree-climbing lions, elephants and birdlife"],
   },
   // TODO(CONFIRM): Review destination wildlife summaries with the team.
   {
     label: "You may see",
-    values: ["Elephant, giraffe, zebra, wildebeest, buffalo, lion", "Lion, elephant, buffalo, hippo, hyena, and a rare chance of black rhino", "Lion, leopard, cheetah, elephant, buffalo, zebra, wildebeest"],
+    values: ["Lion, elephant, buffalo, hippo, hyena, and a rare chance of black rhino", "Lion, leopard, cheetah, elephant, buffalo, zebra, wildebeest", "Elephant, giraffe, zebra, wildebeest, buffalo, lion", "Elephant, giraffe, zebra, buffalo, hippo and many bird species"],
   },
   // TODO(CONFIRM): Review seasonal summaries with the team.
   {
     label: "Seasonal note",
-    values: ["Especially rewarding in the dry season, June to October", "Wildlife viewing is possible through the year", "Year-round wildlife, with the migration moving through the park"],
+    values: ["Wildlife viewing is possible through the year", "Year-round wildlife, with the migration moving through the park", "Especially rewarding in the dry season, June to October", "Year-round forest and lakeshore viewing; conditions vary with water levels"],
   },
   {
     label: "Pairs well with",
-    values: ["Lake Manyara and Ngorongoro", "Tarangire and the Serengeti", "Ngorongoro, and Zanzibar for a beach finish"],
+    values: ["Tarangire and the Serengeti", "Ngorongoro, and Zanzibar for a beach finish", "Lake Manyara and Ngorongoro", "Tarangire and Ngorongoro"],
   },
 ] as const;
 
-export const comparisonIntro = "Bringing these destinations together can create a wonderfully varied safari. You move from the baobab landscapes of Tarangire to the dramatic Ngorongoro highlands and then into the vast Serengeti ecosystem, discovering a different side of Tanzania along the way.";
-export const comparisonCallout = "Combining all three is not the right choice for every traveler. Your route, travel dates and the number of days you have all matter, and we will help you decide.";
+export const comparisonIntro = "Bringing these destinations together can create a wonderfully varied safari. From Lake Manyara's forest and lakeshore to Tarangire's baobabs, the dramatic Ngorongoro highlands and the vast Serengeti ecosystem, each stop reveals a different side of Tanzania.";
+export const comparisonCallout = "Combining all four is not the right choice for every traveler. Your route, travel dates and the number of days you have all matter, and we will help you decide.";
 
 export const journeyCopy = {
   eyebrow: "SAMPLE JOURNEYS",
@@ -247,6 +258,7 @@ export const seasonGrid = [
   { destination: "Serengeti", ratings: ["best", "low", "best", "best", "good"] },
   { destination: "Ngorongoro", ratings: ["good", "mixed", "best", "best", "good"] },
   { destination: "Tarangire", ratings: ["mixed", "low", "best", "best", "mixed"] },
+  { destination: "Lake Manyara", ratings: ["good", "mixed", "good", "best", "good"] },
 ] satisfies { destination: string; ratings: SeasonRating[] }[]; // TODO(CONFIRM): Editorial guide values require review.
 
 export const seasonColumns = ["Jan to Mar", "Apr to May", "Jun to Jul", "Aug to Oct", "Nov to Dec"];
@@ -254,6 +266,7 @@ export const seasonNotes = [
   { destination: "Serengeti", text: "Year-round wildlife, with the migration moving through different regions across the year." },
   { destination: "Ngorongoro", text: "Varied wildlife viewing through the year, with the long rains the least predictable time." },
   { destination: "Tarangire", text: "Particularly notable for dry-season wildlife concentrations along the river." },
+  { destination: "Lake Manyara", text: "Forest and lakeshore viewing continue through the year, with wildlife patterns influenced by water levels." },
 ];
 
 export const approachCards = [
@@ -272,7 +285,7 @@ export const travelStyles = [
 
 export const planSteps = [
   { title: "Tell us your travel dates", text: "Share the month you would like to travel and roughly how long you can be away." },
-  { title: "Choose your destinations", text: "Explore the Serengeti, Ngorongoro and Tarangire, and tell us what draws you most." },
+  { title: "Choose your destinations", text: "Explore the Serengeti, Ngorongoro, Tarangire and Lake Manyara, and tell us what draws you most." },
   { title: "Select your travel style", text: "Decide on comfort level, private or shared travel and any special interests." },
   { title: "Receive your tailor-made proposal", text: "We prepare a suggested itinerary and quotation, subject to availability." },
   { title: "Refine and confirm", text: "Final details, costs, terms and availability are confirmed before you book." },
@@ -280,7 +293,7 @@ export const planSteps = [
 
 export const travelMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 export const travelerOptions = ["1", "2", "3 to 4", "5 or more"];
-export const interestOptions = ["Serengeti", "Ngorongoro", "Tarangire"];
+export const interestOptions = ["Serengeti", "Ngorongoro", "Tarangire", "Lake Manyara"];
 
 export const practicalCards = [
   { title: "When to arrive", text: "Kilimanjaro International Airport is a common entry point for northern circuit journeys, and Arusha Airport may also be relevant depending on your itinerary. Transfers are only included when your proposal says so.", icon: "plane" },
@@ -311,8 +324,8 @@ export const faqItems: FaqItem[] = [
     answer: [{ text: "The Serengeti is known for vast plains, big cats and the Great Migration. Ngorongoro Crater offers dramatic scenery and remarkable wildlife concentrations inside a volcanic caldera. Tarangire is celebrated for its elephants, baobab trees and dry-season wildlife along the Tarangire River. Many travelers also add Lake Manyara." }],
   },
   {
-    question: "Can I visit the Serengeti, Ngorongoro and Tarangire on one safari?",
-    answer: [{ text: "Yes. Tarangire, Ngorongoro and the Serengeti are commonly combined on a northern circuit itinerary. How well it works depends on the number of days you have, the route and the accommodation available, so we plan the order and pace with you." }],
+    question: "Can I visit Lake Manyara, Tarangire, Ngorongoro and the Serengeti on one safari?",
+    answer: [{ text: "Yes. Lake Manyara, Tarangire, Ngorongoro and the Serengeti can be combined on a northern circuit itinerary. How well it works depends on the number of days you have, the route and the accommodation available, so we plan the order and pace with you." }],
   },
   {
     question: "What animals can I see on a Tanzania safari?",
@@ -320,7 +333,7 @@ export const faqItems: FaqItem[] = [
   },
   {
     question: "How many days do I need for a Tanzania safari?",
-    answer: [{ text: "It depends on which destinations you want and how much time you want to spend in each. Visiting all three major destinations generally needs more days than focusing on one or two, and a slower pace usually means a richer experience. Tell us your dates and we will suggest a realistic itinerary." }],
+    answer: [{ text: "It depends on which destinations you want and how much time you want to spend in each. Visiting several destinations generally needs more days than focusing on one or two, and a slower pace usually means a richer experience. Tell us your dates and we will suggest a realistic itinerary." }],
   },
   {
     question: "Is Tanzania suitable for first-time safari travelers?",

@@ -18,6 +18,7 @@ import Callout from "@/components/inner/Callout";
 import CtaBanner from "@/components/inner/CtaBanner";
 import FaqAccordion from "@/components/inner/FaqAccordion";
 import PackageCard from "@/components/inner/PackageCard";
+import HeroSignal from "@/components/layout/HeroSignal";
 import { StaggerGroup, StaggerItem } from "@/components/motion/StaggerGroup";
 import Container from "@/components/ui/Container";
 import Reveal from "@/components/ui/Reveal";
@@ -62,6 +63,7 @@ export function TgHero({ data, breadcrumbs, headingId }: {
 }) {
   return (
     <section aria-labelledby={headingId} className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-[#2b2118] text-white md:min-h-[92svh]">
+      <HeroSignal />
       <SmartImage src={data.image} alt={data.imageAlt} sizes="100vw" fill priority className="object-cover" />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-b from-earth/80 via-earth/5 to-transparent" />
       <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/35 to-earth/5" />

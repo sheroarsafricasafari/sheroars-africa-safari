@@ -13,6 +13,6 @@ export const faqs = [
   },
   {
     question: "What is included in your safari prices?",
-    answer: "Itineraries typically include accommodation, park fees, a private vehicle with an expert guide, meals as specified and airport transfers. Each itinerary page lists exactly what is included and excluded.", // TODO(CONFIRM): confirm inclusions and exclusions before publishing.
+    answer: "Inclusions vary by package. Each itinerary lists what is included and excluded, and our team can help you compare options in a written quote.",
   },
 ];

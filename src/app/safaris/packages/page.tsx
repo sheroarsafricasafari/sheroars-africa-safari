@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Clock3, MapPin, Waves, ArrowRight, MessageCircle } from "lucide-react";
 import PackagesExplorer from "@/components/safaris/PackagesExplorer";
+import { TarangirePackageBrowser } from "@/components/tarangire/packages/TarangirePackages";
 import Breadcrumbs from "@/components/inner/Breadcrumbs";
 import ComparisonTable from "@/components/inner/ComparisonTable";
 import CtaBanner from "@/components/inner/CtaBanner";
@@ -15,13 +16,15 @@ import SplitReveal from "@/components/motion/SplitReveal";
 import HeroSignal from "@/components/layout/HeroSignal";
 import { safaris } from "@/data/safaris";
 import { ngorongoroPackages } from "@/data/ngorongoro-packages";
+import { tarangirePackages } from "@/data/tarangire-packages";
 import { siteConfig } from "@/data/site";
 import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
-const description = "Browse tailor-made Tanzania safari packages, including ten Ngorongoro journeys. Filter by length, destination and travel style.";
+const description = "Browse Tanzania safari packages, including Lake Manyara, Tarangire and Ngorongoro journeys. Filter by length, destination and travel style.";
+const tarangireSlugs = new Set(tarangirePackages.map((item) => item.slug));
 const packageCatalog = Array.from(
   new Map([...safaris, ...ngorongoroPackages].map((item) => [item.slug, item])).values(),
-);
+).filter((item) => !tarangireSlugs.has(item.slug));
 const sharedInclusions = [
   "Airport pick-up and drop-off", // TODO(CONFIRM): confirm service on all packages.
   "Accommodation as listed", // TODO(CONFIRM): confirm accommodation arrangements.
@@ -29,7 +32,6 @@ const sharedInclusions = [
   "A 4x4 safari vehicle and professional driver-guide", // TODO(CONFIRM): confirm service and vehicle details.
   "Meals as specified in the itinerary", // TODO(CONFIRM): confirm meal plans.
   "Bottled drinking water on game drives", // TODO(CONFIRM): confirm provision.
-  "24/7 support from our team", // TODO(CONFIRM): confirm support commitment.
 ];
 const sharedExclusions = [
   "International flights",
@@ -112,6 +114,11 @@ export default function SafariPackagesPage() {
         <Container className="mb-8"><SectionHeading eyebrow="YOUR NEXT JOURNEY" title="Explore the Safari Collection" align="left" /></Container>
         <PackagesExplorer packages={packageCatalog} />
       </section>
+      <TarangirePackageBrowser
+        title="Explore Tarangire safari packages"
+        eyebrow="Eight ways to meet the elephant kingdom"
+        intro="Compare single-day game drives, longer wildlife stays and northern-circuit routes by trip length, travel style and starting price."
+      />
 
       <section className="bg-sand py-20 md:py-24">
         <Container>

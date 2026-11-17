@@ -58,7 +58,7 @@ export function buildOrganizationJsonLd() {
     areaServed: "Tanzania",
     email: siteConfig.email,
     telephone: siteConfig.phoneTel,
-    sameAs: Object.values(siteConfig.socials).filter((url) => !url.includes("replace-this")),
+    sameAs: Object.values(siteConfig.socials).filter((url) => !url.toLowerCase().includes("replace")),
   };
 }
 

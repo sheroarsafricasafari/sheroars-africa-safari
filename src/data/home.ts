@@ -6,15 +6,15 @@ export const storyContent = {
     "Our guides, planners and hosts bring local knowledge, warmth and a fierce love for this land. Whether you travel solo, with friends, with your partner or with family, you will be looked after by a team that treats every journey as its own.",
   ],
   highlights: [
-    "Women guides and hosts on every journey", // TODO(CONFIRM)
+    "Women-led planning, welcoming to everyone",
     "Safety, comfort and respect built into every itinerary",
     "Itineraries shaped around your pace and your dreams",
   ],
 };
 
 export const trustItems = [
-  { title: "Women-Led Team", description: "Planned and guided by women", icon: "users" },
-  { title: "Licensed and Insured", description: "A fully licensed Tanzanian operator", icon: "shield" }, // TODO(CONFIRM): verify operator licence and insurance before publishing.
+  { title: "Women-Led Team", description: "Women-led and welcoming to everyone", icon: "users" },
+  { title: "Thoughtful Planning", description: "Clear trip details and practical preparation", icon: "shield" },
   { title: "Small Groups", description: "Personal, unhurried journeys", icon: "users-round" },
   { title: "Tailor-Made", description: "Every itinerary built around you", icon: "sparkles" },
   { title: "Responsible Travel", description: "Supporting communities and conservation", icon: "heart-handshake" },
@@ -86,9 +86,9 @@ export const kilimanjaro = {
   ],
   facts: ["5,895 m|Uhuru Peak", "5|climate zones, from rainforest to arctic summit", "No technical climbing|required"],
   highlights: [
-    "Daily health checks with a pulse oximeter", // TODO(CONFIRM)
+    "Preparation guidance before your climb",
     "Routes chosen for the best acclimatisation and summit success",
-    "Fair pay and care for every member of our mountain crew", // TODO(CONFIRM)
+    "A clear overview of your climbing crew and itinerary",
   ],
 };
 

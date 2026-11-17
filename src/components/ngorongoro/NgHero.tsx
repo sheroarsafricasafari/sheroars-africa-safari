@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Breadcrumbs from "@/components/inner/Breadcrumbs";
+import HeroSignal from "@/components/layout/HeroSignal";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SmartImage from "@/components/ui/SmartImage";
@@ -55,6 +56,7 @@ export default function NgHero({
       aria-labelledby="ngorongoro-page-title"
       className="relative isolate flex min-h-[88svh] items-end overflow-hidden bg-forest text-white md:min-h-[92svh]"
     >
+      <HeroSignal />
       <SmartImage
         src={image}
         alt={data.imageAlt}

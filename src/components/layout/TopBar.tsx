@@ -9,6 +9,8 @@ const socialEntries = [
   ["youtube", siteConfig.socials.youtube],
 ] as const;
 
+const configuredSocialEntries = socialEntries.filter(([, href]) => !href.toLowerCase().includes("replace"));
+
 export default function TopBar() {
   return (
     <div className="hidden bg-forest text-cream md:block">
@@ -19,7 +21,7 @@ export default function TopBar() {
           <a className="inline-flex items-center gap-2 hover:text-gold" href={siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage)}><SocialIcon name="whatsapp" className="size-3.5" /> WhatsApp</a>
         </div>
         <div className="flex items-center gap-3">
-          {socialEntries.map(([name, href]) => (
+          {configuredSocialEntries.map(([name, href]) => (
             <a key={name} href={href} target="_blank" rel="noreferrer" aria-label={`Follow us on ${name}`} className="hover:text-gold">
               <SocialIcon name={name} className="size-4" />
             </a>

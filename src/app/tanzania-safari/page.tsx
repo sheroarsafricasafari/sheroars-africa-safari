@@ -7,6 +7,8 @@ import {
   WhenToGo, WhyTanzania, WildlifeBento,
 } from "@/components/tanzania-safari/Sections";
 import { MobileStickyCta, StickySubnav } from "@/components/tanzania-safari/Interactive";
+import { PopularTarangirePackages } from "@/components/tarangire/packages/TarangirePackages";
+import LakeManyaraPackageLinks from "@/components/lake-manyara/LakeManyaraPackageLinks";
 import { destinationCards, faqItems, faqPlainText, tanzaniaSafariMeta } from "@/data/tanzania-safari";
 import { siteConfig } from "@/data/site";
 import { buildMetadata } from "@/lib/seo";
@@ -56,6 +58,8 @@ export default function TanzaniaSafariPage() {
       <DestinationCards />
       <CompareDestinations />
       <SampleJourneys />
+      <PopularTarangirePackages />
+      <LakeManyaraPackageLinks title="Explore Lake Manyara safari packages" />
       <RouteSchematic />
       <SafariExperience />
       <WildlifeBento />

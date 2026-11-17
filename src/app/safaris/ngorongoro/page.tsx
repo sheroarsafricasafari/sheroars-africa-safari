@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import CtaBanner from "@/components/inner/CtaBanner";
 import JsonLd from "@/components/seo/JsonLd";
 import NgHero from "@/components/ngorongoro/NgHero";
+import { TarangireNearbyPackages } from "@/components/tarangire/packages/TarangirePackages";
+import LakeManyaraPackageLinks from "@/components/lake-manyara/LakeManyaraPackageLinks";
 import {
   NgCompare,
   NgExploreTiles,
@@ -61,6 +63,8 @@ export default function NgorongoroHubPage() {
       <NgSeasons data={ngorongoroHub.seasons} />
       <NgLogistics data={ngorongoroHub.logistics} />
       <NgorongoroPackagesHub packages={ngorongoroPackages} />
+      <LakeManyaraPackageLinks title="Continue to Lake Manyara" />
+      <TarangireNearbyPackages destination="Ngorongoro" />
       <NgStayTeaser data={ngorongoroHub.stay} />
       <NgFaqSection
         eyebrow={ngorongoroHub.faqSection.eyebrow}

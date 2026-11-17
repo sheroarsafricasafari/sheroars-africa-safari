@@ -51,7 +51,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Public campsite",
     description: "Camping on the crater rim itself, raw and basic. We provide tents, bedding and a cook.",
     bestFor: ["Adventurers", "Budget", "Stars"],
-    image: { src: "/images/stays/simba-public-campsite.jpg", alt: "Camping beneath the night sky on the Ngorongoro rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-simba-public-campsite.jpg", alt: "Camping beneath the night sky on the Ngorongoro rim" },
     seasonNote: "Facilities are basic. Bring a warm layer for cold nights.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -64,7 +64,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "A simple, good-value lodge with a great location close to the rim. It is the most affordable option inside the conservation area.",
     bestFor: ["Value", "Families", "Early starts"],
-    image: { src: "/images/stays/rhino-lodge.jpg", alt: "Lodge accommodation close to the Ngorongoro rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-rhino-lodge.jpg", alt: "Lodge accommodation close to the Ngorongoro rim" },
     seasonNote: "An option inside the conservation area.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -77,7 +77,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "A large, international-style hotel with spacious rooms and big panoramas. Somewhat dated, but comfortable.",
     bestFor: ["Families", "Groups", "Comforts"],
-    image: { src: "/images/stays/ngorongoro-sopa-lodge.jpg", alt: "Panoramic lodge setting on the eastern Ngorongoro rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-ngorongoro-sopa-lodge.jpg", alt: "Panoramic lodge setting on the eastern Ngorongoro rim" },
     seasonNote: "Rim temperatures can be cold and misty.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -90,7 +90,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "A relaxed base between Ngorongoro and Lake Manyara, with lush grounds and a comfortable highland setting.",
     bestFor: ["Value", "Gardens", "Couples"],
-    image: { src: "/images/stays/plantation-lodge.jpg", alt: "A garden path at a Karatu highlands lodge" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-plantation-lodge.jpg", alt: "A garden path at a Karatu highlands lodge" },
     seasonNote: "A green highlands alternative to the rim.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -103,7 +103,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Working coffee plantation",
     description: "Rustic farm-style living on a coffee estate, with a relaxed pace and a sense of life on the land.",
     bestFor: ["Families", "Farm life", "Calm"],
-    image: { src: "/images/stays/ngorongoro-farm-house.jpg", alt: "A farm-style lodge among the Karatu highlands" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-ngorongoro-farm-house.jpg", alt: "A farm-style lodge among the Karatu highlands" },
     seasonNote: "Set among the highland farms.",
   },
   {
@@ -115,7 +115,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "A comfortable lodge near Karatu, good for road-safari loops.",
     bestFor: ["Road-safari loops"],
-    image: { src: "/images/stays/tloma-lodge.jpg", alt: "Tloma Lodge near Karatu" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-tloma-lodge.jpg", alt: "Tloma Lodge near Karatu" },
     seasonNote: "A Karatu highlands stay.",
   },
   {
@@ -127,7 +127,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "A simple, good-value lodge in Karatu.",
     bestFor: ["Value", "Karatu"],
-    image: { src: "/images/stays/country-lodge-karatu.jpg", alt: "Country Lodge Karatu" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-country-lodge-karatu.jpg", alt: "Country Lodge Karatu" },
     seasonNote: "A Karatu highlands stay.",
   },
   // TODO(CONFIRM): Confirm availability, room count, facilities and views.
@@ -141,7 +141,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "Stone-built rooms sit along the rim, many with private balconies looking into the crater, alongside a spa.",
     bestFor: ["Views", "Couples", "Comfort"],
-    image: { src: "/images/stays/ngorongoro-serena-safari-lodge.jpg", alt: "A lodge balcony looking across the Ngorongoro Crater" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-ngorongoro-serena-safari-lodge.jpg", alt: "A lodge balcony looking across the Ngorongoro Crater" },
     seasonNote: "Ask about crater-facing room availability.",
   },
   // TODO(CONFIRM): Confirm availability and access arrangements.
@@ -155,7 +155,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Tented camp",
     description: "A small, comfortable tented camp in ancient forest with lovely walking nearby and privileged access to the crater floor.",
     bestFor: ["Bush feel", "Walkers", "Couples"],
-    image: { src: "/images/stays/lemala-ngorongoro-tented-camp.jpg", alt: "A tented camp set among forest on the Ngorongoro rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-lemala-ngorongoro-tented-camp.jpg", alt: "A tented camp set among forest on the Ngorongoro rim" },
     seasonNote: "A forested setting near the eastern rim.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -168,7 +168,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Farm lodge",
     description: "A historic coffee estate with garden cottages, farm-to-table dining and community connections.",
     bestFor: ["Relaxation", "Food", "Honeymoons"],
-    image: { src: "/images/stays/gibbs-farm.jpg", alt: "A garden cottage at a Karatu coffee estate" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-gibbs-farm.jpg", alt: "A garden cottage at a Karatu coffee estate" },
     seasonNote: "A quiet farm setting in the highlands.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -181,7 +181,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "Thatched cottages and forest views offer a peaceful highlands stay near the crater and cultural villages.",
     bestFor: ["Boutique comfort", "Couples"],
-    image: { src: "/images/stays/kitela-lodge.jpg", alt: "Thatched lodge cottages among the Karatu highlands" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-kitela-lodge.jpg", alt: "Thatched lodge cottages among the Karatu highlands" },
     seasonNote: "A green setting below the crater rim.",
   },
   {
@@ -193,7 +193,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Luxury lodge",
     description: "A luxury lodge in the Karatu highlands.",
     bestFor: ["Luxury", "Karatu"],
-    image: { src: "/images/stays/neptune-ngorongoro-luxury-lodge.jpg", alt: "Neptune Ngorongoro Luxury Lodge in the Karatu highlands" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-neptune-ngorongoro-luxury-lodge.jpg", alt: "Neptune Ngorongoro Luxury Lodge in the Karatu highlands" },
     seasonNote: "A Karatu highlands stay.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -207,7 +207,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "One of the area's most indulgent rim lodges, suited to a special occasion and a memorable crater setting.",
     bestFor: ["Special occasions"],
-    image: { src: "/images/stays/ngorongoro-crater-lodge.jpg", alt: "A luxury lodge overlooking the Ngorongoro Crater" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-ngorongoro-crater-lodge.jpg", alt: "A luxury lodge overlooking the Ngorongoro Crater" },
     seasonNote: "Supplement applies. Quoted on request.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -221,7 +221,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Camp",
     description: "A small, secluded camp with views toward the crater and Serengeti plains. It opened in 2016.",
     bestFor: ["Privacy", "Couples"],
-    image: { src: "/images/stays/entamanu-ngorongoro.jpg", alt: "A secluded camp on the north-west Ngorongoro rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-entamanu-ngorongoro.jpg", alt: "A secluded camp on the north-west Ngorongoro rim" },
     seasonNote: "Remote and secluded. Supplement applies, quoted on request.",
   },
   // TODO(CONFIRM): Confirm availability and current gate access details.
@@ -235,7 +235,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Lodge",
     description: "A luxury lodge on a forested hillside just back from the rim, near the quieter Lemala gate.",
     bestFor: ["Peace and quiet", "Early access"],
-    image: { src: "/images/stays/lemala-osonjoi-lodge.jpg", alt: "A forested hillside lodge near the eastern crater rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-lemala-osonjoi-lodge.jpg", alt: "A forested hillside lodge near the eastern crater rim" },
     seasonNote: "Supplement applies. Quoted on request.",
   },
   // TODO(CONFIRM): Confirm current property name and availability.
@@ -248,7 +248,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Hotel",
     description: "A full-service hotel on the crater rim for travelers who appreciate familiar hotel amenities.",
     bestFor: ["Hotel amenities"],
-    image: { src: "/images/stays/ngorongoro-lodge-melia-collection.jpg", alt: "A full-service hotel on the Ngorongoro rim" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-ngorongoro-lodge-melia-collection.jpg", alt: "A full-service hotel on the Ngorongoro rim" },
     seasonNote: "Supplement applies. Quoted on request.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -261,7 +261,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Estate lodge",
     description: "Traditional estate-style luxury in a garden setting in the Karatu highlands.",
     bestFor: ["Couples", "Gardens"],
-    image: { src: "/images/stays/the-manor-at-ngorongoro.jpg", alt: "A garden and estate-style lodge in the Karatu highlands" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-the-manor-at-ngorongoro.jpg", alt: "A garden and estate-style lodge in the Karatu highlands" },
     seasonNote: "Supplement applies. Quoted on request.",
   },
   // TODO(CONFIRM): Confirm availability and current property details.
@@ -274,7 +274,7 @@ export const ngorongoroStays: readonly Stay[] = [
     type: "Luxury domes",
     description: "Distinctive dome tents on the Olmoti slopes, with volcano and highland views rather than crater views.",
     bestFor: ["Couples", "A different setting"],
-    image: { src: "/images/stays/the-highlands.jpg", alt: "Distinctive accommodation on the Olmoti highlands" },
+    image: { src: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-the-highlands.jpg", alt: "Distinctive accommodation on the Olmoti highlands" },
     seasonNote: "Supplement applies. Quoted on request.",
   },
 ];
@@ -339,10 +339,10 @@ export const ngorongoroStayPage = {
   metadata: {
     title: "Where to Stay in Ngorongoro: Rim Lodges and Karatu",
     description: "Compare Ngorongoro Crater rim lodges, tented camps and Karatu stays. Find the best place to stay near the crater for your budget and style.",
-    image: "/images/safaris/ngorongoro/stay/hero.jpg",
+    image: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-hero.jpg",
   },
   hero: {
-    image: "/images/safaris/ngorongoro/stay/hero.jpg",
+    image: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-hero.jpg",
     imageAlt: "Mist over the Ngorongoro Crater rim at sunrise with a lodge terrace",
     eyebrow: "WHERE TO STAY IN NGORONGORO",
     title: "Sleep on the Edge of a Volcano",
@@ -365,7 +365,7 @@ export const ngorongoroStayPage = {
   ],
   // TODO(CONFIRM): Confirm rim elevation descriptions, weather and property/price comparisons.
   story: {
-    image: "/images/safaris/ngorongoro/stay/story.jpg",
+    image: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-story.jpg",
     imageAlt: "A rim lodge balcony looking into the crater",
     eyebrow: "THE STORY",
     title: "Why Where You Sleep Matters More Here",
@@ -509,7 +509,7 @@ export const ngorongoroStayPage = {
     eyebrow: "YOUR NGORONGORO NIGHT AWAITS",
     title: "Ready to Wake Up Above the Clouds?",
     description: "Tell us your dates, your budget and how you like to travel, and we will choose the right side of the crater for you, from a cold, clear morning on the rim to a warm dinner on a highland farm.",
-    image: "/images/safaris/ngorongoro/stay/cta.jpg",
+    image: "/images/safaris/ngorongoro/accommodation/ngorongoro-stay-hero.jpg",
     imageAlt: "A farm lodge garden in the Karatu highlands",
     primary: { label: "Plan My Ngorongoro Stay", href: "/plan-your-safari?type=Safari" },
     secondaryLabel: "Chat With Our Team",

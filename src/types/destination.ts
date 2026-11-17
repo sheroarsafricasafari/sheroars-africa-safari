@@ -35,7 +35,7 @@ export type DestinationHeroData = {
   secondary: { label: string; href: string };
 };
 export type DestinationNavItem = { id: string; label: string };
-export type DestinationFact = { value: string; numericValue?: number; suffix?: string; label: string };
+export type DestinationFact = { value: string; numericValue?: number; prefix?: string; suffix?: string; label: string };
 export type SeasonRating = "peak" | "good" | "quiet";
 export type SeasonRow = { label: string; months: SeasonRating[] };
 export type SeasonCardData = { range: string; title: string; text: string; icon: string };
@@ -45,12 +45,12 @@ export type RegionData = {
   path: string; labelPosition: { x: number; y: number };
 };
 export type DestinationPin = { label: string; x: number; y: number; kind: "gate" | "airstrip" };
-export type WildlifeTileData = { name: string; description: string; likelihood: string; image: string; featured?: boolean };
+export type WildlifeTileData = { name: string; description: string; likelihood: string; image: string; imageAlt?: string; featured?: boolean };
 export type SightingData = { name: string; likelihood?: number; outlook?: string; where: string; bestTime: string };
 export type SeasonData = { rows: SeasonRow[]; cards: SeasonCardData[]; caption?: string };
 export type TravelModeData = { title: string; description: string; times: string[]; steps: string[] };
 export type GettingThereData = { road: TravelModeData; air: TravelModeData; note: string };
-export type ExperienceData = { title: string; tags: string[]; text: string; image: string; href: string };
+export type ExperienceData = { title: string; tags: string[]; text: string; image: string; imageAlt?: string; href: string };
 export type StayTierData = { title: string; description: string; bestFor: string; recommendedFor: string };
 export type DayOptionData = { label: string; headline: string; suits: string; experience: string; href: string };
 export type ZoneData = { title: string; image: string; description: string; bullets: string[]; lookFor: string[]; bestTime: string };

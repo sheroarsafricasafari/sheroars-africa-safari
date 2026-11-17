@@ -7,6 +7,7 @@ import { siteConfig } from "@/data/site";
 export default function sitemap(): MetadataRoute.Sitemap {
   const paths = [
     ...routeRegistry.map(({ path }) => path),
+    "/safaris/lake-manyara",
     ...safaris.map(({ slug }) => `/safaris/packages/${slug}`),
     ...ngorongoroPackages.map(({ slug }) => `/safaris/packages/${slug}`),
   ];

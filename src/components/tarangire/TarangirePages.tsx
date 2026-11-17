@@ -5,6 +5,8 @@ import JsonLd from "@/components/seo/JsonLd";
 import Container from "@/components/ui/Container";
 import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
+import { TarangirePackageShowcase } from "@/components/tarangire/packages/TarangirePackages";
+import LakeManyaraPackageLinks from "@/components/lake-manyara/LakeManyaraPackageLinks";
 import { BaobabAnatomy, StayZonesDiagram, TarangireStayFinder, TarangireYear, TgStayGrid } from "@/components/tarangire/TarangireInteractions";
 import {
   BaobabDivider,
@@ -143,7 +145,8 @@ export function TarangireHubPage() {
         closing={data.compare.closing}
       />
 
-      <TarangireJourneySection page={data.journeys} id={data.journeys.id} callout={data.journeys.callout} />
+      <TarangirePackageShowcase />
+      <LakeManyaraPackageLinks title="Add a Lake Manyara package to your safari" />
       <TgPractical id="tarangire-practical-heading" data={data.practical} />
       <TgFaq id="tarangire-faq-heading" section={data.faqSection} items={data.faq} />
       <TgCta data={data.cta} />

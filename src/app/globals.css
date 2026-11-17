@@ -142,3 +142,37 @@ p {
     transition-duration: 0.01ms !important;
   }
 }
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .tarangire-print-area,
+  .tarangire-print-area *,
+  .safari-itinerary-print-area,
+  .safari-itinerary-print-area * {
+    visibility: visible !important;
+  }
+
+  .tarangire-print-area,
+  .safari-itinerary-print-area {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    padding: 0;
+    background: white;
+  }
+
+  .tarangire-print-area button,
+  .tarangire-print-area a,
+  .safari-itinerary-print-area button,
+  .safari-itinerary-print-area a {
+    display: none !important;
+  }
+
+  .tarangire-itinerary-day-content,
+  .safari-itinerary-day-content {
+    display: block !important;
+  }
+}

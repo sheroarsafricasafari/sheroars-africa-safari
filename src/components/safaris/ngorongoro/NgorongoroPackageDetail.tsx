@@ -7,6 +7,7 @@ import SerengetiPackageItinerary from "@/components/safaris/serengeti/SerengetiP
 import SerengetiPackageNavigation from "@/components/safaris/serengeti/SerengetiPackageNavigation";
 import SerengetiPackageSeason from "@/components/safaris/serengeti/SerengetiPackageSeason";
 import NgorongoroAccommodationTabs from "@/components/safaris/ngorongoro/NgorongoroAccommodationTabs";
+import HeroSignal from "@/components/layout/HeroSignal";
 import SmartImage from "@/components/ui/SmartImage";
 import { siteConfig } from "@/data/site";
 import type { SerengetiPackage } from "@/types/serengeti-package";
@@ -35,6 +36,7 @@ export default function NgorongoroPackageDetail({
   return (
     <main className="bg-cream pb-16">
       <section id="package-hero" className="relative isolate flex min-h-[72svh] items-end overflow-hidden bg-forest text-white md:min-h-[78svh]">
+        <HeroSignal />
         <SmartImage src={item.heroImage.src} alt={item.heroImage.alt} sizes="100vw" fill priority className="object-cover" />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/45 to-earth/15" />
         <div className="relative mx-auto w-full max-w-7xl px-5 pb-14 pt-32 sm:px-8 md:pb-20">

@@ -11,10 +11,10 @@ export const tarangireElephantsPage = {
   metadata: {
     title: "Tarangire Elephants and Baobabs: Where and When to See",
     description: "Meet Tarangire's famous elephants and baobab trees: how they live together, where to find them and the best time to go. A guide to the park's icons.",
-    image: "/images/safaris/tarangire/elephants-baobabs/hero.jpg",
+    image: "/images/destinations/tarangire.jpeg",
   },
   hero: {
-    image: "/images/safaris/tarangire/elephants-baobabs/hero.jpg",
+    image: "/images/destinations/tarangire.jpeg",
     imageAlt: "An elephant herd walking beneath baobab trees in Tarangire at golden hour",
     eyebrow: "TWO ICONS, ONE LANDSCAPE",
     title: "Elephants and Baobabs: Tarangire's Great Double Act",

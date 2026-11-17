@@ -19,11 +19,11 @@ export const maasaiPage = {
   metadata: {
     title: "Maasai Cultural Visit in Ngorongoro: Respectful Boma Tour",
     description: "Meet a Maasai community near the Ngorongoro Crater on a respectful, consent-based cultural visit. What to expect, etiquette and how to choose ethically.",
-    image: "/images/safaris/ngorongoro/maasai/hero.jpg",
+    image: "/images/safaris/maasai-cultural-visit-hero.jpeg",
   },
   // TODO(CONFIRM): Use only supplied photographs of people taken with consent and shown with dignity.
   hero: {
-    image: "/images/safaris/ngorongoro/maasai/hero.jpg",
+    image: "/images/safaris/maasai-cultural-visit-hero.jpeg",
     imageAlt: "A guide and visitors listening to a community representative at a Maasai homestead",
     eyebrow: "MAASAI CULTURE",
     title: "A Maasai Cultural Visit, Done With Respect",
@@ -47,7 +47,7 @@ export const maasaiPage = {
   ],
   // TODO(CONFIRM): Review the cultural history and the description of current Maasai life with a reliable source.
   story: {
-    image: "/images/safaris/ngorongoro/maasai/story.jpg",
+    image: "/images/safaris/maasai-cultural-visit-story.jpg",
     imageAlt: "Visitors speaking with a Maasai family at a homestead",
     eyebrow: "THE STORY",
     title: "Not a Show. A Conversation.",
@@ -193,7 +193,7 @@ export const maasaiPage = {
     eyebrow: "A MEETING, NOT A MONUMENT",
     title: "Ready to Meet the Families of the Highlands?",
     description: "Tell us your dates and what you hope to learn, and we will weave a respectful Maasai cultural visit into your Ngorongoro safari, with enough time for conversation and none for rush.",
-    image: "/images/safaris/ngorongoro/maasai/cta.jpg",
+    image: "/images/safaris/maasai-cultural-visit-cta.jpg",
     imageAlt: "Visitors and a local guide sharing a conversation at a Maasai homestead",
     primary: { label: "Plan a Cultural Visit", href: "/plan-your-safari?type=Safari" },
     secondaryLabel: "Chat With Our Team",

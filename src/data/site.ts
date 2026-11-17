@@ -13,7 +13,7 @@ export const siteConfig = {
     return `${this.whatsappUrl}?text=${encodeURIComponent(message)}`;
   },
   defaultWhatsappMessage: "Hello She Roars Africa Safari! I'd like to plan a trip to Tanzania. Could you please share more details about our safaris, Kilimanjaro climbs and Zanzibar packages? Thank you.",
-  address: "Office address coming soon", // TODO(REPLACE): publish the verified business address.
+  address: "", // TODO(REPLACE): publish the verified business address.
   hours: "Monday to Saturday, 8:00 to 18:00 East Africa Time", // TODO(CONFIRM): verify business hours.
   responseTime: "within 24 hours", // TODO(CONFIRM): verify the response-time commitment.
   mapUrl: "", // TODO(REPLACE): set the Google Maps link for the office.

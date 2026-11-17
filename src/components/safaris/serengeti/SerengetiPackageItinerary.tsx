@@ -22,7 +22,7 @@ export default function SerengetiPackageItinerary({ item }: { item: SerengetiPac
       <div className="rounded-3xl border border-gold/40 bg-white p-6 sm:p-8">
         <p className="text-eyebrow text-terracotta">ITINERARY DETAILS PENDING</p>
         <h3 className="mt-2 font-heading text-2xl text-earth">A day-by-day schedule is not available yet.</h3>
-        <p className="mt-3 leading-7 text-muted">Exact activities, time blocks, meal arrangements, overnight locations, and travel notes were not included in the available source material. TODO(CONFIRM) before publishing a detailed itinerary.</p>
+        <p className="mt-3 leading-7 text-muted">Your written itinerary confirms the activities, meal arrangements, overnight locations and transfer details for your dates.</p>
         <a href={`/plan-your-safari?package=${encodeURIComponent(item.slug)}`} className="mt-5 inline-flex min-h-11 items-center rounded-full bg-terracotta px-5 font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta">Request the current itinerary</a>
       </div>
     );

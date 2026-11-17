@@ -12,6 +12,8 @@ const socials = [
   ["youtube", siteConfig.socials.youtube],
 ] as const;
 
+const configuredSocials = socials.filter(([, href]) => !href.toLowerCase().includes("replace"));
+
 function LinkColumn({ title, links }: { title: string; links: { label: string; href: string }[] }) {
   return (
     <div className="min-w-0">
@@ -32,7 +34,7 @@ export default function Footer() {
             <Logo light />
             <p className="mt-5 max-w-sm text-sm leading-6 text-cream/75">A women-led travel company crafting safaris, Kilimanjaro climbs and Zanzibar escapes across Tanzania.</p>
             <div className="mt-5 flex gap-4">
-              {socials.map(([name, href]) => <a key={name} href={href} target="_blank" rel="noreferrer" aria-label={`Follow us on ${name}`} className="text-cream/80 hover:text-gold"><SocialIcon name={name} className="size-5" /></a>)}
+              {configuredSocials.map(([name, href]) => <a key={name} href={href} target="_blank" rel="noreferrer" aria-label={`Follow us on ${name}`} className="text-cream/80 hover:text-gold"><SocialIcon name={name} className="size-5" /></a>)}
             </div>
             <NewsletterForm />
           </div>
@@ -41,16 +43,12 @@ export default function Footer() {
           <div className="min-w-0">
             <LinkColumn title="Company" links={footerLinks.company} />
             <div className="mt-6 grid gap-2 text-sm text-cream/75">
-              <p>{siteConfig.address}</p>
+              {siteConfig.address ? <p>{siteConfig.address}</p> : null}
               <a href={`mailto:${siteConfig.email}`} className="hover:text-gold">{siteConfig.email}</a>
               <a href={`tel:${siteConfig.phoneTel}`} className="hover:text-gold">{siteConfig.phoneDisplay}</a>
               <a href={siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage)} className="hover:text-gold">WhatsApp us</a>
             </div>
           </div>
-        </div>
-        <div className="mt-12 flex flex-wrap gap-3 border-y border-white/15 py-5">
-          {/* TODO(REPLACE): replace this licence/membership badge placeholder with verified logos. */}
-          <span className="rounded-lg border border-gold/50 px-4 py-2 text-xs text-cream/70">Licence / membership badge (add logo)</span>
         </div>
         <div className="flex flex-col gap-4 pt-6 text-xs text-cream/65 md:flex-row md:items-center md:justify-between">
           <p>© <CurrentYear /> SheRoarsAfricaSafari. All rights reserved.</p>

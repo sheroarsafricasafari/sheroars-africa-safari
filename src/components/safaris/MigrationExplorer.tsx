@@ -92,7 +92,7 @@ export default function MigrationExplorer({ migration, initialMonth }: { migrati
           </div>
         </section>
       </div>
-      <p className="mt-5 text-sm text-cream/70">Movements vary with the rains. Your guide follows the herds in real time. <span className="sr-only">TODO(CONFIRM): verify migration guidance.</span></p>
+      <p className="mt-5 text-sm text-cream/70">Movements vary with the rains. Check current conditions as you plan your route.</p>
       <style jsx>{`@keyframes migration-flow { to { stroke-dashoffset: -120; } }`}</style>
     </div>
   );

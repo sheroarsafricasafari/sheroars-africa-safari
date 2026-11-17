@@ -95,7 +95,7 @@ const wildlifeNote = "Wildlife is wild, and sightings can never be guaranteed. M
 function unknownAccommodationNote() {
   return {
     title: "Accommodation details",
-    text: "Named properties, exact locations, and accommodation descriptions were not supplied. TODO(CONFIRM) before publishing accommodation specifics.",
+    text: "Your written itinerary confirms the accommodation property, location and facilities for your travel dates.",
     status: "todo-confirm" as const,
   };
 }
@@ -178,7 +178,7 @@ const packageFacts: Omit<SerengetiPackage, "pricing" | "accommodation">[] = [
     inclusions: { items: [], status: "todo-confirm" },
     exclusions: { items: [], status: "todo-confirm" },
     addOns: [],
-    goodToKnow: [unknownAccommodationNote(), { title: "Air access", text: "Flight details and baggage limits were not supplied. TODO(CONFIRM) for the selected dates.", status: "todo-confirm" }],
+    goodToKnow: [unknownAccommodationNote(), { title: "Air access", text: "Your written quote confirms flight schedules, operators and baggage limits for your selected dates.", status: "todo-confirm" }],
     wildlife: [],
     faqs: [
       { question: "How do I travel to Central Serengeti?", answer: "The proposed package is fly-in and fly-out. Flight operator, schedule, duration, and baggage limits require confirmation." },
@@ -398,7 +398,7 @@ const packageFacts: Omit<SerengetiPackage, "pricing" | "accommodation">[] = [
     inclusions: { items: [], status: "todo-confirm" },
     exclusions: { items: [], status: "todo-confirm" },
     addOns: [],
-    goodToKnow: [unknownAccommodationNote(), { title: "A multi-region journey", text: "Specific day-by-day travel sequence and transfer details were not supplied. TODO(CONFIRM) before publishing the itinerary.", status: "todo-confirm" }],
+    goodToKnow: [unknownAccommodationNote(), { title: "A multi-region journey", text: "Your written itinerary confirms the day-by-day sequence and transfer details for your travel dates.", status: "todo-confirm" }],
     wildlife: [],
     faqs: [
       { question: "Which regions are included?", answer: "The proposed route includes Central Serengeti, the Western Corridor, and Northern Serengeti." },
@@ -446,7 +446,7 @@ const packageFacts: Omit<SerengetiPackage, "pricing" | "accommodation">[] = [
     wildlife: [],
     faqs: [
       { question: "Is the balloon experience included?", answer: "Yes. It is included in both proposed price tiers for this package." },
-      { question: "When does the balloon flight operate?", answer: "The operator, launch time, flight duration, and operating conditions were not supplied. TODO(CONFIRM) before publishing those details." },
+      { question: "When does the balloon flight operate?", answer: "Your written quote confirms the balloon operator, schedule, duration and operating conditions for your travel dates." },
     ],
     relatedPackages: ["3-day-serengeti-fly-in-express", "4-day-central-serengeti-big-cat-safari", "8-day-serengeti-grand-circuit"],
     heroImage: serengetiImage,
@@ -467,7 +467,7 @@ export const serengetiPackages: SerengetiPackage[] = serengetiPackagesSchema.par
         tiers: price.tiers,
         midRangeGroupPrices: price.groupPrices,
         ...(price.singleSupplement ? { singleSupplement: price.singleSupplement } : {}),
-        unitConfirmation: "The pricing unit for the supplied amounts is not defined. TODO(CONFIRM) before publishing a per-person or trip-total claim.",
+        unitConfirmation: "Request a written quote to confirm whether the displayed amount is per person or for the full trip.",
         ...(item.slug === "4-day-serengeti-romance-balloon-fly-in" ? { balloonIncluded: true } : {}),
       },
       accommodation: accommodation(price.tiers),

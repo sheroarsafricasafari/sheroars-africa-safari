@@ -1,0 +1,101 @@
+import { tarangirePackages } from "@/data/tarangire-packages";
+
+export const tarangireSafariPackageAdapters = tarangirePackages.map((item) => ({
+  item,
+  input: {
+    slug: item.slug,
+    title: item.name,
+    duration: item.duration,
+    days: item.days,
+    parks: item.parks,
+    summary: item.tagline,
+    highlight: item.tagline,
+    highlights: item.highlights,
+    bestFor: item.bestFor,
+    difficulty: item.pace === "Relaxed" ? "Easy" : item.pace === "Active" ? "Challenging" : "Moderate",
+    groupSize: `Up to ${item.maxGuestsPerVehicle} guests in a private vehicle`,
+    groupSizeNote: `Private 4x4 for up to ${item.maxGuestsPerVehicle} guests, with a window seat for each traveller.`,
+    tags: item.tags,
+    image: item.cardImage,
+    pricing: item.pricing,
+    inclusions: item.inclusions,
+    exclusions: item.exclusions,
+    badge: item.tags[0],
+    nights: item.nights,
+    startPoint: "Arusha",
+    endPoint: "Arusha",
+    pace: item.pace,
+    comfortLevel: item.accommodationSummary,
+    overview: [item.hook, item.accommodationSummary],
+    highlightCards: item.highlights.map((text, index) => ({
+      icon: ["paw", "sun", "camera", "map", "heart"][index % 5],
+      title: `Highlight ${index + 1}`,
+      text,
+    })),
+    route: [
+      { id: "arusha", label: "Arusha", kind: "start" as const, note: "Safari start point" },
+      ...item.parks.map((park, index) => ({
+        id: `stop-${index + 1}`,
+        label: park,
+        kind: "park" as const,
+        note: `Included in the ${item.name} route`,
+      })),
+      { id: "return", label: "Arusha", kind: "end" as const, note: "Safari return point" },
+    ],
+    wildlife: item.highlights.slice(0, 3),
+    seasonNote: item.seasonsNote,
+    accommodationTiers: item.pricing.tiers
+      ? [
+          {
+            name: "Comfort",
+            description: "Tented lodge or camp, en-suite, full board, subject to availability.",
+            bestFor: "A comfortable stay close to the route.",
+            askUsFor: "Ask us to confirm the property and availability.",
+          },
+          {
+            name: "Luxury",
+            description: "Boutique tented camp or lodge, amenities vary by property.",
+            bestFor: "A more private stay with additional space.",
+            askUsFor: "Ask us to confirm the property and availability.",
+          },
+        ]
+      : [
+          {
+            name: item.nights === 0 ? "Day trip" : "Included stay",
+            description: item.accommodationSummary,
+            bestFor: item.bestFor[0],
+            askUsFor: "Ask us to confirm any property and availability.",
+          },
+        ],
+    dayByDay: item.itinerary.map((entry, index) => ({
+      day: entry.day,
+      title: entry.title,
+      description: entry.activities.map((activity) => `${activity.time} ${activity.text}`).join(" "),
+      overnight: entry.overnight,
+      meals: entry.meals.map((meal) => meal === "Breakfast" ? "B" : meal === "Lunch" ? "L" : "D"),
+      accommodation: entry.overnight,
+      routeId: `stop-${Math.min(index + 1, item.parks.length)}`,
+      driveNote: entry.driveTime ?? "See the detailed itinerary for the day's route.",
+      activities: entry.activities.map((activity) => `${activity.time} ${activity.text}`),
+      imageSrc: item.gallery[index % item.gallery.length].src,
+    })),
+    goodToKnow: [
+      { variant: "tip" as const, title: "Estimate", text: item.pricing.note },
+      { variant: "note" as const, title: "Season", text: item.seasonsNote },
+      { variant: "safety" as const, title: "Wildlife", text: "Wildlife sightings vary and cannot be guaranteed." },
+    ],
+    faqs: item.faqs.slice(0, 3),
+    gallery: [
+      { src: item.heroImage, alt: item.heroAlt, span: "wide" as const },
+      { src: item.cardImage, alt: item.cardAlt, span: "square" as const },
+      ...item.gallery.slice(0, 3).map((image, index) => ({
+        ...image,
+        span: index === 0 ? "tall" as const : "square" as const,
+      })),
+      { ...item.gallery[0], span: "square" as const },
+    ],
+    departureInfo: { type: "private" as const, datesNote: "Choose your preferred travel dates." },
+    extraInclusions: [],
+    related: item.related,
+  },
+}));

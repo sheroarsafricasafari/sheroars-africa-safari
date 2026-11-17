@@ -1,5 +1,5 @@
 import { MessageCircle } from "lucide-react";
-import InquiryForm from "@/components/forms/InquiryForm";
+import InquiryFormWithPrefill from "@/components/forms/InquiryFormWithPrefill";
 import PageHero from "@/components/inner/PageHero";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
@@ -27,7 +27,7 @@ export default function Page() {
       <section className="py-12 md:py-16">
         <Container className="grid gap-10 lg:grid-cols-[minmax(0,1.2fr)_360px]">
           <div className="rounded-[28px] border border-sand bg-white p-5 shadow-soft md:p-8">
-            <InquiryForm variant="book" />
+            <InquiryFormWithPrefill variant="book" />
           </div>
 
           <aside className="space-y-6">

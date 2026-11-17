@@ -5,8 +5,12 @@ import CtaBanner from "@/components/inner/CtaBanner";
 import JsonLd from "@/components/seo/JsonLd";
 import NgorongoroPackageDetail from "@/components/safaris/ngorongoro/NgorongoroPackageDetail";
 import SafariPackageExperience from "@/components/safaris/SafariPackageExperience";
+import TarangirePackageDetail from "@/components/tarangire/packages/TarangirePackageDetail";
+import LakeManyaraPackageDetail from "@/components/lake-manyara/LakeManyaraPackageDetail";
 import { ngorongoroPackages } from "@/data/ngorongoro-packages";
+import { lakeManyaraPackages } from "@/data/lake-manyara-packages";
 import { safaris } from "@/data/safaris";
+import { tarangirePackages } from "@/data/tarangire-packages";
 import { siteConfig } from "@/data/site";
 import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
@@ -15,14 +19,32 @@ type PageProps = {
 };
 
 export function generateStaticParams() {
-  return [...new Set([...safaris, ...ngorongoroPackages].map(({ slug }) => slug))].map((slug) => ({ slug }));
+  return [...new Set([...safaris, ...ngorongoroPackages, ...tarangirePackages, ...lakeManyaraPackages].map(({ slug }) => slug))].map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const safari = safaris.find((item) => item.slug === slug);
   const ngorongoroPackage = ngorongoroPackages.find((item) => item.slug === slug);
-  if (!safari && !ngorongoroPackage) notFound();
+  const tarangirePackage = tarangirePackages.find((item) => item.slug === slug);
+  const lakeManyaraPackage = lakeManyaraPackages.find((item) => item.slug === slug);
+  if (!safari && !ngorongoroPackage && !tarangirePackage && !lakeManyaraPackage) notFound();
+  if (lakeManyaraPackage) {
+    return buildMetadata({
+      title: lakeManyaraPackage.seo.title,
+      description: lakeManyaraPackage.seo.description,
+      path: `/safaris/packages/${slug}`,
+      image: lakeManyaraPackage.heroImage,
+    });
+  }
+  if (tarangirePackage) {
+    return buildMetadata({
+      title: tarangirePackage.seo.title,
+      description: tarangirePackage.seo.description,
+      path: `/safaris/packages/${slug}`,
+      image: tarangirePackage.heroImage,
+    });
+  }
   if (ngorongoroPackage) {
     return buildMetadata({
       title: ngorongoroPackage.seo.title,
@@ -98,6 +120,56 @@ async function SafariPackageContent({ params }: PageProps) {
       </>
     );
   }
+  const lakeManyaraPackage = lakeManyaraPackages.find((item) => item.slug === slug);
+  if (lakeManyaraPackage) {
+    const breadcrumbItems = [
+      { title: "Home", href: "/" },
+      { title: "Safaris", href: "/safaris" },
+      { title: "Packages", href: "/safaris/packages" },
+      { title: lakeManyaraPackage.title, href: `/safaris/packages/${slug}` },
+    ];
+    return (
+      <>
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "TouristTrip",
+          name: lakeManyaraPackage.title,
+          description: lakeManyaraPackage.seo.description,
+          url: `${siteConfig.url}/safaris/packages/${slug}`,
+          image: `${siteConfig.url}${lakeManyaraPackage.heroImage}`,
+          itinerary: {
+            "@type": "ItemList",
+            itemListElement: lakeManyaraPackage.itinerary.map((day) => ({
+              "@type": "ListItem",
+              position: day.day,
+              name: day.title,
+              description: day.story,
+            })),
+          },
+          offers: {
+            "@type": "AggregateOffer",
+            priceCurrency: "USD",
+            lowPrice: lakeManyaraPackage.pricing.priceFrom,
+          },
+          provider: { "@type": "TravelAgency", name: siteConfig.shortName, url: siteConfig.url },
+        }} />
+        <JsonLd data={buildBreadcrumbJsonLd(breadcrumbItems)} />
+        <JsonLd data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: lakeManyaraPackage.faqs.map(({ question, answer }) => ({
+            "@type": "Question",
+            name: question,
+            acceptedAnswer: { "@type": "Answer", text: answer },
+          })),
+        }} />
+        <LakeManyaraPackageDetail item={lakeManyaraPackage} />
+      </>
+    );
+  }
+  const tarangirePackage = tarangirePackages.find((item) => item.slug === slug);
+  if (tarangirePackage) return <TarangirePackageDetail item={tarangirePackage} />;
+
   const safari = safaris.find((item) => item.slug === slug);
   if (!safari) notFound();
 

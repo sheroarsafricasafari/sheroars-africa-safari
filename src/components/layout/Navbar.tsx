@@ -79,8 +79,16 @@ function MobileNavItem({
 export default function Navbar() {
   const pathname = usePathname();
   const { hasHero } = useNavbarTheme();
-  const hasTransparentHero = pathname === "/" || pathname === "/tanzania-safari" || hasHero;
-  const [scrolled, setScrolled] = useState(pathname !== "/" && pathname !== "/tanzania-safari");
+  const hasHeroPath = pathname === "/"
+    || pathname === "/tanzania-safari"
+    || pathname === "/safaris/packages"
+    || pathname.startsWith("/safaris/packages/")
+    || pathname === "/safaris/ngorongoro"
+    || pathname.startsWith("/safaris/ngorongoro/")
+    || pathname === "/safaris/tarangire"
+    || pathname.startsWith("/safaris/tarangire/");
+  const hasTransparentHero = hasHeroPath || hasHero;
+  const [scrolled, setScrolled] = useState(!hasHeroPath);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const [mobileOpenAt, setMobileOpenAt] = useState<string | null>(null);

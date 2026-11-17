@@ -69,11 +69,11 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
               {[
                 ["Duration", `${item.durationDays} days / ${item.nights} nights`],
                 ["Regions", item.regions.map(({ name }) => name).join(", ")],
-                ["Access", item.access.label],
-                ["Pace", item.pace.label],
+                ["Access", item.access.status === "todo-confirm" ? "Confirm with your written quote" : item.access.label],
+                ["Pace", item.pace.status === "todo-confirm" ? "Confirm with your written quote" : item.pace.label],
                 ["Travel period", item.season],
-                ["Departure", item.departureType.label],
-                ["Group size", item.groupSize.minimum !== undefined && item.groupSize.maximum !== undefined ? `${item.groupSize.minimum} to ${item.groupSize.maximum} guests` : "Not specified (TODO(CONFIRM))"],
+                ["Departure", item.departureType.status === "todo-confirm" ? "Confirm with your written quote" : item.departureType.label],
+                ["Group size", item.groupSize.minimum !== undefined && item.groupSize.maximum !== undefined ? `${item.groupSize.minimum} to ${item.groupSize.maximum} guests` : "Confirm with your written quote"],
               ].map(([label, value]) => <div key={label} className="rounded-2xl bg-sand p-4"><dt className="text-xs font-semibold uppercase tracking-wide text-terracotta">{label}</dt><dd className="mt-2 text-sm leading-6 text-earth">{value}</dd></div>)}
             </dl>
           </div>
@@ -113,7 +113,7 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
               <article key={stay.id} className={`rounded-2xl border bg-white p-5 ${stay.availability === "unavailable" ? "border-sand opacity-75" : "border-sand"}`}>
                 <p className="text-eyebrow text-terracotta">{tierNames[stay.tier]}</p>
                 <h3 className="mt-2 font-heading text-xl text-earth">{stay.availability === "unavailable" ? "Not available for this package" : stay.availability === "on-request" ? "Available on request" : stay.availability === "limited" ? "Limited availability" : "Listed tier"}</h3>
-                <p className="mt-3 text-sm leading-6 text-muted">{stay.description ?? "Property names, exact locations, accommodation types, and facilities were not supplied. TODO(CONFIRM) before publishing these details."}</p>
+                <p className="mt-3 text-sm leading-6 text-muted">{stay.description ?? "Your written itinerary confirms the accommodation property, location and facilities for your dates."}</p>
                 <p className="mt-3 text-xs leading-5 text-muted">Any final property, location, and availability must be confirmed in a written proposal.</p>
               </article>
             ))}
@@ -150,13 +150,13 @@ export default function SerengetiPackageDetail({ item, relatedPackages }: { item
             ].map(({ title, data }) => (
               <article key={title} className="rounded-2xl border border-sand bg-white p-6">
                 <h3 className="font-heading text-2xl text-earth">{title}</h3>
-                {data.items.length ? <ul className="mt-4 space-y-3">{data.items.map((entry) => <li key={entry} className="flex gap-3 text-sm leading-6 text-muted"><Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-terracotta" />{entry}</li>)}</ul> : <p className="mt-4 text-sm leading-6 text-muted">Package-specific {title.toLowerCase()} were not supplied. TODO(CONFIRM) before publishing.</p>}
+                {data.items.length ? <ul className="mt-4 space-y-3">{data.items.map((entry) => <li key={entry} className="flex gap-3 text-sm leading-6 text-muted"><Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-terracotta" />{entry}</li>)}</ul> : <p className="mt-4 text-sm leading-6 text-muted">Confirm package-specific {title.toLowerCase()} in your written quote.</p>}
               </article>
             ))}
           </div>
           <div className="mt-5 rounded-2xl bg-sand p-5">
             <h3 className="font-heading text-xl text-earth">Optional add-ons</h3>
-            {item.addOns.length ? <ul className="mt-3 space-y-2">{item.addOns.map((addOn) => <li key={addOn.name} className="text-sm leading-6 text-muted"><strong className="text-earth">{addOn.name}:</strong> {addOn.status.replace("-", " ")}{addOn.note ? ` · ${addOn.note}` : ""}{addOn.price ? ` · ${addOn.price}` : ""}</li>)}</ul> : <p className="mt-2 text-sm leading-6 text-muted">No package-specific add-ons were supplied. TODO(CONFIRM) before publishing optional activities or prices.</p>}
+            {item.addOns.filter((addOn) => addOn.status !== "todo-confirm").length ? <ul className="mt-3 space-y-2">{item.addOns.filter((addOn) => addOn.status !== "todo-confirm").map((addOn) => <li key={addOn.name} className="text-sm leading-6 text-muted"><strong className="text-earth">{addOn.name}:</strong> {addOn.status.replace("-", " ")}{addOn.note ? ` · ${addOn.note}` : ""}{addOn.price ? ` · ${addOn.price}` : ""}</li>)}</ul> : <p className="mt-2 text-sm leading-6 text-muted">Ask us to confirm available optional activities and any additional costs for your dates.</p>}
           </div>
         </section>
 

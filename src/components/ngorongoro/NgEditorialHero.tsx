@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import Breadcrumbs from "@/components/inner/Breadcrumbs";
+import HeroSignal from "@/components/layout/HeroSignal";
 import Button from "@/components/ui/Button";
 import Container from "@/components/ui/Container";
 import SmartImage from "@/components/ui/SmartImage";
@@ -44,6 +45,7 @@ export default function NgEditorialHero({
 }) {
   return (
     <section aria-labelledby="editorial-hero-title" className={`relative isolate flex min-h-[88svh] items-end overflow-hidden text-white md:min-h-[92svh] ${mood === "sunrise" ? "bg-earth" : "bg-forest"}`}>
+      <HeroSignal />
       <SmartImage src={data.image} alt={data.imageAlt} sizes="100vw" fill priority className="object-cover" />
       {mood === "sunrise" ? (
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-br from-terracotta/55 via-earth/30 to-earth/90" />

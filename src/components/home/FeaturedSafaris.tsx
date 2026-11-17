@@ -9,7 +9,15 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 
 export default function FeaturedSafaris() {
-  const homepageSafaris = safaris.filter((safari) => safari.departureInfo.type !== "group");
+  const featuredTarangireSlugs = new Set([
+    "tarangire-elephant-escape",
+    "tarangire-manyara-ngorongoro-circuit",
+  ]);
+  const existingFeaturedSafaris = safaris.filter(
+    (safari) => safari.departureInfo.type !== "group" && !safari.slug.startsWith("tarangire-"),
+  ).slice(0, 3);
+  const tarangireFeaturedSafaris = safaris.filter((safari) => featuredTarangireSlugs.has(safari.slug));
+  const homepageSafaris = [...existingFeaturedSafaris, ...tarangireFeaturedSafaris];
   return (
     <Container>
       <SectionHeading {...homeCopy.safariHeading} />

@@ -24,15 +24,23 @@ const iconMap: Record<string, LucideIcon> = {
   paw: PawPrint, plane: Plane, route: Route, sun: Sun, tent: Tent, trees: Trees,
 };
 
-export function FactStrip({ items, footnote }: { items: DestinationFact[]; footnote: string }) {
+export function FactStrip({
+  items,
+  footnote,
+  showVerificationMark = true,
+}: {
+  items: DestinationFact[];
+  footnote: string;
+  showVerificationMark?: boolean;
+}) {
   return (
     <div>
       <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         {items.map((item) => <div key={item.label} className="border-l border-gold pl-4 sm:pl-5">
           <dt className="font-heading text-3xl leading-tight text-earth sm:text-4xl">
-            {item.numericValue !== undefined ? <CountUp value={item.numericValue} /> : item.value}{item.suffix ?? ""}
+            {item.numericValue !== undefined ? <>{item.prefix ?? ""}<CountUp value={item.numericValue} />{item.suffix ?? ""}</> : item.value}
           </dt>
-          <dd className="mt-2 text-sm leading-5 text-muted">{item.label}<sup className="ml-1 text-terracotta" aria-label="Figure to be verified">*</sup></dd>
+            <dd className="mt-2 text-sm leading-5 text-muted">{item.label}{showVerificationMark ? <sup className="ml-1 text-terracotta" aria-label="Figure to be verified">*</sup> : null}</dd>
         </div>)}
       </dl>
       <p className="mt-5 text-xs leading-5 text-muted">{footnote}</p>
@@ -89,7 +97,7 @@ export function WildlifeShowcase({ items, note }: { items: WildlifeTileData[]; n
     <>
       <div className="grid auto-rows-[230px] gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((item) => <article key={item.name} className={`group relative isolate overflow-hidden rounded-2xl bg-forest text-white ${item.featured ? "sm:col-span-2 sm:row-span-2" : ""}`}>
-          <SmartImage src={item.image} alt={item.name} sizes={item.featured ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 640px) 100vw, 25vw"} fill className="object-cover transition-transform duration-700 group-hover:scale-105 group-focus-within:scale-105" />
+          <SmartImage src={item.image} alt={item.imageAlt ?? item.name} sizes={item.featured ? "(max-width: 640px) 100vw, 50vw" : "(max-width: 640px) 100vw, 25vw"} fill className="object-cover transition-transform duration-700 group-hover:scale-105 group-focus-within:scale-105" />
           <div className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/30 to-transparent" />
           <div className="absolute inset-x-0 bottom-0 p-5">
             <span className="inline-flex rounded-full border border-white/35 bg-forest/70 px-3 py-1 text-xs backdrop-blur">{item.likelihood}</span>
@@ -148,7 +156,15 @@ export function TipsGrid({ items }: { items: TipData[] }) {
   </StaggerGroup>;
 }
 
-export function ExperienceCards({ items, variant = "default" }: { items: ExperienceData[]; variant?: "default" | "overlay" }) {
+export function ExperienceCards({
+  items,
+  variant = "default",
+  highlightedTitles = [],
+}: {
+  items: ExperienceData[];
+  variant?: "default" | "overlay";
+  highlightedTitles?: string[];
+}) {
   return <StaggerGroup className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
     {items.map((item) => <StaggerItem key={item.title} className="h-full">
       {variant === "overlay" ? (
@@ -157,7 +173,7 @@ export function ExperienceCards({ items, variant = "default" }: { items: Experie
             href={item.href}
             className="group relative block min-h-[420px] h-full overflow-hidden rounded-2xl bg-earth text-white shadow-card focus-visible:outline focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:outline-terracotta sm:min-h-[460px]"
           >
-            <SmartImage src={item.image} alt={item.title} sizes="(max-width: 640px) 88vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105" />
+            <SmartImage src={item.image} alt={item.imageAlt ?? item.title} sizes="(max-width: 640px) 88vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover transition-transform duration-700 motion-reduce:transition-none group-hover:scale-105" />
             <span aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/95 via-earth/35 to-transparent" />
             <span className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
               <span className="flex flex-wrap gap-2">
@@ -172,10 +188,11 @@ export function ExperienceCards({ items, variant = "default" }: { items: Experie
           </Link>
         </TiltCard>
       ) : (
-        <TiltCard className="h-full overflow-hidden rounded-2xl border border-sand bg-white shadow-sm">
+        <TiltCard className={`h-full overflow-hidden rounded-2xl border bg-white shadow-sm ${highlightedTitles.includes(item.title) ? "border-gold ring-2 ring-gold/60" : "border-sand"}`}>
           <article className="h-full">
-            <div className="relative aspect-[4/3] bg-sand"><SmartImage src={item.image} alt={item.title} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover" /></div>
+            <div className="relative aspect-[4/3] bg-sand"><SmartImage src={item.image} alt={item.imageAlt ?? item.title} sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw" fill className="object-cover" /></div>
             <div className="p-5">
+              {highlightedTitles.includes(item.title) ? <p className="text-xs font-bold uppercase tracking-wider text-terracotta">Recommended for your style</p> : null}
               <div className="flex flex-wrap gap-2">{item.tags.map((tag) => <span key={tag} className="rounded-full bg-sand px-3 py-1 text-xs font-semibold text-earth">{tag}</span>)}</div>
               <h3 className="mt-4 font-heading text-2xl text-earth">{item.title}</h3><p className="mt-2 text-sm leading-6 text-muted">{item.text}</p>
               <Link href={item.href} className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">Explore experience <span aria-hidden="true">→</span></Link>

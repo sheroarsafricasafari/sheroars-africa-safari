@@ -23,7 +23,6 @@ const sharedInclusions = [
   "A private 4x4 safari vehicle with pop-up roof and a professional driver-guide", // TODO(CONFIRM): confirm vehicle and guide service.
   "Meals as specified in the itinerary", // TODO(CONFIRM): confirm meal plans.
   "Bottled drinking water on game drives", // TODO(CONFIRM): confirm provision.
-  "24/7 support from our team", // TODO(CONFIRM): confirm support commitment.
 ];
 
 const accommodationTiers = [
@@ -92,7 +91,7 @@ type SafariCore = Pick<DetailedPackage,
 type SafariDetails = Pick<DetailedPackage,
   | "nights" | "startPoint" | "endPoint" | "pace" | "comfortLevel" | "groupSizeNote"
   | "overview" | "highlightCards" | "route" | "wildlife" | "seasonNote"
-  | "accommodationTiers" | "dayByDay" | "goodToKnow" | "faqs" | "gallery" | "departureInfo"
+  | "accommodationTiers" | "dayByDay" | "goodToKnow" | "faqs" | "gallery" | "departureInfo" | "pricing"
 > & {
   extraInclusions: string[];
   related: string[];
@@ -101,17 +100,19 @@ type SafariDetails = Pick<DetailedPackage,
 type SafariPackageInput = SafariCore & SafariDetails & {
   extraInclusions: string[];
   related: string[];
+  inclusions?: string[];
+  exclusions?: string[];
 };
 
 function makePackage(input: SafariPackageInput): SafariPackage {
-  const { extraInclusions, related, ...packageData } = input;
+  const { extraInclusions, related, inclusions: explicitInclusions, exclusions: explicitExclusions, ...packageData } = input;
   const record = {
     ...packageData,
     itinerary: input.dayByDay.map(({ day, title, description, overnight, meals, accommodation }) => ({
       day, title, description, overnight, meals, accommodation,
     })) satisfies ItineraryDay[],
-    inclusions: [...sharedInclusions, ...extraInclusions],
-    exclusions,
+    inclusions: explicitInclusions ?? [...sharedInclusions, ...extraInclusions],
+    exclusions: explicitExclusions ?? exclusions,
     priceFrom: null,
     related,
   };
@@ -474,6 +475,16 @@ export const safaris: SafariPackage[] = [
     related: ["5-day-northern-circuit-classic", "6-day-serengeti-great-migration", "7-day-women-only-group-safari"],
     departureInfo: { type: "private", datesNote: "Choose your preferred travel dates." },
   }),
+  ...tarangireSafariPackageAdapters.map(({ item, input }) => ({
+    ...makePackage(input),
+    image: item.cardImage,
+    priceFrom: item.pricing.priceFrom,
+  })),
+  ...lakeManyaraSafariPackageAdapters.map(({ item, input }) => ({
+    ...makePackage(input),
+    image: item.cardImage,
+    priceFrom: item.pricing.priceFrom,
+  })),
 ];
 
 if (process.env.NODE_ENV === "development") safaris.forEach((safari) => detailedPackageSchema.parse(safari));
@@ -481,3 +492,5 @@ if (process.env.NODE_ENV === "development") safaris.forEach((safari) => detailed
 export function getSafariBySlug(slug: string) {
   return safaris.find((safari) => safari.slug === slug);
 }
+import { tarangireSafariPackageAdapters } from "@/data/tarangire-package-adapter";
+import { lakeManyaraSafariPackageAdapters } from "@/data/lake-manyara-package-adapter";

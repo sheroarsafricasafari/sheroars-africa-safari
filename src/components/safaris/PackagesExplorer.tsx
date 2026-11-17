@@ -13,10 +13,10 @@ import useReducedMotionPreference from "@/components/motion/useReducedMotionPref
 
 type ExplorerPackage = SafariPackage | NgorongoroPackage;
 type Filters = { q: string; duration: string; park: string[]; style: string; destination: string; sort: string };
-const durationOptions = ["All", "3 days", "4 to 5", "6 to 7", "8 or more"];
+const durationOptions = ["All", "1 day", "2 days", "3 days", "4 to 5", "6 to 7", "8 or more"];
 const parkOptions = ["Serengeti", "Ngorongoro", "Tarangire", "Lake Manyara", "Zanzibar"];
-const styleOptions = ["Great Migration", "Women-Only", "Safari and Beach", "Short Safaris", "Short stays", "Luxury", "Family", "Culture and walking", "After Kilimanjaro", "With the Serengeti"];
-const destinationOptions = ["All", "Ngorongoro", "Tarangire"];
+const styleOptions = ["Great Migration", "Women-Only", "Safari and Beach", "Short Safaris", "Day trip", "Overnight", "Culture", "Family", "Short stays", "Luxury", "Culture and walking", "After Kilimanjaro", "With the Serengeti"];
+const destinationOptions = ["All", "Ngorongoro", "Tarangire", "Lake Manyara"];
 const defaults: Filters = { q: "", duration: "All", park: [], style: "All", destination: "All", sort: "Recommended" };
 
 function isNgorongoroPackage(item: ExplorerPackage): item is NgorongoroPackage {
@@ -42,7 +42,7 @@ function Explorer({ packages }: { packages: ExplorerPackage[] }) {
   const reducedMotion = useReducedMotionPreference();
   const monthParam = params.get("month");
   const rawDuration = params.get("duration") ?? "All";
-  const duration = rawDuration === "3" ? "3 days" : rawDuration === "4" || rawDuration === "5" ? "4 to 5" : rawDuration === "6" || rawDuration === "7" ? "6 to 7" : rawDuration === "8" ? "8 or more" : rawDuration;
+  const duration = rawDuration === "1" ? "1 day" : rawDuration === "2" ? "2 days" : rawDuration === "3" ? "3 days" : rawDuration === "4" || rawDuration === "5" ? "4 to 5" : rawDuration === "6" || rawDuration === "7" ? "6 to 7" : rawDuration === "8" ? "8 or more" : rawDuration;
   const initial: Filters = {
     q: params.get("q") ?? "",
     duration,
@@ -76,18 +76,21 @@ function Explorer({ packages }: { packages: ExplorerPackage[] }) {
       const days = packageDays(item);
       const matchesQuery = !query || [item.title, item.summary, isNgorongoroPackage(item) ? item.tagline : item.highlight, ...parks].join(" ").toLowerCase().includes(query);
       const matchesDuration = filters.duration === "All"
+        || filters.duration === "1 day" && days === 1
+        || filters.duration === "2 days" && days === 2
         || filters.duration === "3 days" && days === 3
         || filters.duration === "4 to 5" && days >= 4 && days <= 5
         || filters.duration === "6 to 7" && days >= 6 && days <= 7
         || filters.duration === "8 or more" && days >= 8;
-      const matchesPark = !filters.park.length || filters.park.some((park) => parks.includes(park));
+      const matchesPark = !filters.park.length || filters.park.some((park) => parks.some((name) => name === park || name.startsWith(`${park} `)));
       const matchesDestination = filters.destination === "All"
         || (isNgorongoroPackage(item)
           ? item.destinations.includes(filters.destination)
-          : item.parks.includes(filters.destination));
+          : item.parks.some((park) => park.toLowerCase().includes(filters.destination.toLowerCase())));
       const matchesStyle = filters.style === "All" || (isNgorongoroPackage(item)
         ? item.collections.includes(filters.style) || item.style === filters.style
-        : filters.style === "Great Migration" && item.tags.includes("Great Migration")
+        : item.tags.includes(filters.style)
+          || filters.style === "Great Migration" && item.tags.includes("Great Migration")
           || filters.style === "Women-Only" && item.tags.includes("Women-Only")
           || filters.style === "Safari and Beach" && item.tags.includes("Safari and Beach")
           || filters.style === "Short Safaris" && days <= 4);

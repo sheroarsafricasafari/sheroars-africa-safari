@@ -75,7 +75,7 @@ export default function SafarisPage() {
           poster="/images/safaris/hub/serengeti.jpeg"
           className="absolute inset-0 size-full object-cover"
         >
-          <source src="/videos/safaris/hub/safari-home-hero.mp4.mp4" type="video/mp4" />
+          <source src="/videos/safaris/hub/safari-home-hero.mp4" type="video/mp4" />
         </video>
         <div aria-hidden="true" className="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-earth/80 to-transparent" />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-earth/85 via-earth/20 to-transparent" />
@@ -91,7 +91,7 @@ export default function SafarisPage() {
               <MagneticButton><Button href="/plan-your-safari" variant="outline-light" size="lg">Plan My Safari</Button></MagneticButton>
             </div>
             <div className="mt-7 flex flex-wrap justify-center gap-2 md:justify-start">
-              {["Tailor-made", "Private vehicles", "Led by women, welcoming to all"].map((item) => <span key={item} className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-md">{item}{item === "Private vehicles" ? <span className="sr-only"> TODO(CONFIRM): verify private vehicles are available on all journeys.</span> : null}</span>)}
+              {["Tailor-made", "Private vehicles", "Led by women, welcoming to all"].map((item) => <span key={item} className="rounded-full border border-white/25 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-md">{item}</span>)}
             </div>
           </div>
         </Container>

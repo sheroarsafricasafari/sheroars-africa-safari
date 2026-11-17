@@ -64,7 +64,7 @@ export function ArticleLayout({
       <Container className="py-16 md:py-24">
         <div className="mx-auto mb-8 max-w-prose border-b border-sand pb-5 text-sm text-muted">
           <p>{readingTime} min read</p>
-          <div className="mt-2">{author ?? <span>By the She Roars team <span className="sr-only">TODO(REPLACE): replace with a verified byline.</span></span>}</div>
+          {author ? <div className="mt-2">{author}</div> : null}
         </div>
         <Prose className="mx-auto">{children}</Prose>
       </Container>

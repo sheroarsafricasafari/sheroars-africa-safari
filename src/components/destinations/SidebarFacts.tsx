@@ -32,7 +32,7 @@ export default function SidebarFacts({ items, message = "Hello, I would like to 
       </dl>
       <Button href="/plan-your-safari?type=Safari" className="mt-6 w-full">Plan This Journey</Button>
       <Link href={siteConfig.whatsappUrlWithMessage(message)} className="mt-3 inline-flex min-h-11 w-full items-center justify-center rounded-full border border-forest px-5 text-sm font-semibold text-forest focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta">Chat on WhatsApp</Link>
-      <p className="mt-3 text-center text-xs text-muted">No obligation. Reply within 24 hours. {/* TODO(CONFIRM): verify the response-time commitment. */}</p>
+      <p className="mt-3 text-center text-xs text-muted">No obligation. Share your plans when you are ready.</p>
     </aside>
     {showMobileBar ? <div className="fixed inset-x-0 bottom-0 z-40 flex gap-2 border-t border-sand bg-cream/95 p-3 shadow-[0_-8px_24px_rgba(42,31,23,.12)] backdrop-blur-md lg:hidden">
       <Button href="/plan-your-safari?type=Safari" className="flex-1">Plan This Journey</Button>
