@@ -13,6 +13,7 @@ export type CtaBannerProps = {
   image?: { src: string; alt: string };
   primaryCta?: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
+  trustChips?: string[];
   parallax?: boolean;
   className?: string;
   id?: string;
@@ -25,6 +26,7 @@ export default function CtaBanner({
   image = { src: "/images/home/cta-banner.webp", alt: "Warm evening light across Tanzania" },
   primaryCta = { label: "Plan My Safari", href: "/plan-your-safari" },
   secondaryCta = { label: "Chat on WhatsApp", href: siteConfig.whatsappUrlWithMessage(siteConfig.defaultWhatsappMessage) },
+  trustChips,
   parallax = false,
   className,
   id,
@@ -45,6 +47,7 @@ export default function CtaBanner({
           <Button href={primaryCta.href} variant="light" size="lg">{primaryCta.label}</Button>
           <Button href={secondaryCta.href} variant="outline-light" size="lg"><MessageCircle aria-hidden="true" size={18} />{secondaryCta.label}</Button>
         </div>
+        {trustChips?.length ? <ul className="mt-6 flex flex-wrap justify-center gap-2">{trustChips.map((chip) => <li key={chip} className="rounded-full border border-white/25 bg-white/10 px-3 py-1.5 text-xs text-white/90">{chip}</li>)}</ul> : null}
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import type { DefaultValues, FieldPath, UseFormRegister } from "react-hook-form"
 import type { ReactNode } from "react";
 import { ArrowRight, Clock3, LoaderCircle, LockKeyhole, Plus, Minus } from "lucide-react";
 import { getAllPackages } from "@/data";
+import { PACKAGES as kilimanjaroPackages } from "@/data/kilimanjaro-packages";
 import { siteConfig } from "@/data/site";
 import { getAllSerengetiPackages } from "@/lib/serengeti-packages";
 import { submitInquiry, type FormType, type InquiryPayload, type SubmitResult } from "@/lib/forms/submitInquiry";
@@ -22,6 +23,7 @@ import TextInput from "./TextInput";
 const packages = [
   ...getAllPackages().map(({ slug, title }) => ({ slug, title })),
   ...getAllSerengetiPackages().map(({ slug, title }) => ({ slug, title })),
+  ...kilimanjaroPackages.map(({ slug, name }) => ({ slug, title: name })),
 ];
 const emptyValues: DefaultValues<InquiryFormValues> = {
   name: "", email: "", phone: "", country: "", interest: "", month: "", year: "2026",

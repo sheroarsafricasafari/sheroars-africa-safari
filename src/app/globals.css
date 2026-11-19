@@ -92,6 +92,16 @@ p {
   line-height: 1.7;
 }
 
+.circuit-stop-label {
+  font-size: 16px;
+}
+
+@media (max-width: 640px) {
+  .circuit-stop-label {
+    font-size: 24px;
+  }
+}
+
 .text-eyebrow {
   font-size: 0.75rem;
   font-weight: 600;
@@ -115,6 +125,34 @@ p {
   }
   to {
     transform: scale(1.06);
+  }
+}
+
+.kilimanjaro-cloud-drift {
+  animation: kilimanjaro-cloud-drift 60s linear infinite;
+}
+
+.kilimanjaro-camp-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: kilimanjaro-camp-pulse 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes kilimanjaro-cloud-drift {
+  from {
+    transform: translateX(-2%);
+  }
+  to {
+    transform: translateX(2%);
+  }
+}
+
+@keyframes kilimanjaro-camp-pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.4);
   }
 }
 
@@ -151,12 +189,15 @@ p {
   .tarangire-print-area,
   .tarangire-print-area *,
   .safari-itinerary-print-area,
-  .safari-itinerary-print-area * {
+  .safari-itinerary-print-area *,
+  .kilimanjaro-print-area,
+  .kilimanjaro-print-area * {
     visibility: visible !important;
   }
 
   .tarangire-print-area,
-  .safari-itinerary-print-area {
+  .safari-itinerary-print-area,
+  .kilimanjaro-print-area {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -167,12 +208,18 @@ p {
   .tarangire-print-area button,
   .tarangire-print-area a,
   .safari-itinerary-print-area button,
-  .safari-itinerary-print-area a {
+  .safari-itinerary-print-area a,
+  .kilimanjaro-print-area button,
+  .kilimanjaro-print-area a {
     display: none !important;
   }
 
   .tarangire-itinerary-day-content,
-  .safari-itinerary-day-content {
+  .safari-itinerary-day-content,
+  .kilimanjaro-day-content {
     display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    opacity: 1 !important;
   }
 }

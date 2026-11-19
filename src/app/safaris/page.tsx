@@ -212,6 +212,17 @@ export default function SafarisPage() {
             })}
           </div>
           <div className="mt-8 text-center"><Link href="/why-she-roars" className="inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta underline">Discover Why She Roars<ArrowRight aria-hidden="true" size={17} /></Link></div>
+          <Link href="/kilimanjaro" className="group mt-10 grid overflow-hidden rounded-3xl border border-sand bg-white shadow-card transition hover:shadow-lift focus-visible:outline focus-visible:outline-2 focus-visible:outline-terracotta sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+            <div className="relative min-h-52">
+              <SmartImage src="/images/kilimanjaro/overview-main.jpg" alt="Mount Kilimanjaro rising above the Tanzanian plains" sizes="(max-width: 640px) 100vw, 40vw" fill className="object-cover" />
+            </div>
+            <span className="flex flex-col justify-center p-6 sm:p-8">
+              <span className="text-eyebrow text-terracotta">Beyond the safari</span>
+              <span className="mt-2 font-heading text-2xl text-earth sm:text-3xl">Climb Kilimanjaro</span>
+              <span className="mt-2 text-sm leading-6 text-muted">Explore the routes, seasons and practical details for planning a climb to Uhuru Peak.</span>
+              <span className="mt-4 inline-flex min-h-11 items-center gap-2 font-semibold text-terracotta">Discover the mountain <ArrowRight aria-hidden="true" size={17} /></span>
+            </span>
+          </Link>
         </Container>
       </section>
 

@@ -61,7 +61,14 @@ export const navigation: NavItem[] = [
     { label: "Lake Manyara", href: "/safaris/lake-manyara", group: "Destinations", description: "Explore a compact park of forest, escarpment and lake." },
   ] },
   { label: "Kilimanjaro", href: "/kilimanjaro", children: [
-    { label: "Routes", href: "/kilimanjaro/routes" },
+    { label: "Routes", href: "/kilimanjaro/routes", children: [
+      { label: "Machame", href: "/kilimanjaro/routes/machame", group: "Routes" },
+      { label: "Lemosho", href: "/kilimanjaro/routes/lemosho", group: "Routes" },
+      { label: "Marangu", href: "/kilimanjaro/routes/marangu", group: "Routes" },
+      { label: "Rongai", href: "/kilimanjaro/routes/rongai", group: "Routes" },
+      { label: "Northern Circuit", href: "/kilimanjaro/routes/northern-circuit", group: "Routes" },
+      { label: "Umbwe", href: "/kilimanjaro/routes/umbwe", group: "Routes" },
+    ] },
     { label: "Climb Packages", href: "/kilimanjaro/packages" },
     { label: "Climbing Guide", href: "/kilimanjaro/guide" },
   ] },

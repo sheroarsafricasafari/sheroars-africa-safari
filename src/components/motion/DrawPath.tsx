@@ -11,10 +11,12 @@ export default function DrawPath({
   d,
   children,
   className = "",
+  duration = 1.6,
 }: {
   d: string;
   children?: ReactNode;
   className?: string;
+  duration?: number;
 }) {
   const reducedMotion = useReducedMotionPreference();
   return (
@@ -27,7 +29,7 @@ export default function DrawPath({
         initial={reducedMotion ? false : { pathLength: 0 }}
         whileInView={reducedMotion ? undefined : { pathLength: 1 }}
         viewport={{ once: true, margin: "-80px" }}
-        transition={{ duration: 1.6, ease: "easeInOut" }}
+        transition={{ duration, ease: "easeInOut" }}
       />
       {Children.toArray(children).map((child, index, nodes) => (
         <motion.g

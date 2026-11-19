@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import RoutePackagesPage from "@/components/kilimanjaro/route/RoutePackagesPage";
+import { RONGAI_COPY } from "@/data/kilimanjaro-route-copy";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Rongai Route | SheRoarsAfricaSafari",
-};
+export const metadata = buildMetadata({
+  title: RONGAI_COPY.metadata.title,
+  description: RONGAI_COPY.metadata.description,
+  keywords: RONGAI_COPY.metadata.keywords,
+  path: "/kilimanjaro/routes/rongai",
+  image: "/images/kilimanjaro/routes/rongai/hero-sky.jpg",
+});
 
 export default function Page() {
-  return (
-    <PagePlaceholder title="Rongai Route" path="/kilimanjaro/routes/rongai" section="Kilimanjaro" />
-  );
+  return <RoutePackagesPage route="rongai" copy={RONGAI_COPY} />;
 }

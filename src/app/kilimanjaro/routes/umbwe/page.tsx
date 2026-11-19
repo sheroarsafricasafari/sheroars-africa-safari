@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
-import PagePlaceholder from "@/components/ui/PagePlaceholder";
+import RoutePackagesPage from "@/components/kilimanjaro/route/RoutePackagesPage";
+import { UMBWE_COPY } from "@/data/kilimanjaro-route-copy";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Umbwe Route | SheRoarsAfricaSafari",
-};
+export const metadata = buildMetadata({
+  title: UMBWE_COPY.metadata.title,
+  description: UMBWE_COPY.metadata.description,
+  keywords: UMBWE_COPY.metadata.keywords,
+  path: "/kilimanjaro/routes/umbwe",
+  image: "/images/kilimanjaro/routes/umbwe/hero-sky.jpg",
+});
 
 export default function Page() {
-  return (
-    <PagePlaceholder title="Umbwe Route" path="/kilimanjaro/routes/umbwe" section="Kilimanjaro" />
-  );
+  return <RoutePackagesPage route="umbwe" copy={UMBWE_COPY} />;
 }

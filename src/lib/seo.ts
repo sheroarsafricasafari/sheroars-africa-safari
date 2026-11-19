@@ -6,6 +6,7 @@ type MetadataInput = {
   description: string;
   path: string;
   image?: string;
+  keywords?: string[];
   noIndex?: boolean;
   absoluteTitle?: boolean;
 };
@@ -22,6 +23,7 @@ export function buildMetadata({
   description,
   path,
   image,
+  keywords,
   noIndex = false,
   absoluteTitle = false,
 }: MetadataInput): Metadata {
@@ -29,6 +31,7 @@ export function buildMetadata({
   return {
     title: absoluteTitle ? { absolute: title } : title,
     description,
+    keywords,
     alternates: { canonical: path },
     robots: noIndex ? { index: false, follow: false } : undefined,
     openGraph: {

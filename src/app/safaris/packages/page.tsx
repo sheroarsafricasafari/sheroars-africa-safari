@@ -14,13 +14,15 @@ import SectionHeading from "@/components/ui/SectionHeading";
 import SmartImage from "@/components/ui/SmartImage";
 import SplitReveal from "@/components/motion/SplitReveal";
 import HeroSignal from "@/components/layout/HeroSignal";
+import KilimanjaroPackageBrowser from "@/components/kilimanjaro/route/KilimanjaroPackageBrowser";
 import { safaris } from "@/data/safaris";
 import { ngorongoroPackages } from "@/data/ngorongoro-packages";
 import { tarangirePackages } from "@/data/tarangire-packages";
+import { PACKAGES } from "@/data/kilimanjaro-packages";
 import { siteConfig } from "@/data/site";
 import { buildBreadcrumbJsonLd, buildMetadata } from "@/lib/seo";
 
-const description = "Browse Tanzania safari packages, including Lake Manyara, Tarangire and Ngorongoro journeys. Filter by length, destination and travel style.";
+const description = "Browse Tanzania safari packages and Kilimanjaro climbs, including Lake Manyara, Tarangire and Ngorongoro journeys. Compare routes, lengths and travel styles.";
 const tarangireSlugs = new Set(tarangirePackages.map((item) => item.slug));
 const packageCatalog = Array.from(
   new Map([...safaris, ...ngorongoroPackages].map((item) => [item.slug, item])).values(),
@@ -50,7 +52,7 @@ const faqItems = [
 ];
 
 export const metadata = buildMetadata({
-  title: "Tanzania Safari Packages",
+  title: "Tanzania Safari and Kilimanjaro Packages",
   description,
   path: "/safaris/packages",
   image: "/images/safaris/hub/packages-hero.jpg",
@@ -75,12 +77,20 @@ export default function SafariPackagesPage() {
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: "Tanzania Safari Packages",
-        itemListElement: packageCatalog.map((item, index) => ({
+        itemListElement: [
+          ...packageCatalog.map((item, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: item.title,
           url: `${siteConfig.url}/safaris/packages/${item.slug}`,
-        })),
+          })),
+          ...PACKAGES.map((item, index) => ({
+            "@type": "ListItem",
+            position: packageCatalog.length + index + 1,
+            name: item.name,
+            url: `${siteConfig.url}/kilimanjaro/routes/${item.route}?days=${item.days}`,
+          })),
+        ],
       }} />
       <JsonLd data={buildBreadcrumbJsonLd(breadcrumbs)} />
 
@@ -119,6 +129,13 @@ export default function SafariPackagesPage() {
         eyebrow="Eight ways to meet the elephant kingdom"
         intro="Compare single-day game drives, longer wildlife stays and northern-circuit routes by trip length, travel style and starting price."
       />
+
+      <section id="kilimanjaro-packages" className="bg-cream py-16 md:py-20">
+        <Container className="mb-8">
+          <SectionHeading eyebrow="KILIMANJARO CLIMBS" title="Kilimanjaro Climb Packages" subtitle="Compare all 18 packages by route, duration and comfort, then open a package to explore every day of the climb." />
+        </Container>
+        <KilimanjaroPackageBrowser />
+      </section>
 
       <section className="bg-sand py-20 md:py-24">
         <Container>
