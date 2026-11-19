@@ -8,6 +8,11 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/dev-preview", "/thank-you"],
     },
-    sitemap: new URL("/sitemap.xml", siteConfig.url).toString(),
+    sitemap: [
+      new URL("/sitemap.xml", siteConfig.url).toString(),
+      new URL("/kilimanjaro/sitemap.xml", siteConfig.url).toString(),
+      new URL("/safaris/sitemap.xml", siteConfig.url).toString(),
+      new URL("/zanzibar/sitemap.xml", siteConfig.url).toString(),
+    ],
   };
 }

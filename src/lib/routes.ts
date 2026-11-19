@@ -1,6 +1,8 @@
 import { safaris } from "@/data/safaris";
 import { serengetiPackages } from "@/data/serengeti-packages";
 import { ngorongoroPackages } from "@/data/ngorongoro-packages";
+import { tarangirePackages } from "@/data/tarangire-packages";
+import { lakeManyaraPackages } from "@/data/lake-manyara-packages";
 
 export type RouteDefinition = {
   path: string;
@@ -52,6 +54,8 @@ const staticPaths = [
   "/booking-terms", "/plan-your-safari", "/privacy-policy", "/terms", "/group-departures",
   ...safaris.map(({ slug }) => `/safaris/packages/${slug}`),
   ...ngorongoroPackages.map(({ slug }) => `/safaris/packages/${slug}`),
+  ...tarangirePackages.map(({ slug }) => `/safaris/packages/${slug}`),
+  ...lakeManyaraPackages.map(({ slug }) => `/safaris/packages/${slug}`),
   ...serengetiPackages.map(({ slug }) => `/safaris/serengeti/packages/${slug}`),
 ];
 
@@ -96,6 +100,10 @@ function humanize(path: string) {
   if (packageTitle) return packageTitle;
   const ngorongoroPackageTitle = ngorongoroPackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
   if (ngorongoroPackageTitle) return ngorongoroPackageTitle;
+  const tarangirePackageTitle = tarangirePackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
+  if (tarangirePackageTitle) return tarangirePackageTitle;
+  const lakeManyaraPackageTitle = lakeManyaraPackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
+  if (lakeManyaraPackageTitle) return lakeManyaraPackageTitle;
   const serengetiPackageTitle = serengetiPackages.find(({ slug }) => path === `/safaris/serengeti/packages/${slug}`)?.title;
   if (serengetiPackageTitle) return serengetiPackageTitle;
   if (path === "/") return "Home";
