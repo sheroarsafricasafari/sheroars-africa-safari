@@ -100,9 +100,9 @@ function humanize(path: string) {
   if (packageTitle) return packageTitle;
   const ngorongoroPackageTitle = ngorongoroPackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
   if (ngorongoroPackageTitle) return ngorongoroPackageTitle;
-  const tarangirePackageTitle = tarangirePackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
+  const tarangirePackageTitle = tarangirePackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.name;
   if (tarangirePackageTitle) return tarangirePackageTitle;
-  const lakeManyaraPackageTitle = lakeManyaraPackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.title;
+  const lakeManyaraPackageTitle = lakeManyaraPackages.find(({ slug }) => path === `/safaris/packages/${slug}`)?.name;
   if (lakeManyaraPackageTitle) return lakeManyaraPackageTitle;
   const serengetiPackageTitle = serengetiPackages.find(({ slug }) => path === `/safaris/serengeti/packages/${slug}`)?.title;
   if (serengetiPackageTitle) return serengetiPackageTitle;
